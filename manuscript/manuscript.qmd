@@ -1,0 +1,62 @@
+---
+title: Short Paper
+subtitle: A Short Subtitle
+author:
+  - name: Anders Lorentzen Kolstad
+    email: anders.kolstad@nina.no
+    orchid: https://orcid.org/0000-0002-9623-9491
+    affiliations: 
+        - id: nina
+          name: Norwegian Institute for Nature Research
+          department: Department of Terrestrial Ecology
+          address: Pb 5685 Torgarden
+          city: Trondheim
+          postal-code: 7485
+    attributes:
+        corresponding: true
+  - name: Hanno Sandvik
+    email: hanno.sandvik@nina.no
+    orchid: https://orcid.org/0000-0002-5889-1606
+    affiliations:
+      - id: nina
+        name: Norwegian Institute for Nature Research
+        department: Department of Aquatic Biodiversity
+        address: Pb 5685 Torgarden
+        city: Trondheim
+        postal-code: 7485
+  - name: Chloé R. Nater
+    email: chloe.nater@nina.no
+    orchid: https://orcid.org/0000-0002-7975-0108
+    affiliations:
+        - ref: nina
+abstract: |
+  This is the abstract. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum augue turpis, dictum non malesuada a, volutpat eget velit. Nam placerat turpis purus, eu tristique ex tincidunt et. Mauris sed augue eget turpis ultrices tincidunt. Sed et mi in leo porta egestas. Aliquam non laoreet velit. Nunc quis ex vitae eros aliquet auctor nec ac libero. Duis laoreet sapien eu mi luctus, in bibendum leo molestie. Sed hendrerit diam diam, ac dapibus nisl volutpat vitae. Aliquam bibendum varius libero, eu efficitur justo rutrum at. Sed at tempus elit.
+keywords: 
+  - keyword1
+  - keyword2
+date: last-modified
+bibliography: bibliography.bib
+format:
+  elsevier-pdf:
+    keep-tex: true
+    journal:
+      name: Ecological Indicators
+      formatting: preprint
+      model: 3p
+      cite-style: super
+    include-in-header:
+      text: '\usepackage{lineno}\linenumbers'
+execute:
+  warning: false
+  message: false
+---
+
+# Introduction
+
+# Methods
+
+# Results
+
+# Discussion
+
+# References {-}
