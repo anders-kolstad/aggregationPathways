@@ -43,20 +43,7 @@ Indicators with grey background
 
 -   Produce guidelines
 
----
 
-Example with two indicators.
-Scaling indicators at the sub-regions also makes it possible to
-calculate an index for the sub-regions. 
-But to get an index for the whole region, should we aggregate the 
-
-```{r}
-#| fig-align: "left"
-#| fig-height: 6
-#| fig-width: 7
-source("../R/example2.R")
-example2
-```
 
 ---
 
@@ -81,10 +68,21 @@ Example of indicators aggregated at EEA scale, then turned into an index
 source("../R/example4.R")
 example4
 ```
+
 ---
 
-However, this result is area sensitive
+Adding area weighting to the first example
+```{r}
+#| fig-align: "left"
+#| fig-height: 6
+#| fig-width: 7
+source("../R/example3b.R")
+example3b
+```
 
+---
+
+and to the second example
 ```{r}
 #| fig-align: "left"
 #| fig-height: 6
@@ -93,5 +91,43 @@ source("../R/example5.R")
 example5
 ```
 
+
 ---
-Next, variables aggregated at EAA scale
+
+Next, variables aggregated at EAA scale by taking the area weighted mean. When would this make sense to do? Obviously not for count variables.
+
+```{r}
+#| fig-align: "left"
+#| fig-height: 6
+#| fig-width: 7
+source("../R/example6.R")
+example6
+```
+
+---
+
+Here, variable aggregated at EAA scale with no area weighting
+
+
+```{r}
+#| fig-align: "left"
+#| fig-height: 6
+#| fig-width: 7
+source("../R/example7.R")
+example7
+```
+
+---
+
+Example with two indicators.
+Scaling indicators at the sub-regions also makes it possible to
+calculate an index for the sub-regions. 
+But to get an index for the whole region, should we aggregate the 
+
+```{r}
+#| fig-align: "left"
+#| fig-height: 6
+#| fig-width: 7
+source("../R/example2.R")
+example2
+```
