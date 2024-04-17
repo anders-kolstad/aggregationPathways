@@ -1,0 +1,97 @@
+---
+title: "Understanding the problem"
+format: 
+  revealjs:
+    smaller: true
+    scrollable: true
+editor: visual
+---
+
+## Blåbærkrisa
+
+:::: {.columns}
+
+::: {.column width="30%"}
+Same data gave different indicator values
+::: 
+
+::: {.column width="70%"}
+```{r}
+#| fig-align: "left"
+#| fig-height: 6
+#| fig-width: 7
+source("../R/example1.R")
+example1
+```
+
+::: aside
+Indicators with grey background
+:::
+:::
+
+::::
+
+## This project
+
+-   250 000 kr
+
+-   166 hours
+
+-   1 month
+
+-   Manuscript on pre-print server
+
+-   Produce guidelines
+
+---
+
+Example with two indicators.
+Scaling indicators at the sub-regions also makes it possible to
+calculate an index for the sub-regions. 
+But to get an index for the whole region, should we aggregate the 
+
+```{r}
+#| fig-align: "left"
+#| fig-height: 6
+#| fig-width: 7
+source("../R/example2.R")
+example2
+```
+
+---
+
+Example of indeces at EA scale aggregated to EAA scale
+
+```{r}
+#| fig-align: "left"
+#| fig-height: 6
+#| fig-width: 7
+source("../R/example3.R")
+example3
+```
+
+---
+
+Example of indicators aggregated at EEA scale, then turned into an index
+
+```{r}
+#| fig-align: "left"
+#| fig-height: 6
+#| fig-width: 7
+source("../R/example4.R")
+example4
+```
+---
+
+However, this result is area sensitive
+
+```{r}
+#| fig-align: "left"
+#| fig-height: 6
+#| fig-width: 7
+source("../R/example5.R")
+example5
+```
+
+---
+Next, variables aggregated at EAA scale
