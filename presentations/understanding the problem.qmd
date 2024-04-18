@@ -1,37 +1,16 @@
 ---
-title: "Understanding the problem"
+title: "Understanding the problem of when to scale"
 format: 
   revealjs:
     smaller: true
-    scrollable: true
+    scrollable: false
+    preview-links: true
 editor: visual
 ---
 
 ```{r setup}
 library(knitr)
 ```
-
-## Blåbærkrisa
-
-::: columns
-::: {.column width="30%"}
-Same data gave different indicator values
-:::
-
-::: {.column width="70%"}
-```{r}
-#| fig-align: "left"
-#| fig-height: 6
-#| fig-width: 7
-source("../R/example1.R")
-example1
-```
-
-::: aside
-Indicators with grey background
-:::
-:::
-:::
 
 ## This project
 
@@ -45,9 +24,98 @@ Indicators with grey background
 
 -   Produce guidelines
 
+## Blåbærkrisa
+
+::: columns
+::: {.column width="50%"}
+
+- Same data gave different indicator values.
+- Reference values are at county scales (and probably only make sense at that scale)
+- IBECA normalised the variables (with truncation) at plot scale
+- NI normalised the variable (probably) at a regional scale after first taking a mean
+:::
+
+::: {.column width="50%"}
+
+![](img/billberry.PNG){width=100%}
+
+:::
+
+:::
+
+---
+
+
+![](img/billberry_graph.PNG)
+
+---
+
+![](img/billberry_ibeca.PNG)
+
+## It matters 
+if we  aggregate (takes means of) of the scaled or unscaled variabel:
+
+![](img/ASPT.png)
+
+## Arguments for scaling and truncating immediately
+
+- Positive (and negative) outliers in on area can not compensate for poor (or good) condition elsewhere
+- Gives higher-resolution indicator values
+
+## Arguments for scaling and truncating later at a level where the reference value is sensible
+
+- The reference value was maybe intended for that scale
+- The indicator uncertainty becomes (apparently) smaller because the mean or sum for a region is less variable.
+- Maybe, to many truncation events leds to accumulated dissplacement errors?
+
+## What if
+
+- The reference value is at the same scale as the variable
+- The reference value is the same all over
+- We scale locally before aggregating, and then truncate later
+- We also want to aggregate the original variable further, e.g. to national level - will the indicator and variable remain correlated
+
+## Resources
+
+[Sanvik 2019](https://brage.nina.no/nina-xmlui/handle/11250/2631056)
+
+
+## Why do we re-scale
+*notes from Bård*
+
+Reference values serve two purposes
+
+- to enable rescaling to a common measurement scale to facilitate the calculation of the mean.
+-	to set a limit for how much one indicator can compensate for other indicators being in a bad state.
+
+As a consequence, an index of rescaled indicators summarizes **negative deviations** from the reference state over a large set of indicators. 
+
+Unscaled states above the reference value are not recognized as being better than the reference state.
+
+Rescaling is useful for making indeces, but why use it for individual indicators? [answer: it depends if we want to aggregate 'condition estimates' of actuall measurements]
+
+
+
+
+
+
+## Spatially aggregating 
+condition estimates (bottom) or actuall measurements (top)
+
+```{r}
+source("../R/example1.R")
+example1
+```
+
+::: aside
+Indicators with grey background
+:::
+
+
 ------------------------------------------------------------------------
 
-Example of indeces at EA scale aggregated to EAA scale
+## Early scaling 
+leads to cummutativity 
 
 ```{r}
 #| fig-align: "left"
@@ -59,7 +127,8 @@ example3
 
 ------------------------------------------------------------------------
 
-Example of indicators aggregated at EEA scale, then turned into an index
+## Early scaling 
+leads to cummutativity 
 
 ```{r}
 #| fig-align: "left"
@@ -71,7 +140,7 @@ example4
 
 ------------------------------------------------------------------------
 
-Adding area weighting to the first example
+## Also with area weighting
 
 ```{r}
 #| fig-align: "left"
@@ -83,7 +152,7 @@ example3b
 
 ------------------------------------------------------------------------
 
-and to the second example
+## Also with area weighting
 
 ```{r}
 #| fig-align: "left"
@@ -95,13 +164,11 @@ example5
 
 ## Commutativty
 
-These are examples of cummutative aggregation workflows
 
 ![](img/commutativity.PNG)
 
-------------------------------------------------------------------------
-
-Next, variables aggregated at EAA scale by taking the area weighted mean. When would this make sense to do? Obviously not for count variables.
+## Alternativey,
+we can aggregate the actual measurements. When would this make sense to do?
 
 ```{r}
 #| fig-align: "left"
@@ -113,7 +180,7 @@ example6
 
 ------------------------------------------------------------------------
 
-Here, variable aggregated at EAA scale with no area weighting
+## Same, but with no area weighting and taking the sum (e.g. population sizes)
 
 ```{r}
 #| fig-align: "left"
@@ -123,14 +190,7 @@ source("../R/example7.R")
 example7
 ```
 
-------------------------------------------------------------------------
+## What about
 
-Example with two indicators. Scaling indicators at the sub-regions also makes it possible to calculate an index for the sub-regions. But to get an index for the whole region, should we aggregate the
-
-```{r}
-#| fig-align: "left"
-#| fig-height: 6
-#| fig-width: 7
-source("../R/example2.R")
-example2
-```
+- Scaling, aggregating, and then truncating
+- Non-linear re-scaling functions with asymptotes
