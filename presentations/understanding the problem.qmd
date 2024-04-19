@@ -28,79 +28,56 @@ library(knitr)
 
 ::: columns
 ::: {.column width="50%"}
-
-- Same data gave different indicator values.
-- Reference values are at county scales (and probably only make sense at that scale)
-- IBECA normalised the variables (with truncation) at plot scale
-- NI normalised the variable (probably) at a regional scale after first taking a mean
+-   Same data gave different indicator values.
+-   Reference values are at county scales (and probably only make sense at that scale)
+-   IBECA normalised the variables (with truncation) at plot scale
+-   NI normalised the variable (probably) at a regional scale after first taking a mean
 :::
 
 ::: {.column width="50%"}
-
-![](img/billberry.PNG){width=100%}
-
+![](img/billberry.PNG){width="80%"}
+:::
 :::
 
-:::
-
----
-
+------------------------------------------------------------------------
 
 ![](img/billberry_graph.PNG)
 
----
+------------------------------------------------------------------------
 
 ![](img/billberry_ibeca.PNG)
 
-## It matters 
-if we  aggregate (takes means of) of the scaled or unscaled variabel:
+## It matters
+
+if we aggregate (takes means of) of the scaled or unscaled variabel:
 
 ![](img/ASPT.png)
 
-## Arguments for scaling and truncating immediately
+## Pathways
 
-- Positive (and negative) outliers in on area can not compensate for poor (or good) condition elsewhere
-- Gives higher-resolution indicator values
+```{r}
+source("../R/pathways.R")
+pathways
+```
 
-## Arguments for scaling and truncating later at a level where the reference value is sensible
+## Glossery
 
-- The reference value was maybe intended for that scale
-- The indicator uncertainty becomes (apparently) smaller because the mean or sum for a region is less variable.
-- Maybe, to many truncation events leds to accumulated dissplacement errors?
+**Scaling** = Linear range scaling, usually reducing the range of the variable by using one or two reference value
 
-## What if
+**Truncating** = Cutting of value above or below a given threshold. In our case, making the metrices bound between 0 and 1. Truncation is also a type of scaling.
 
-- The reference value is at the same scale as the variable
-- The reference value is the same all over
-- We scale locally before aggregating, and then truncate later
-- We also want to aggregate the original variable further, e.g. to national level - will the indicator and variable remain correlated
+**Re-scaling** = not used, but often used as a synonym to normalisation.
 
-## Resources
+**Normalising** = a combination of scaling, followed by truncating (if needed). This lead to a non-linear transformation of the original variable and returns indicators that share the same scale.
 
-[Sanvik 2019](https://brage.nina.no/nina-xmlui/handle/11250/2631056)
-
-
-## Why do we re-scale
-*notes from Bård*
-
-Reference values serve two purposes
-
-- to enable rescaling to a common measurement scale to facilitate the calculation of the mean.
--	to set a limit for how much one indicator can compensate for other indicators being in a bad state.
-
-As a consequence, an index of rescaled indicators summarizes **negative deviations** from the reference state over a large set of indicators. 
-
-Unscaled states above the reference value are not recognized as being better than the reference state.
-
-Rescaling is useful for making indeces, but why use it for individual indicators? [answer: it depends if we want to aggregate 'condition estimates' of actuall measurements]
+**Non-linear scaling**: Scaling functions like truncation, sigmoid, exponential or break-point types.
 
 
 
 
+## Spatially aggregating
 
-
-## Spatially aggregating 
-condition estimates (bottom) or actuall measurements (top)
+condition estimates (bottom) or actual measurements (top)
 
 ```{r}
 source("../R/example1.R")
@@ -111,11 +88,14 @@ example1
 Indicators with grey background
 :::
 
-
 ------------------------------------------------------------------------
+## Commutativty
 
-## Early scaling 
-leads to cummutativity 
+![](img/commutativity.PNG)
+
+## Early scaling
+
+leads to cummutativity
 
 ```{r}
 #| fig-align: "left"
@@ -127,8 +107,9 @@ example3
 
 ------------------------------------------------------------------------
 
-## Early scaling 
-leads to cummutativity 
+## Early scaling
+
+leads to cummutativity
 
 ```{r}
 #| fig-align: "left"
@@ -162,12 +143,9 @@ source("../R/example5.R")
 example5
 ```
 
-## Commutativty
-
-
-![](img/commutativity.PNG)
 
 ## Alternativey,
+
 we can aggregate the actual measurements. When would this make sense to do?
 
 ```{r}
@@ -190,7 +168,43 @@ source("../R/example7.R")
 example7
 ```
 
-## What about
 
-- Scaling, aggregating, and then truncating
-- Non-linear re-scaling functions with asymptotes
+## Why do we normalise
+
+*notes from Bård*
+
+Reference values serve two purposes
+
+-   to enable rescaling to a common measurement scale to facilitate the calculation of the mean.
+-   to set a limit for how much one indicator can compensate for other indicators being in a bad state.
+
+As a consequence, an index of rescaled indicators summarizes **negative deviations** from the reference state over a large set of indicators.
+
+Unscaled states above the reference value are not recognized as being better than the reference state.
+
+Rescaling is useful for making indeces, but why use it for individual indicators? \[answer: it depends if we want to aggregate 'condition estimates' of actuall measurements\]
+
+
+## Arguments for scaling and truncating immediately
+
+-   High or low *outliers* can not compensate for low or high values (i.e. condition) elsewhere, respectively.
+-   Gives higher-resolution indicator values and preserves the original spatial resolution of the variable.
+-   Means that subsequent aggregation is carrying information about the actual condition, and not the raw variable.
+
+## Arguments for scaling and truncating later at a level where the reference value is sensible
+
+-   The reference value was maybe intended for that scale
+-   The indicator uncertainty becomes (apparently) smaller because the mean or sum for a region is less variable.
+-   Maybe, too many truncation events leads to accumulated displacement errors?
+
+## What if
+
+-   The reference value is at the same scale as the variable
+-   The reference value is the same all over
+-   We also want to aggregate the original variable further, e.g. to national level - will the indicator and variable remain correlated
+-   We want to use non-linear re-scaling functions with asymptotes  
+
+## Resources
+
+[Sanvik 2019](https://brage.nina.no/nina-xmlui/handle/11250/2631056)
+

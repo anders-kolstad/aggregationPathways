@@ -5,8 +5,7 @@ library(DiagrammeR)
 
 
 pathways <- grViz("digraph{
-  
-   
+
    graph [
             compound = true, 
             nodesep = .8, 
@@ -30,48 +29,49 @@ pathways <- grViz("digraph{
             color = black
         ]
 
-subgraph clusterEAA {
-      graph[colour = black]
-      label='EAA scale';   
-   
-subgraph clusterRegion {
-      graph[style=dashed]
-      label='Regional scale';
+   three[label='3) ', shape = plaintext]
+   two  [label='2) ', shape = plaintext]
+   one  [label='1) ', shape = plaintext]
 
-   
-subgraph clusterPlot {
-      graph[style=dashed]
-      style=filled; 
-      color=lightblue;
-      label='Plot scale';
+subgraph cluster0_1 {
+        label='Measurement scale';
+        labeljust=l;
+        peripheries=1;
 
-  Variable[label='Original\nvariable']
-  Variable2[label='Original\nvariable']
-  Scale2[label='Scale']
-  
-  
+   m3[label = 'measure']
+   m2[label = 'measure']
+   m1[label = 'measure']
+   n1[label = 'normalise']
+   scale
+
 }
 
-subgraph clusterHEA {
-      graph[style=dashed]
-      style=filled; 
-      color=grey90;
-      label='HEA';
+subgraph cluster0_2 {
+        label='Larger scale';
+        labeljust=l;
+        peripheries=1;
 
-  Scale[label='Scale']
+   a1[label = 'aggregate']
+   a2[label = 'aggregate']
+   a3[label = 'aggregate']
+   n2[label = 'normalise']
+   truncate
 
-} # end HEA scale
-} # end regional scale
+}
 
-  Agg[label='Aggregate']
-  Agg2[label='Aggregate']
 
-} # end EAA scale
-  
-  Variable -> Scale -> Agg
-  Variable2 -> Scale2 -> Agg2
+one -> m3 [style = invis]
+m3 ->a3 [minlen=2, weight=0]
+a3 -> n2
 
+two -> m2 [style = invis]
+m2 -> n1 -> a2
    
+three -> m1 [style = invis]
+m1 -> scale -> a1 -> truncate
+
+{rank=same; one; two; three;}
+
 
 }")
 

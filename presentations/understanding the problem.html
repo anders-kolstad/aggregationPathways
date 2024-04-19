@@ -356,7 +356,7 @@
 <li>NI normalised the variable (probably) at a regional scale after first taking a mean</li>
 </ul>
 </div><div class="column" style="width:50%;">
-<p><img data-src="img/billberry.PNG" style="width:100.0%"></p>
+<p><img data-src="img/billberry.PNG" style="width:80.0%"></p>
 </div>
 </div>
 </section>
@@ -373,36 +373,113 @@
 <p>if we aggregate (takes means of) of the scaled or unscaled variabel:</p>
 
 <img data-src="img/ASPT.png" class="r-stretch"></section>
-<section id="arguments-for-scaling-and-truncating-immediately" class="slide level2">
-<h2>Arguments for scaling and truncating immediately</h2>
-<ul>
-<li>Positive (and negative) outliers in on area can not compensate for poor (or good) condition elsewhere</li>
-<li>Gives higher-resolution indicator values</li>
-</ul>
+<section id="pathways" class="slide level2">
+<h2>Pathways</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-b5620174e467f8ebc7a3" style="width:960px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-b5620174e467f8ebc7a3">{"x":{"diagram":"digraph{\n\n   graph [\n            compound = true, \n            nodesep = .8, \n            ranksep = .8,\n            color = crimson, \n            rankdir = LR\n        ]\n\n  \n    node [\n            fontname = Helvetica, \n            fontcolor = darkslategray,\n            shape = rectangle, \n            fixedsize = true, \n            width = 1,\n            color = darkslategray\n        ]\n        \n        \n    edge [\n            color = black\n        ]\n\n   three[label=\"3) \", shape = plaintext]\n   two  [label=\"2) \", shape = plaintext]\n   one  [label=\"1) \", shape = plaintext]\n\nsubgraph cluster0_1 {\n        label=\"Measurement scale\";\n        labeljust=l;\n        peripheries=1;\n\n   m3[label = \"measure\"]\n   m2[label = \"measure\"]\n   m1[label = \"measure\"]\n   n1[label = \"normalise\"]\n   scale\n\n}\n\nsubgraph cluster0_2 {\n        label=\"Larger scale\";\n        labeljust=l;\n        peripheries=1;\n\n   a1[label = \"aggregate\"]\n   a2[label = \"aggregate\"]\n   a3[label = \"aggregate\"]\n   n2[label = \"normalise\"]\n   truncate\n\n}\n\n\none -> m3 [style = invis]\nm3 ->a3 [minlen=2, weight=0]\na3 -> n2\n\ntwo -> m2 [style = invis]\nm2 -> n1 -> a2\n   \nthree -> m1 [style = invis]\nm1 -> scale -> a1 -> truncate\n\n{rank=same; one; two; three;}\n\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
 </section>
-<section id="arguments-for-scaling-and-truncating-later-at-a-level-where-the-reference-value-is-sensible" class="slide level2">
-<h2>Arguments for scaling and truncating later at a level where the reference value is sensible</h2>
-<ul>
-<li>The reference value was maybe intended for that scale</li>
-<li>The indicator uncertainty becomes (apparently) smaller because the mean or sum for a region is less variable.</li>
-<li>Maybe, to many truncation events leds to accumulated dissplacement errors?</li>
-</ul>
+<section id="glossery" class="slide level2">
+<h2>Glossery</h2>
+<p><strong>Scaling</strong> = Linear range scaling, usually reducing the range of the variable by using one or two reference value</p>
+<p><strong>Truncating</strong> = Cutting of value above or below a given threshold. In our case, making the metrices bound between 0 and 1. Truncation is also a type of scaling.</p>
+<p><strong>Re-scaling</strong> = not used, but often used as a synonym to normalisation.</p>
+<p><strong>Normalising</strong> = a combination of scaling, followed by truncating (if needed). This lead to a non-linear transformation of the original variable and returns indicators that share the same scale.</p>
+<p><strong>Non-linear scaling</strong>: Scaling functions like truncation, sigmoid, exponential or break-point types.</p>
 </section>
-<section id="what-if" class="slide level2">
-<h2>What if</h2>
-<ul>
-<li>The reference value is at the same scale as the variable</li>
-<li>The reference value is the same all over</li>
-<li>We scale locally before aggregating, and then truncate later</li>
-<li>We also want to aggregate the original variable further, e.g.&nbsp;to national level - will the indicator and variable remain correlated</li>
-</ul>
+<section id="spatially-aggregating" class="slide level2">
+<h2>Spatially aggregating</h2>
+<p>condition estimates (bottom) or actual measurements (top)</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-e89ecedc37a56c8e355f" style="width:960px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-e89ecedc37a56c8e355f">{"x":{"diagram":"digraph{\n  \n   \n   graph [\n            compound = true, \n            nodesep = .8, \n            ranksep = .8,\n            color = crimson, \n            rankdir = LR\n        ]\n\n  \n    node [\n            fontname = Helvetica, \n            fontcolor = darkslategray,\n            shape = rectangle, \n            fixedsize = true, \n            width = 1,\n            color = darkslategray\n        ]\n        \n        \n    edge [\n            color = black\n        ]\n        \n        \n   subgraph clusterTop {\n      graph[color = black]\n      \n    subgraph cluster0 {\n      peripheries=0;\n       \n       subgraph cluster0_1 {\n        label=\"EA-1\";\n        labeljust=l;\n        Area1[label = \"Value = 5\nRef. = 10\"]\n       }\n       \n       subgraph cluster0_2 {\n        label=\"EA-2\";\n        labeljust=l;\n        Area2[label = \"Value = 1\nRef. = 4\"]\n       }\n    }\n    \n    subgraph clusterScaledUpper {\n      graph[style=dashed]\n      style=filled; color=grey90;\n      \n    subgraph cluster1 {\n      peripheries=0;\n        \n        subgraph cluster1_1 {\n          label=\"EA-1\";\n          labeljust=l;\n          Area1_2[label = \".5\"]\n        }\n        \n        subgraph cluster1_2 {\n          label=\"EA-2\";\n          labeljust=l;\n          Area2_2[label = \".25\"]\n        }\n    }   \n    \n    \n    subgraph cluster2 {\n      peripheries=0;\n      label = EAA;\n      labeljust=l;\n      Norge[label = \".375\"]\n    }\n    }\n    \n    Area1 -> Area1_2 -> Norge\n    Area2 -> Area2_2 -> Norge\n  \n   }  \n   \n   \n   \n   \n   subgraph clusterBottom {\n    graph[color = black];\n\n    \n    subgraph cluster0b {\n       peripheries=0;\n       \n       \n       subgraph cluster0_1b {\n        label=\"EA-1\";\n        labeljust=l;\n        Area1b[label = \"Value = 5\nRef = 10\"]\n       }\n       \n       subgraph cluster0_2b {\n        label=\"EA-2\";\n        labeljust=l;\n        Area2b[label = \"Value = 1\nRef = 4\"]\n       }\n    }\n      \n      subgraph cluster1b {\n        peripheries=0;\n        label = EAA;\n        labeljust=l;\n        NorwayValues[label = \"Value = 6\nRef. = 14\"]\n        }\n\n    \n    \n    subgraph cluster2b {\n      graph[style=dashed]\n      style=filled; color=grey90;\n      \n      subgraph clusterScaledB {\n      \n      peripheries=0;\n      label = EAA;\n      labeljust=l;\n      Norgeb[label = \".43\"]\n      \n      }\n    }   \n    \n    Area1b -> NorwayValues -> Norgeb\n    Area2b -> NorwayValues\n  \n   }\n   \n   \n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+
+<table>
+<colgroup>
+<col style="width: 100%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">## Commutativty</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><img data-src="img/commutativity.PNG"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">## Early scaling</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">leads to cummutativity</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">::: {.cell layout-align=“left”} ::: {.cell-output-display}</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>{=html} &lt;div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-c66c20746f052bc9d385" style="width:672px;height:576px;"&gt;&lt;/div&gt; &lt;script type="application/json" data-for="htmlwidget-c66c20746f052bc9d385"&gt;{"x":{"diagram":"digraph{\n  \n   \n   graph [\n            compound = true, \n            nodesep = .8, \n            ranksep = .8,\n            color = crimson, \n            rankdir = LR\n        ]\n\n  \n    node [\n            fontname = Helvetica, \n            fontcolor = darkslategray,\n            shape = rectangle, \n            fixedsize = true, \n            width = 1,\n            color = darkslategray\n        ]\n        \n        \n    edge [\n            color = black\n        ]\n        \n# Orange part --------------------------\n\n   subgraph clusterTop {\n      graph[color = orange]\n      \n    subgraph cluster0 {\n      graph[color = green]\n      peripheries=0;\n       \n       subgraph cluster0_1 {\n        label=\"EA-1\";\n        labeljust=l;\n        peripheries=1;\n        V2_EA1[label = \"Value = 5\nRef. = 25\", color = orange, style = filled, fontcolor = white]\n        V1_EA1[label = \"Value = 5\nRef. = 10\", color = blue, style = filled, fontcolor = white]\n        I1_EA1[label = \" .5\", color = blue, style = filled, fontcolor = white]\n        I2_EA1[label = \" .2\", color = orange, style = filled, fontcolor = white]\n        X_EA1[label = \" .35\", color = grey, style = filled]\n        V1_EA1 -&gt; I1_EA1 -&gt; X_EA1\n        V2_EA1 -&gt; I2_EA1 -&gt; X_EA1\n        \n       }\n       \n       subgraph cluster0_2 {\n        label=\"EA-2\";\n        labeljust=l;\n        peripheries=1;\n        V2_EA2[label = \"Value = 1\nRef. = 10\", color = orange, style = filled, fontcolor = white]\n        V1_EA2[label = \"Value = 1\nRef. = 4\", color = blue, style = filled, fontcolor = white]\n        I1_EA2[label = \" .25\", color = blue, style = filled, fontcolor = white]\n        I2_EA2[label = \" .1\", color = orange, style = filled, fontcolor = white]\n        X_EA2[label = \" .175\", color = grey, style = filled]\n        V1_EA2 -&gt; I1_EA2 -&gt; X_EA2\n        V2_EA2 -&gt; I2_EA2 -&gt; X_EA2\n       }\n    }\nX[label = \".2625\", color = grey, style = filled]\nX_EA1 -&gt; X\nX_EA2 -&gt; X\n\n}\n\n\n   \n   \n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}&lt;/script&gt;</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">::: :::</td>
+</tr>
+</tbody>
+</table>
+<aside><div>
+<p>Indicators with grey background</p>
+</div></aside></section>
+<section id="early-scaling" class="slide level2">
+<h2>Early scaling</h2>
+<p>leads to cummutativity</p>
+<div class="cell" data-layout-align="left">
+<div class="cell-output-display">
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-f77f4ec2b425b53c0b88" style="width:672px;height:576px;"></div>
+<script type="application/json" data-for="htmlwidget-f77f4ec2b425b53c0b88">{"x":{"diagram":"digraph{\n  \n   \n   graph [\n            compound = true, \n            nodesep = .8, \n            ranksep = .8,\n            color = crimson, \n            rankdir = LR\n        ]\n\n  \n    node [\n            fontname = Helvetica, \n            fontcolor = darkslategray,\n            shape = rectangle, \n            fixedsize = true, \n            width = 1,\n            color = darkslategray\n        ]\n        \n        \n    edge [\n            color = black\n        ]\n        \n# Orange part --------------------------\n\n   subgraph clusterTop {\n      \n      graph[color = orange]\n       \n    subgraph cluster0 {\n      graph[color = green]\n      peripheries=0;\n       \n       subgraph cluster0_1 {\n        label=\"EA-1\";\n        labeljust=l;\n        peripheries=1;\n        V1_EA1[label = \"Value = 5\nRef. = 10\", color = blue, style = filled, fontcolor = white]\n        V2_EA1[label = \"Value = 5\nRef. = 25\", color = orange, style = filled, fontcolor = white]\n        I1_EA1[label = \" .5\", color = blue, style = filled, fontcolor = white]\n        I2_EA1[label = \" .2\", color = orange, style = filled, fontcolor = white]\n        V1_EA1 -> I1_EA1\n        V2_EA1 -> I2_EA1\n        \n       }\n       \n       subgraph cluster0_2 {\n        label=\"EA-2\";\n        labeljust=l;\n        peripheries=1;\n        V1_EA2[label = \"Value = 1\nRef. = 4\", color = blue, style = filled, fontcolor = white]\n        V2_EA2[label = \"Value = 1\nRef. = 10\", color = orange, style = filled, fontcolor = white]\n        I1_EA2[label = \" .25\", color = blue, style = filled, fontcolor = white]\n        I2_EA2[label = \" .1\", color = orange, style = filled, fontcolor = white]\n        V1_EA2 -> I1_EA2\n        V2_EA2 -> I2_EA2\n       }\n    }\n\nI1_EAA[label = \" .375\", color = blue, style = filled, fontcolor = white]\nI2_EAA[label = \" .15\", color = orange, style = filled, fontcolor = white]\nX[label = \".2625\", color = grey, style = filled]\n\n\nI1_EA2 -> I1_EAA\nI1_EA1 -> I1_EAA -> X\n\nI2_EA2 -> I2_EAA\nI2_EA1 -> I2_EAA -> X\n\n}\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
 </section>
-<section id="resources" class="slide level2">
-<h2>Resources</h2>
-<p><a href="https://brage.nina.no/nina-xmlui/handle/11250/2631056">Sanvik 2019</a></p>
+<section id="also-with-area-weighting" class="slide level2">
+<h2>Also with area weighting</h2>
+<div class="cell" data-layout-align="left">
+<div class="cell-output-display">
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-98ca107b7176eea38b8c" style="width:672px;height:576px;"></div>
+<script type="application/json" data-for="htmlwidget-98ca107b7176eea38b8c">{"x":{"diagram":"digraph{\n  \n   \n   graph [\n            compound = true, \n            nodesep = .8, \n            ranksep = .8,\n            color = crimson, \n            rankdir = LR\n        ]\n\n  \n    node [\n            fontname = Helvetica, \n            fontcolor = darkslategray,\n            shape = rectangle, \n            fixedsize = true, \n            width = 1,\n            color = darkslategray\n        ]\n        \n        \n    edge [\n            color = black\n        ]\n        \n# Orange part --------------------------\n\n   subgraph clusterTop {\n      graph[color = orange]\n      \n    subgraph cluster0 {\n      graph[color = green]\n      peripheries=0;\n       \n       subgraph cluster0_1 {\n        label=\"EA-1, 1 hectare\";\n        labeljust=l;\n        peripheries=1;\n        V2_EA1[label = \"Value = 5\nRef. = 25\", color = orange, style = filled, fontcolor = white]\n        V1_EA1[label = \"Value = 5\nRef. = 10\", color = blue, style = filled, fontcolor = white]\n        I1_EA1[label = \" .5\", color = blue, style = filled, fontcolor = white]\n        I2_EA1[label = \" .2\", color = orange, style = filled, fontcolor = white]\n        X_EA1[label = \" .35\", color = grey, style = filled]\n        V1_EA1 -> I1_EA1 -> X_EA1\n        V2_EA1 -> I2_EA1 -> X_EA1\n        \n       }\n       \n       subgraph cluster0_2 {\n        label=\"EA-2, 2 hectare\";\n        labeljust=l;\n        peripheries=1;\n        V2_EA2[label = \"Value = 1\nRef. = 10\", color = orange, style = filled, fontcolor = white]\n        V1_EA2[label = \"Value = 1\nRef. = 4\", color = blue, style = filled, fontcolor = white]\n        I1_EA2[label = \" .25\", color = blue, style = filled, fontcolor = white]\n        I2_EA2[label = \" .1\", color = orange, style = filled, fontcolor = white]\n        X_EA2[label = \" .175\", color = grey, style = filled]\n        V1_EA2 -> I1_EA2 -> X_EA2\n        V2_EA2 -> I2_EA2 -> X_EA2\n       }\n    }\nX[label = \".233\", color = grey, style = filled]\nX_EA1 -> X\nX_EA2 -> X\n\n}\n\n\n   \n   \n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
 </section>
-<section id="why-do-we-re-scale" class="slide level2">
-<h2>Why do we re-scale</h2>
+<section id="also-with-area-weighting-1" class="slide level2">
+<h2>Also with area weighting</h2>
+<div class="cell" data-layout-align="left">
+<div class="cell-output-display">
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-f05512c05e8ed105f0dd" style="width:672px;height:576px;"></div>
+<script type="application/json" data-for="htmlwidget-f05512c05e8ed105f0dd">{"x":{"diagram":"digraph{\n  \n   \n   graph [\n            compound = true, \n            nodesep = .8, \n            ranksep = .8,\n            color = crimson, \n            rankdir = LR\n        ]\n\n  \n    node [\n            fontname = Helvetica, \n            fontcolor = darkslategray,\n            shape = rectangle, \n            fixedsize = true, \n            width = 1,\n            color = darkslategray\n        ]\n        \n        \n    edge [\n            color = black\n        ]\n        \n# Orange part --------------------------\n\n   subgraph clusterTop {\n      \n      graph[color = orange]\n       \n    subgraph cluster0 {\n      graph[color = green]\n      peripheries=0;\n       \n       subgraph cluster0_1 {\n        label=\"EA-1, 1 hectar\";\n        labeljust=l;\n        peripheries=1;\n        V1_EA1[label = \"Value = 5\nRef. = 10\", color = blue, style = filled, fontcolor = white]\n        V2_EA1[label = \"Value = 5\nRef. = 25\", color = orange, style = filled, fontcolor = white]\n        I1_EA1[label = \" .5\", color = blue, style = filled, fontcolor = white]\n        I2_EA1[label = \" .2\", color = orange, style = filled, fontcolor = white]\n        V1_EA1 -> I1_EA1\n        V2_EA1 -> I2_EA1\n        \n       }\n       \n       subgraph cluster0_2 {\n        label=\"EA-2, 2 hectar\";\n        labeljust=l;\n        peripheries=1;\n        V1_EA2[label = \"Value = 1\nRef. = 4\", color = blue, style = filled, fontcolor = white]\n        V2_EA2[label = \"Value = 1\nRef. = 10\", color = orange, style = filled, fontcolor = white]\n        I1_EA2[label = \" .25\", color = blue, style = filled, fontcolor = white]\n        I2_EA2[label = \" .1\", color = orange, style = filled, fontcolor = white]\n        V1_EA2 -> I1_EA2\n        V2_EA2 -> I2_EA2\n       }\n    }\n\nI1_EAA[label = \" .33\", color = blue, style = filled, fontcolor = white]\nI2_EAA[label = \" .133\", color = orange, style = filled, fontcolor = white]\nX[label = \".233\", color = grey, style = filled]\n\n\nI1_EA2 -> I1_EAA\nI1_EA1 -> I1_EAA -> X\n\nI2_EA2 -> I2_EAA\nI2_EA1 -> I2_EAA -> X\n\n}\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="alternativey" class="slide level2">
+<h2>Alternativey,</h2>
+<p>we can aggregate the actual measurements. When would this make sense to do?</p>
+<div class="cell" data-layout-align="left">
+<div class="cell-output-display">
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-fa7be7450d3bed37a25b" style="width:672px;height:576px;"></div>
+<script type="application/json" data-for="htmlwidget-fa7be7450d3bed37a25b">{"x":{"diagram":"digraph{\n  \n   \n   graph [\n            compound = true, \n            nodesep = .8, \n            ranksep = .8,\n            color = crimson, \n            rankdir = LR\n        ]\n\n  \n    node [\n            fontname = Helvetica, \n            fontcolor = darkslategray,\n            shape = rectangle, \n            fixedsize = true, \n            width = 1,\n            color = darkslategray\n        ]\n        \n        \n    edge [\n            color = black\n        ]\n        \n# Orange part --------------------------\n\n   subgraph clusterTop {\n      \n      graph[color = orange]\n       \n    subgraph cluster0 {\n      graph[color = green]\n      peripheries=0;\n       \n       subgraph cluster0_1 {\n        label=\"EA-1, 1 hectar\";\n        labeljust=l;\n        peripheries=1;\n        V1_EA1[label = \"Value = 5\nRef. = 10\", color = blue, style = filled, fontcolor = white]\n        V2_EA1[label = \"Value = 5\nRef. = 25\", color = orange, style = filled, fontcolor = white]\n        #I1_EA1[label = \" .5\", color = blue, style = filled, fontcolor = white]\n        #I2_EA1[label = \" .2\", color = orange, style = filled, fontcolor = white]\n        #V1_EA1 -> I1_EA1\n        #V2_EA1 -> I2_EA1\n        \n       }\n       \n       subgraph cluster0_2 {\n        label=\"EA-2, 2 hectar\";\n        labeljust=l;\n        peripheries=1;\n        V1_EA2[label = \"Value = 1\nRef. = 4\", color = blue, style = filled, fontcolor = white]\n        V2_EA2[label = \"Value = 1\nRef. = 10\", color = orange, style = filled, fontcolor = white]\n        #I1_EA2[label = \" .25\", color = blue, style = filled, fontcolor = white]\n        #I2_EA2[label = \" .1\", color = orange, style = filled, fontcolor = white]\n        #V1_EA2 -> I1_EA2\n        #V2_EA2 -> I2_EA2\n       }\n    }\n\nV1_EAA[label = \"Value (awm) = 2.33\nRef.(awm) = 6\", color = blue, style = filled, fontcolor = white, width = 2]\nV2_EAA[label = \"Value (awm) =  2.33\nRef.(awm) = 15\", color = orange, style = filled, fontcolor = white, width = 2]\nI1_EAA[label = \".39\", color = blue, style = filled, fontcolor = white]\nI2_EAA[label = \".156\", color = orange, style = filled, fontcolor = white]\nX[label = \".278\", color = grey, style = filled]\n\nV1_EA1 -> V1_EAA -> I1_EAA -> X\nV1_EA2 -> V1_EAA\nV2_EA1 -> V2_EAA -> I2_EAA -> X\nV2_EA2 -> V2_EAA\n}\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="same-but-with-no-area-weighting-and-taking-the-sum-e.g.-population-sizes" class="slide level2">
+<h2>Same, but with no area weighting and taking the sum (e.g.&nbsp;population sizes)</h2>
+<div class="cell" data-layout-align="left">
+<div class="cell-output-display">
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-1d362f25f3ef7fbe042a" style="width:672px;height:576px;"></div>
+<script type="application/json" data-for="htmlwidget-1d362f25f3ef7fbe042a">{"x":{"diagram":"digraph{\n  \n   \n   graph [\n            compound = true, \n            nodesep = .8, \n            ranksep = .8,\n            color = crimson, \n            rankdir = LR\n        ]\n\n  \n    node [\n            fontname = Helvetica, \n            fontcolor = darkslategray,\n            shape = rectangle, \n            fixedsize = true, \n            width = 1,\n            color = darkslategray\n        ]\n        \n        \n    edge [\n            color = black\n        ]\n        \n# Orange part --------------------------\n\n   subgraph clusterTop {\n      \n      graph[color = orange]\n       \n    subgraph cluster0 {\n      graph[color = green]\n      peripheries=0;\n       \n       subgraph cluster0_1 {\n        label=\"EA-1\";\n        labeljust=l;\n        peripheries=1;\n        V1_EA1[label = \"Value = 5\nRef. = 10\", color = blue, style = filled, fontcolor = white]\n        V2_EA1[label = \"Value = 5\nRef. = 25\", color = orange, style = filled, fontcolor = white]\n        #I1_EA1[label = \" .5\", color = blue, style = filled, fontcolor = white]\n        #I2_EA1[label = \" .2\", color = orange, style = filled, fontcolor = white]\n        #V1_EA1 -> I1_EA1\n        #V2_EA1 -> I2_EA1\n        \n       }\n       \n       subgraph cluster0_2 {\n        label=\"EA-2\";\n        labeljust=l;\n        peripheries=1;\n        V1_EA2[label = \"Value = 1\nRef. = 4\", color = blue, style = filled, fontcolor = white]\n        V2_EA2[label = \"Value = 1\nRef. = 10\", color = orange, style = filled, fontcolor = white]\n        #I1_EA2[label = \" .25\", color = blue, style = filled, fontcolor = white]\n        #I2_EA2[label = \" .1\", color = orange, style = filled, fontcolor = white]\n        #V1_EA2 -> I1_EA2\n        #V2_EA2 -> I2_EA2\n       }\n    }\n\nV1_EAA[label = \"Value (sum) = 6\nRef.(sum) = 14\", color = blue, style = filled, fontcolor = white, width = 2]\nV2_EAA[label = \"Value (sum) =  6\nRef.(sum) = 35\", color = orange, style = filled, fontcolor = white, width = 2]\nI1_EAA[label = \".43\", color = blue, style = filled, fontcolor = white]\nI2_EAA[label = \".17\", color = orange, style = filled, fontcolor = white]\nX[label = \".3\", color = grey, style = filled]\n\nV1_EA1 -> V1_EAA -> I1_EAA -> X\nV1_EA2 -> V1_EAA\nV2_EA1 -> V2_EAA -> I2_EAA -> X\nV2_EA2 -> V2_EAA\n}\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="why-do-we-normalise" class="slide level2">
+<h2>Why do we normalise</h2>
 <p><em>notes from Bård</em></p>
 <p>Reference values serve two purposes</p>
 <ul>
@@ -413,86 +490,34 @@
 <p>Unscaled states above the reference value are not recognized as being better than the reference state.</p>
 <p>Rescaling is useful for making indeces, but why use it for individual indicators? [answer: it depends if we want to aggregate ‘condition estimates’ of actuall measurements]</p>
 </section>
-<section id="spatially-aggregating" class="slide level2">
-<h2>Spatially aggregating</h2>
-<p>condition estimates (bottom) or actuall measurements (top)</p>
-<div class="cell">
-<div class="cell-output-display">
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-b3f0842882c12e5ee887" style="width:960px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-b3f0842882c12e5ee887">{"x":{"diagram":"digraph{\n  \n   \n   graph [\n            compound = true, \n            nodesep = .8, \n            ranksep = .8,\n            color = crimson, \n            rankdir = LR\n        ]\n\n  \n    node [\n            fontname = Helvetica, \n            fontcolor = darkslategray,\n            shape = rectangle, \n            fixedsize = true, \n            width = 1,\n            color = darkslategray\n        ]\n        \n        \n    edge [\n            color = black\n        ]\n        \n        \n   subgraph clusterTop {\n      graph[color = black]\n      \n    subgraph cluster0 {\n      peripheries=0;\n       \n       subgraph cluster0_1 {\n        label=\"EA-1\";\n        labeljust=l;\n        Area1[label = \"Value = 5\nRef. = 10\"]\n       }\n       \n       subgraph cluster0_2 {\n        label=\"EA-2\";\n        labeljust=l;\n        Area2[label = \"Value = 1\nRef. = 4\"]\n       }\n    }\n    \n    subgraph clusterScaledUpper {\n      graph[style=dashed]\n      style=filled; color=grey90;\n      \n    subgraph cluster1 {\n      peripheries=0;\n        \n        subgraph cluster1_1 {\n          label=\"EA-1\";\n          labeljust=l;\n          Area1_2[label = \".5\"]\n        }\n        \n        subgraph cluster1_2 {\n          label=\"EA-2\";\n          labeljust=l;\n          Area2_2[label = \".25\"]\n        }\n    }   \n    \n    \n    subgraph cluster2 {\n      peripheries=0;\n      label = EAA;\n      labeljust=l;\n      Norge[label = \".375\"]\n    }\n    }\n    \n    Area1 -> Area1_2 -> Norge\n    Area2 -> Area2_2 -> Norge\n  \n   }  \n   \n   \n   \n   \n   subgraph clusterBottom {\n    graph[color = black];\n\n    \n    subgraph cluster0b {\n       peripheries=0;\n       \n       \n       subgraph cluster0_1b {\n        label=\"EA-1\";\n        labeljust=l;\n        Area1b[label = \"Value = 5\nRef = 10\"]\n       }\n       \n       subgraph cluster0_2b {\n        label=\"EA-2\";\n        labeljust=l;\n        Area2b[label = \"Value = 1\nRef = 4\"]\n       }\n    }\n      \n      subgraph cluster1b {\n        peripheries=0;\n        label = EAA;\n        labeljust=l;\n        NorwayValues[label = \"Value = 6\nRef. = 14\"]\n        }\n\n    \n    \n    subgraph cluster2b {\n      graph[style=dashed]\n      style=filled; color=grey90;\n      \n      subgraph clusterScaledB {\n      \n      peripheries=0;\n      label = EAA;\n      labeljust=l;\n      Norgeb[label = \".43\"]\n      \n      }\n    }   \n    \n    Area1b -> NorwayValues -> Norgeb\n    Area2b -> NorwayValues\n  \n   }\n   \n   \n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
-
-<aside><div>
-<p>Indicators with grey background</p>
-</div></aside></section>
-<section id="early-scaling" class="slide level2">
-<h2>Early scaling</h2>
-<p>leads to cummutativity</p>
-<div class="cell" data-layout-align="left">
-<div class="cell-output-display">
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-9954f49ebb2fdf8ac51e" style="width:672px;height:576px;"></div>
-<script type="application/json" data-for="htmlwidget-9954f49ebb2fdf8ac51e">{"x":{"diagram":"digraph{\n  \n   \n   graph [\n            compound = true, \n            nodesep = .8, \n            ranksep = .8,\n            color = crimson, \n            rankdir = LR\n        ]\n\n  \n    node [\n            fontname = Helvetica, \n            fontcolor = darkslategray,\n            shape = rectangle, \n            fixedsize = true, \n            width = 1,\n            color = darkslategray\n        ]\n        \n        \n    edge [\n            color = black\n        ]\n        \n# Orange part --------------------------\n\n   subgraph clusterTop {\n      graph[color = orange]\n      \n    subgraph cluster0 {\n      graph[color = green]\n      peripheries=0;\n       \n       subgraph cluster0_1 {\n        label=\"EA-1\";\n        labeljust=l;\n        peripheries=1;\n        V2_EA1[label = \"Value = 5\nRef. = 25\", color = orange, style = filled, fontcolor = white]\n        V1_EA1[label = \"Value = 5\nRef. = 10\", color = blue, style = filled, fontcolor = white]\n        I1_EA1[label = \" .5\", color = blue, style = filled, fontcolor = white]\n        I2_EA1[label = \" .2\", color = orange, style = filled, fontcolor = white]\n        X_EA1[label = \" .35\", color = grey, style = filled]\n        V1_EA1 -> I1_EA1 -> X_EA1\n        V2_EA1 -> I2_EA1 -> X_EA1\n        \n       }\n       \n       subgraph cluster0_2 {\n        label=\"EA-2\";\n        labeljust=l;\n        peripheries=1;\n        V2_EA2[label = \"Value = 1\nRef. = 10\", color = orange, style = filled, fontcolor = white]\n        V1_EA2[label = \"Value = 1\nRef. = 4\", color = blue, style = filled, fontcolor = white]\n        I1_EA2[label = \" .25\", color = blue, style = filled, fontcolor = white]\n        I2_EA2[label = \" .1\", color = orange, style = filled, fontcolor = white]\n        X_EA2[label = \" .175\", color = grey, style = filled]\n        V1_EA2 -> I1_EA2 -> X_EA2\n        V2_EA2 -> I2_EA2 -> X_EA2\n       }\n    }\nX[label = \".2625\", color = grey, style = filled]\nX_EA1 -> X\nX_EA2 -> X\n\n}\n\n\n   \n   \n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
-</section>
-<section id="early-scaling-1" class="slide level2">
-<h2>Early scaling</h2>
-<p>leads to cummutativity</p>
-<div class="cell" data-layout-align="left">
-<div class="cell-output-display">
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-b08256fc32dbd5334cce" style="width:672px;height:576px;"></div>
-<script type="application/json" data-for="htmlwidget-b08256fc32dbd5334cce">{"x":{"diagram":"digraph{\n  \n   \n   graph [\n            compound = true, \n            nodesep = .8, \n            ranksep = .8,\n            color = crimson, \n            rankdir = LR\n        ]\n\n  \n    node [\n            fontname = Helvetica, \n            fontcolor = darkslategray,\n            shape = rectangle, \n            fixedsize = true, \n            width = 1,\n            color = darkslategray\n        ]\n        \n        \n    edge [\n            color = black\n        ]\n        \n# Orange part --------------------------\n\n   subgraph clusterTop {\n      \n      graph[color = orange]\n       \n    subgraph cluster0 {\n      graph[color = green]\n      peripheries=0;\n       \n       subgraph cluster0_1 {\n        label=\"EA-1\";\n        labeljust=l;\n        peripheries=1;\n        V1_EA1[label = \"Value = 5\nRef. = 10\", color = blue, style = filled, fontcolor = white]\n        V2_EA1[label = \"Value = 5\nRef. = 25\", color = orange, style = filled, fontcolor = white]\n        I1_EA1[label = \" .5\", color = blue, style = filled, fontcolor = white]\n        I2_EA1[label = \" .2\", color = orange, style = filled, fontcolor = white]\n        V1_EA1 -> I1_EA1\n        V2_EA1 -> I2_EA1\n        \n       }\n       \n       subgraph cluster0_2 {\n        label=\"EA-2\";\n        labeljust=l;\n        peripheries=1;\n        V1_EA2[label = \"Value = 1\nRef. = 4\", color = blue, style = filled, fontcolor = white]\n        V2_EA2[label = \"Value = 1\nRef. = 10\", color = orange, style = filled, fontcolor = white]\n        I1_EA2[label = \" .25\", color = blue, style = filled, fontcolor = white]\n        I2_EA2[label = \" .1\", color = orange, style = filled, fontcolor = white]\n        V1_EA2 -> I1_EA2\n        V2_EA2 -> I2_EA2\n       }\n    }\n\nI1_EAA[label = \" .375\", color = blue, style = filled, fontcolor = white]\nI2_EAA[label = \" .15\", color = orange, style = filled, fontcolor = white]\nX[label = \".2625\", color = grey, style = filled]\n\n\nI1_EA2 -> I1_EAA\nI1_EA1 -> I1_EAA -> X\n\nI2_EA2 -> I2_EAA\nI2_EA1 -> I2_EAA -> X\n\n}\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
-</section>
-<section id="also-with-area-weighting" class="slide level2">
-<h2>Also with area weighting</h2>
-<div class="cell" data-layout-align="left">
-<div class="cell-output-display">
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-60638ef04b2bf05e0162" style="width:672px;height:576px;"></div>
-<script type="application/json" data-for="htmlwidget-60638ef04b2bf05e0162">{"x":{"diagram":"digraph{\n  \n   \n   graph [\n            compound = true, \n            nodesep = .8, \n            ranksep = .8,\n            color = crimson, \n            rankdir = LR\n        ]\n\n  \n    node [\n            fontname = Helvetica, \n            fontcolor = darkslategray,\n            shape = rectangle, \n            fixedsize = true, \n            width = 1,\n            color = darkslategray\n        ]\n        \n        \n    edge [\n            color = black\n        ]\n        \n# Orange part --------------------------\n\n   subgraph clusterTop {\n      graph[color = orange]\n      \n    subgraph cluster0 {\n      graph[color = green]\n      peripheries=0;\n       \n       subgraph cluster0_1 {\n        label=\"EA-1, 1 hectare\";\n        labeljust=l;\n        peripheries=1;\n        V2_EA1[label = \"Value = 5\nRef. = 25\", color = orange, style = filled, fontcolor = white]\n        V1_EA1[label = \"Value = 5\nRef. = 10\", color = blue, style = filled, fontcolor = white]\n        I1_EA1[label = \" .5\", color = blue, style = filled, fontcolor = white]\n        I2_EA1[label = \" .2\", color = orange, style = filled, fontcolor = white]\n        X_EA1[label = \" .35\", color = grey, style = filled]\n        V1_EA1 -> I1_EA1 -> X_EA1\n        V2_EA1 -> I2_EA1 -> X_EA1\n        \n       }\n       \n       subgraph cluster0_2 {\n        label=\"EA-2, 2 hectare\";\n        labeljust=l;\n        peripheries=1;\n        V2_EA2[label = \"Value = 1\nRef. = 10\", color = orange, style = filled, fontcolor = white]\n        V1_EA2[label = \"Value = 1\nRef. = 4\", color = blue, style = filled, fontcolor = white]\n        I1_EA2[label = \" .25\", color = blue, style = filled, fontcolor = white]\n        I2_EA2[label = \" .1\", color = orange, style = filled, fontcolor = white]\n        X_EA2[label = \" .175\", color = grey, style = filled]\n        V1_EA2 -> I1_EA2 -> X_EA2\n        V2_EA2 -> I2_EA2 -> X_EA2\n       }\n    }\nX[label = \".233\", color = grey, style = filled]\nX_EA1 -> X\nX_EA2 -> X\n\n}\n\n\n   \n   \n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
-</section>
-<section id="also-with-area-weighting-1" class="slide level2">
-<h2>Also with area weighting</h2>
-<div class="cell" data-layout-align="left">
-<div class="cell-output-display">
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-dc208c57780340ae9695" style="width:672px;height:576px;"></div>
-<script type="application/json" data-for="htmlwidget-dc208c57780340ae9695">{"x":{"diagram":"digraph{\n  \n   \n   graph [\n            compound = true, \n            nodesep = .8, \n            ranksep = .8,\n            color = crimson, \n            rankdir = LR\n        ]\n\n  \n    node [\n            fontname = Helvetica, \n            fontcolor = darkslategray,\n            shape = rectangle, \n            fixedsize = true, \n            width = 1,\n            color = darkslategray\n        ]\n        \n        \n    edge [\n            color = black\n        ]\n        \n# Orange part --------------------------\n\n   subgraph clusterTop {\n      \n      graph[color = orange]\n       \n    subgraph cluster0 {\n      graph[color = green]\n      peripheries=0;\n       \n       subgraph cluster0_1 {\n        label=\"EA-1, 1 hectar\";\n        labeljust=l;\n        peripheries=1;\n        V1_EA1[label = \"Value = 5\nRef. = 10\", color = blue, style = filled, fontcolor = white]\n        V2_EA1[label = \"Value = 5\nRef. = 25\", color = orange, style = filled, fontcolor = white]\n        I1_EA1[label = \" .5\", color = blue, style = filled, fontcolor = white]\n        I2_EA1[label = \" .2\", color = orange, style = filled, fontcolor = white]\n        V1_EA1 -> I1_EA1\n        V2_EA1 -> I2_EA1\n        \n       }\n       \n       subgraph cluster0_2 {\n        label=\"EA-2, 2 hectar\";\n        labeljust=l;\n        peripheries=1;\n        V1_EA2[label = \"Value = 1\nRef. = 4\", color = blue, style = filled, fontcolor = white]\n        V2_EA2[label = \"Value = 1\nRef. = 10\", color = orange, style = filled, fontcolor = white]\n        I1_EA2[label = \" .25\", color = blue, style = filled, fontcolor = white]\n        I2_EA2[label = \" .1\", color = orange, style = filled, fontcolor = white]\n        V1_EA2 -> I1_EA2\n        V2_EA2 -> I2_EA2\n       }\n    }\n\nI1_EAA[label = \" .33\", color = blue, style = filled, fontcolor = white]\nI2_EAA[label = \" .133\", color = orange, style = filled, fontcolor = white]\nX[label = \".233\", color = grey, style = filled]\n\n\nI1_EA2 -> I1_EAA\nI1_EA1 -> I1_EAA -> X\n\nI2_EA2 -> I2_EAA\nI2_EA1 -> I2_EAA -> X\n\n}\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
-</section>
-<section id="commutativty" class="slide level2">
-<h2>Commutativty</h2>
-
-<img data-src="img/commutativity.PNG" class="r-stretch"></section>
-<section id="alternativey" class="slide level2">
-<h2>Alternativey,</h2>
-<p>we can aggregate the actual measurements. When would this make sense to do?</p>
-<div class="cell" data-layout-align="left">
-<div class="cell-output-display">
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-9f410abb8bcbb6e1fe79" style="width:672px;height:576px;"></div>
-<script type="application/json" data-for="htmlwidget-9f410abb8bcbb6e1fe79">{"x":{"diagram":"digraph{\n  \n   \n   graph [\n            compound = true, \n            nodesep = .8, \n            ranksep = .8,\n            color = crimson, \n            rankdir = LR\n        ]\n\n  \n    node [\n            fontname = Helvetica, \n            fontcolor = darkslategray,\n            shape = rectangle, \n            fixedsize = true, \n            width = 1,\n            color = darkslategray\n        ]\n        \n        \n    edge [\n            color = black\n        ]\n        \n# Orange part --------------------------\n\n   subgraph clusterTop {\n      \n      graph[color = orange]\n       \n    subgraph cluster0 {\n      graph[color = green]\n      peripheries=0;\n       \n       subgraph cluster0_1 {\n        label=\"EA-1, 1 hectar\";\n        labeljust=l;\n        peripheries=1;\n        V1_EA1[label = \"Value = 5\nRef. = 10\", color = blue, style = filled, fontcolor = white]\n        V2_EA1[label = \"Value = 5\nRef. = 25\", color = orange, style = filled, fontcolor = white]\n        #I1_EA1[label = \" .5\", color = blue, style = filled, fontcolor = white]\n        #I2_EA1[label = \" .2\", color = orange, style = filled, fontcolor = white]\n        #V1_EA1 -> I1_EA1\n        #V2_EA1 -> I2_EA1\n        \n       }\n       \n       subgraph cluster0_2 {\n        label=\"EA-2, 2 hectar\";\n        labeljust=l;\n        peripheries=1;\n        V1_EA2[label = \"Value = 1\nRef. = 4\", color = blue, style = filled, fontcolor = white]\n        V2_EA2[label = \"Value = 1\nRef. = 10\", color = orange, style = filled, fontcolor = white]\n        #I1_EA2[label = \" .25\", color = blue, style = filled, fontcolor = white]\n        #I2_EA2[label = \" .1\", color = orange, style = filled, fontcolor = white]\n        #V1_EA2 -> I1_EA2\n        #V2_EA2 -> I2_EA2\n       }\n    }\n\nV1_EAA[label = \"Value (awm) = 2.33\nRef.(awm) = 6\", color = blue, style = filled, fontcolor = white, width = 2]\nV2_EAA[label = \"Value (awm) =  2.33\nRef.(awm) = 15\", color = orange, style = filled, fontcolor = white, width = 2]\nI1_EAA[label = \".39\", color = blue, style = filled, fontcolor = white]\nI2_EAA[label = \".156\", color = orange, style = filled, fontcolor = white]\nX[label = \".278\", color = grey, style = filled]\n\nV1_EA1 -> V1_EAA -> I1_EAA -> X\nV1_EA2 -> V1_EAA\nV2_EA1 -> V2_EAA -> I2_EAA -> X\nV2_EA2 -> V2_EAA\n}\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
-</section>
-<section id="same-but-with-no-area-weighting-and-taking-the-sum-e.g.-population-sizes" class="slide level2">
-<h2>Same, but with no area weighting and taking the sum (e.g.&nbsp;population sizes)</h2>
-<div class="cell" data-layout-align="left">
-<div class="cell-output-display">
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-bceceb6f8e1d6f82fab5" style="width:672px;height:576px;"></div>
-<script type="application/json" data-for="htmlwidget-bceceb6f8e1d6f82fab5">{"x":{"diagram":"digraph{\n  \n   \n   graph [\n            compound = true, \n            nodesep = .8, \n            ranksep = .8,\n            color = crimson, \n            rankdir = LR\n        ]\n\n  \n    node [\n            fontname = Helvetica, \n            fontcolor = darkslategray,\n            shape = rectangle, \n            fixedsize = true, \n            width = 1,\n            color = darkslategray\n        ]\n        \n        \n    edge [\n            color = black\n        ]\n        \n# Orange part --------------------------\n\n   subgraph clusterTop {\n      \n      graph[color = orange]\n       \n    subgraph cluster0 {\n      graph[color = green]\n      peripheries=0;\n       \n       subgraph cluster0_1 {\n        label=\"EA-1\";\n        labeljust=l;\n        peripheries=1;\n        V1_EA1[label = \"Value = 5\nRef. = 10\", color = blue, style = filled, fontcolor = white]\n        V2_EA1[label = \"Value = 5\nRef. = 25\", color = orange, style = filled, fontcolor = white]\n        #I1_EA1[label = \" .5\", color = blue, style = filled, fontcolor = white]\n        #I2_EA1[label = \" .2\", color = orange, style = filled, fontcolor = white]\n        #V1_EA1 -> I1_EA1\n        #V2_EA1 -> I2_EA1\n        \n       }\n       \n       subgraph cluster0_2 {\n        label=\"EA-2\";\n        labeljust=l;\n        peripheries=1;\n        V1_EA2[label = \"Value = 1\nRef. = 4\", color = blue, style = filled, fontcolor = white]\n        V2_EA2[label = \"Value = 1\nRef. = 10\", color = orange, style = filled, fontcolor = white]\n        #I1_EA2[label = \" .25\", color = blue, style = filled, fontcolor = white]\n        #I2_EA2[label = \" .1\", color = orange, style = filled, fontcolor = white]\n        #V1_EA2 -> I1_EA2\n        #V2_EA2 -> I2_EA2\n       }\n    }\n\nV1_EAA[label = \"Value (sum) = 6\nRef.(sum) = 14\", color = blue, style = filled, fontcolor = white, width = 2]\nV2_EAA[label = \"Value (sum) =  6\nRef.(sum) = 35\", color = orange, style = filled, fontcolor = white, width = 2]\nI1_EAA[label = \".43\", color = blue, style = filled, fontcolor = white]\nI2_EAA[label = \".17\", color = orange, style = filled, fontcolor = white]\nX[label = \".3\", color = grey, style = filled]\n\nV1_EA1 -> V1_EAA -> I1_EAA -> X\nV1_EA2 -> V1_EAA\nV2_EA1 -> V2_EAA -> I2_EAA -> X\nV2_EA2 -> V2_EAA\n}\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
-</section>
-<section id="what-about" class="slide level2">
-<h2>What about</h2>
+<section id="arguments-for-scaling-and-truncating-immediately" class="slide level2">
+<h2>Arguments for scaling and truncating immediately</h2>
 <ul>
-<li>Scaling, aggregating, and then truncating</li>
-<li>Non-linear re-scaling functions with asymptotes</li>
+<li>High or low <em>outliers</em> can not compensate for low or high values (i.e.&nbsp;condition) elsewhere, respectively.</li>
+<li>Gives higher-resolution indicator values and preserves the original spatial resolution of the variable.</li>
+<li>Means that subsequent aggregation is carrying information about the actual condition, and not the raw variable.</li>
 </ul>
+</section>
+<section id="arguments-for-scaling-and-truncating-later-at-a-level-where-the-reference-value-is-sensible" class="slide level2">
+<h2>Arguments for scaling and truncating later at a level where the reference value is sensible</h2>
+<ul>
+<li>The reference value was maybe intended for that scale</li>
+<li>The indicator uncertainty becomes (apparently) smaller because the mean or sum for a region is less variable.</li>
+<li>Maybe, too many truncation events leads to accumulated displacement errors?</li>
+</ul>
+</section>
+<section id="what-if" class="slide level2">
+<h2>What if</h2>
+<ul>
+<li>The reference value is at the same scale as the variable</li>
+<li>The reference value is the same all over</li>
+<li>We also want to aggregate the original variable further, e.g.&nbsp;to national level - will the indicator and variable remain correlated</li>
+<li>We want to use non-linear re-scaling functions with asymptotes</li>
+</ul>
+</section>
+<section id="resources" class="slide level2">
+<h2>Resources</h2>
+<p><a href="https://brage.nina.no/nina-xmlui/handle/11250/2631056">Sanvik 2019</a></p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
