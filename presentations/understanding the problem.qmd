@@ -5,6 +5,7 @@ format:
     smaller: true
     scrollable: false
     preview-links: true
+    self-contained: true
 editor: visual
 ---
 
@@ -23,9 +24,7 @@ library(knitr)
 -   Manuscript on pre-print server
 
 -   Produce guidelines
-```{r}
-print(getwd())
-```
+
 
 
 ## Blåbærkrisa
@@ -93,6 +92,7 @@ Indicators with grey background
 :::
 
 ------------------------------------------------------------------------
+
 ## Commutativty
 
 ![](img/commutativity.PNG)
@@ -162,7 +162,8 @@ example6
 
 ------------------------------------------------------------------------
 
-## Same, but with no area weighting and taking the sum (e.g. population sizes)
+## Same, but with no area weighting 
+and taking the sum (e.g. population sizes)
 
 ```{r}
 #| fig-align: "left"
