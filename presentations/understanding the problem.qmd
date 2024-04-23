@@ -5,12 +5,12 @@ format:
     smaller: true
     scrollable: false
     preview-links: true
+    embed-resources: true
 editor: visual
 ---
 
 ```{r setup}
 library(knitr)
-library(here)
 ```
 
 ## This project
@@ -57,7 +57,7 @@ if we aggregate (takes means of) of the scaled or unscaled variabel:
 ## Pathways
 
 ```{r}
-source(here::here("R/pathways.R"))
+source("../R/pathways.R")
 pathways
 ```
 
