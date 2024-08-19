@@ -77,3 +77,8 @@ m1 -> scale -> a1 -> truncate
 
 pathways
 
+#grViz_png <- function(x, filename = "graph.png") {
+#  utils::capture.output({
+#   rsvg::rsvg_png(svg = charToRaw(DiagrammeRsvg::export_svg(DiagrammeR::grViz(x))), file = filename)})
+#  invisible()}
+#grViz_png(pathways[[1]]$diagram, filename = "R/figures/pathways.png")
