@@ -3,7 +3,7 @@ library(eaTools)
 library(sf)
 library(ggtext)
 
-var <- seq(50, 200, .1)
+var <- seq(50, 200, 0.1)
 dat <- data.frame(var = var)
 
 X0 <- 60
@@ -21,7 +21,7 @@ dat <- var |>
     var >X0 ~ (var -X0)/(X100-X0),
     var <= X0 ~ 0,
   ),
-  ind = round(ind, 2))
+  ind = round(ind, 3))
 
 low <- "red"
 high <- "green"
@@ -43,10 +43,16 @@ fVhatt <- dat |>
   pull(ind)
 fVbar <- ((fV2-fV1)/2)+fV1
 
+dat_x <- dat |>
+  distinct(ind,
+           .keep_all = T) |>
+  add_row(ind = 0, var = X0) |>
+  add_row(ind = 1, var = 200)
+
 
 # ggtext and element markdown doesnt work for some mathematical signs, like bar.
 ## PLOT 1 -------------
-dat |>
+dat_x |>
   ggplot(aes(
     x = var,
     y = ind,
@@ -130,7 +136,8 @@ dat |>
 ## PLOT 2 --------------
 # add X60
 
-X60 <- 155
+
+X60 <- 150
 X100 <- 160
 V2 <- 170
 Vbar <- ((V2-V1)/2)+V1
@@ -143,7 +150,7 @@ dat2 <- var |>
     var >X0 ~ (var-X0)/(X60-X0) *0.6,
     var <= X0 ~ 0,
   ),
-  ind = round(ind, 2))
+  ind = round(ind, 3))
 
 fV1x <- dat2 |>
   filter(var == V1) |>
@@ -156,31 +163,39 @@ fVhattx <- dat2 |>
   pull(ind)
 fVbarx <- ((fV2x-fV1x)/2)+fV1x
 
+dat3 <- dat2 |>
+  distinct(ind,
+           .keep_all = T) |>
+  add_row(ind = 0, var = X0) |>
+  add_row(ind = 1, var = 200)
 
-dat2 |>
+dat3 |>
   ggplot(aes(
     x = var,
     y = ind,
     colour = ind
   )) +
+  geom_point()+
   geom_line(
     lineend = "round",
+    linejoin = "bevel",
     size = mySize,
     alpha = myAlpha
   ) +
-  ylab("") +
-  xlab("") +
   scale_color_gradient("Indicator values",
                        low = low,
                        high = high
   ) +
+  ylab("") +
+  xlab("") +
   scale_x_continuous( # expand = expansion(mult = 0.2),
-    breaks = c(X0, V1, Vbar, X60, V2),
+    breaks = c(X0, V1, Vbar, X60, X100, V2),
     labels = c(
       expression(X[0]),
       expression(V[1]),
       expression(bar(V)),
       expression(X[60]),
+      expression(X[100]),
       expression(V[2])
     )
   ) +
