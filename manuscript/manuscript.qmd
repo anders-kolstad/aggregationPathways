@@ -210,7 +210,7 @@ This is also recommended practice following the SEEA EA. However, if the indicat
 Indicators typically now reflect the average ecosystem condition, where areas in very good or very poor condition have limited ability to compensate for opposite extreme values elsewhere.
 The spatially aggregated variable on the other hand, may reflect something like a sum of individuals, or some other aspect where values above and below the average value are able to compensate for each other.
 
-### Alien species example
+## Alien species example {#sec-ali}
 
 *Variable*: The local ecological effect from alien species (mostly vascular plants) recorded on a 7-step ordinal scale (1 = no alien species, 7 = only alien species).
 The data comes from nature type monitoring with reference to individual occurences (polygons).
@@ -234,7 +234,7 @@ Separate assessments should give identical indicator values for the same areas, 
 When this is not true it raises concerns about reproducibility and sacrifices the credibility of both assessments.
 This was also the case in the billberry example, but here we used another example to illustrate the point further.
 
-### Phytoplankton trophic index (PTI) {#sec-pti}
+## Phytoplankton trophic index (PTI) {#sec-pti}
 
 <!-- Dataset: “Vannmiljø”, the Norwegian Environment Agency’s database for Water Framework Directive relevant measurements -->
 
@@ -275,7 +275,7 @@ knitr::include_graphics("../img/aggregationPathways.jpg")
 
 Based on the example above, we suggest some recommendations for developers of ecosystem condition indicators and assessment for trying to avoid some of the pitfalls from having a too casual approach to the choice of aggregation pathways.
 
-### 1. Always report the aggregation pathway, using standardised terminology {.unnumbered}
+### 1. Report the aggregation pathway, using standardised terminology {.unnumbered}
 
 In indicator documentation or ECA repports, authors should make an effort to make a precise description of the steps in the aggregation process.
 To do this we suggest using the terms as described in @fig-term.
@@ -284,16 +284,17 @@ Besides making the indicator workflow itself more transparrent and reproduciable
 It will make the interpretation of assessment less prone to misunderstanding.
 It will also make troubleshooting easier, as i the billberry example where researchers had to spend several days looking though old code to identify the reason why two assessment produces dissimilar indicator values from the same underlying data.
 
-### 2. Always normalise variables at the scale where the reference levels are relevant {.unnumbered}
+### 2. Normalise variables early, but at the scale where the reference levels are relevant {.unnumbered}
 
-Normalising variables early in the aggregation pathway has several benefits, as we have seen.
+Normalising variables early in the aggregation pathway has several benefits, such as comparability between nested assessments (@sec-ali).
+It also means that you are aggregating normative measures of condition, which is generally what you want in ECAs.
 But same as variables and indicators, reference levels also have a spatial resolution, and they should only be used to normalise variables when the variable is at a scale which is relevant to the way the reference levels are defined.
-This was exeplified with the billberry example (@sec-bill).
+This was exemplified with the billberry example (@sec-bill).
 
 ### 3. Use the same aggregation pathway for all indicators in the same assessment {.unnumbered}
 
-As we saw in the wolves example (@sec-wolves) this eases interpretation and reduces the change that the meaning of indicators are misunderstood.
-It may be premature, or not even possible, to prescribe an aggregation pathway to be used for all ECA, but internal consistency within assessment should be possible.
+It may be premature, or not even possible, to prescribe an aggregation pathway to be used for all ECAs, but internal consistency within assessments should be possible.
+As we saw in the wolves example (@sec-wolves), this eases interpretation and reduces the change that the meaning of indicators are misunderstood.
 
 ### 4. Use unique indicator IDs on indicators that are similar, but use different pathways {.unnumbered}
 
