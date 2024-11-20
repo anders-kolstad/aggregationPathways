@@ -74,7 +74,7 @@ Variables can be truncated to produce a bound indicator scale between 0 and 1.
 Sometimes variables are transformed to adjust the indicator scale to reflect potentially nonlinear relationships between the variable and ecosystem condition.
 This is commonly done by anchoring specific variable values to predefined class boundaries [@czúcz], but may also be done without any additional reference levels, for example by using a sigmoid or exponential transformation.
 When a variable is normalised in this way, its interpretation changes from descriptive to normative.
-The ecological significance of the indicator might also differ from that of the variable since additional ecological knowledge can be introduced via the reference leveles.
+The ecological significance of the indicator might also differ from that of the variable since additional ecological knowledge can be introduced via the reference levels.
 The indicator is a function of the variable and the reference values, and this relationship is almost always nonlinear (e.g. due to truncation which is ubiquitous practice).
 
 Similar to variables, the reference values used for normalising the variables also have a spatial assignment, but it can be different from that of the variable.
@@ -162,14 +162,14 @@ The reference levels are unique to each (CMA).
 This example is from Norway, where wolves are extinct in most of the country.
 Therefore, most carnivore management areas will get an indicator value of 0.
 Wolves exists i designated wolf zones in south-east Norway, although in small numbers.
-In the Norwegian Natur Index [@jakobsson2020], the variable follows pathway 1 and is normalised at the CMA level.
+In the Norwegian Nature Index [@jakobsson2020], the variable follows pathway 1 and is normalised at the CMA level.
 When aggregating the indicator to a national value, it is common for the general public to interpret this value as the status for wolves in Norway, and to connect this value to Norway's international obligations to maintain wolf numbers.
 But note that even an unlimited number of wolves in the wolf zone would not to bring the national indicator value up to a level indicator good condition.
 This is because the normalisation process truncates the variable, and does not allow overshooting values to compensate for lower values in the rest of the country.
 
 \*Conclusion\*: Indicators should make intuitive sense to the readers.
 However, there are sometimes good reasons for making things complicated.
-In this example, The Norwegian Nature Index uses the same pathway for all indicators, so this common missunderstanding about what indicator values represenets can be exaplin just one time, and not for each indicator spesifically.
+In this example, The Norwegian Nature Index uses the same pathway for all indicators, so this common misunderstandings about what indicator values represents can be explain just one time, and not for each indicator specifically.
 It can also be a good idea to sometime go back to the variable, and see if it can be defined differently to avoid these kinds of confusions.
 Wolf numbers could in this example be converted to wolf density.
 
@@ -184,7 +184,7 @@ At what scale is the ref value intended?
 
 <!-- Reference: https://www.naturindeks.no/Indicators/blaabaer -->
 
-*Variable*: Horizontal coverage (vertical projection) of billberry (Vaccinum myrtillus) recorded in permanent vegetation plots.
+*Variable*: Horizontal coverage (vertical projection) of billberry (*Vaccinum myrtillus*) recorded in permanent vegetation plots.
 
 *Reference levels*: X~100~ was defined for each of 5 regions in Norway based on an expert elicitation.
 Experts were informed by the distribution of the variable values both within and outside protected areas, and the regional distribution of major forest types.
@@ -213,7 +213,7 @@ The spatially aggregated variable on the other hand, may reflect something like 
 ## Alien species example {#sec-ali}
 
 *Variable*: The local ecological effect from alien species (mostly vascular plants) recorded on a 7-step ordinal scale (1 = no alien species, 7 = only alien species).
-The data comes from nature type monitoring with reference to individual occurences (polygons).
+The data comes from nature type monitoring with reference to individual occurrences (polygons).
 
 *Reference levels*: X~0~ = total dominance from alien species (variable value 7).
 X~100~ = zero influence from alien species (variable value 1).
@@ -277,10 +277,10 @@ Based on the example above, we suggest some recommendations for developers of ec
 
 ### 1. Report the aggregation pathway, using standardised terminology {.unnumbered}
 
-In indicator documentation or ECA repports, authors should make an effort to make a precise description of the steps in the aggregation process.
+In indicator documentation or ECA reports, authors should make an effort to make a precise description of the steps in the aggregation process.
 To do this we suggest using the terms as described in @fig-term.
 The description can be made even easier by referencing specific aggregation pathways in @fig-pathways by number.
-Besides making the indicator workflow itself more transparrent and reproduciable, ee believe this recommendation would help raise the general awareness about aggregation bias in EAs, both among readers and researchers.
+Besides making the indicator workflow itself more transparent and reproducible, ee believe this recommendation would help raise the general awareness about aggregation bias in EAs, both among readers and researchers.
 It will make the interpretation of assessment less prone to misunderstanding.
 It will also make troubleshooting easier, as i the billberry example where researchers had to spend several days looking though old code to identify the reason why two assessment produces dissimilar indicator values from the same underlying data.
 
@@ -294,12 +294,12 @@ This was exemplified with the billberry example (@sec-bill).
 ### 3. Use the same aggregation pathway for all indicators in the same assessment {.unnumbered}
 
 It may be premature, or not even possible, to prescribe an aggregation pathway to be used for all ECAs, but internal consistency within assessments should be possible.
-As we saw in the wolves example (@sec-wolves), this eases interpretation and reduces the change that the meaning of indicators are misunderstood.
+As we saw in the wolves example (@sec-wolves), this eases interpretation and reduces the chance that the meaning of indicators are misunderstood.
 
 ### 4. Use unique indicator IDs on indicators that are similar, but use different pathways {.unnumbered}
 
 Indicators (and variables) often exist in multiple version, varying slightly in the raw data or in the methods used to produce the data or metrics.
-Yet different versions are often refered to by the same common name.
+Yet different versions are often refereed to by the same common name.
 This causes confusion about which indicator version is being used, and thus making it difficult to make out which aggregation pathway that has been used.
 We recommend making use of stable indicator IDs, unique for each version of the indicators sharing the same common name.
 This has for example been implemented in [ecRxiv](https://github.com/NINAnor/ecRxiv), a publishing platform for ecosystem condition indicators.
