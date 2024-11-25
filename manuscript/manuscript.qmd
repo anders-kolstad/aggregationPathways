@@ -17,11 +17,11 @@ author:
     email: hanno.sandvik@nina.no
     orchid: https://orcid.org/0000-0002-5889-1606
     affiliations:
-      - id: nina
+      - ref: nina
   - name: Bálint Czúcz
     email: balint.czucz@nina.no
     affiliations:
-        - ref: nina
+      - ref: nina
 abstract: |
   Ecosystem condition assessments (ECA) and accounts use variables and indicators to describe key ecosystem characteristics reflecting the ecosystem condition and any potential deviations from a reference condition. These metrices are rutinely aggregation spatially to produce values representing the condition of a larger area, such as a country. However, we experience little awareness about the potential pitfals arising from aggregation bias of highly modified indicators. Here we outline some consequences regarding the order of the steps involed in normalising variables and aggregating them in space. We show that the choice of  aggregation pathways in non-trivial and has the potential to undermine the credibility and precition in ECAs, and to confuse the communication of their results. We introduce a common terminology for aggregation pathways, spesific to ecosystem condition indicators following SEEA EA standards, and make some recomendations about which pathway to use in different settings, and how to report these choices.   
   

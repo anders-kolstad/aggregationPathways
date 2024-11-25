@@ -90,7 +90,7 @@ dat_x |>
     )
   ) +
   guides(color = "none") +
-  theme_bw(base_size = 16) +
+  theme_bw(base_size = 30) +
   theme(panel.grid.minor = element_blank()) +
   geom_segment(aes(x = 50, y = fV1, xend = V1, yend = fV1),
     color = lc, linewidth = 2, linetype = lt
@@ -210,7 +210,7 @@ dat3 |>
     )
   ) +
   guides(color = "none") +
-  theme_bw(base_size = 16) +
+  theme_bw(base_size = 30) +
   theme(panel.grid.minor = element_blank()) +
   geom_segment(aes(x = 50, y = fV1x, xend = V1, yend = fV1x),
                color = lc, linewidth = 2, linetype = lt
