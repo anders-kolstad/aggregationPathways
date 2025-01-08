@@ -40,7 +40,7 @@ format:
       name: ---
       formatting: preprint
       model: 3p
-      cite-style: super
+      cite-style: authoryear
     include-in-header:
       text: '\usepackage{lineno}\linenumbers'
 execute:
@@ -257,7 +257,7 @@ When WFD data are put into use in other contexts, however, aggregation becomes i
 *Conclusion*: Because of how X~100~ is defined based on the median value across reference lakes, overshooting values (\> X~100~) should be preserved in the spatial aggregation.
 <!-- Otherwise, the condition of water bodies with X > X80 will be underreported.  --> Otherwise we get a negative displacement, as in the bilberry example.
 This means that neither EQR values (which are untransformed), nor nEQR values (which are truncated), can be used uncritically in ECAs.
-One solution, to enable the use of WFD indicators in ECA, would be to change to pathway 6, with (1) scaling, (2) transforming, (3) aggregating and (4) truncating the values [@fig.pathways].
+One solution, to enable the use of WFD indicators in ECA, would be to change to pathway 6, with (1) scaling, (2) transforming, (3) aggregating and (4) truncating the values [@fig-pathways].
 Furthermore, Eurostat @eurostat2022\
 <!-- requires  --> encourages reporting of variable values.
 These, however, cannot be aggregated spatially in a meaningful way.
