@@ -57,34 +57,47 @@ editor:
 
 Ecosystem accounting (EA), and other types of environmental assessments, are generally aimed at communicating major changes and trends in the extent and condition of ecosystems at a scale that is relevant for decision makers.
 For ecosystem condition accounting (ECA) and assessments, this often requires that **metrics**[^1] used to describe the condition of ecosystems are aggregated spatially to produce a single value for a larger area.
-This represents a type of knowledge synthesis, aimed at condensing the complexity of the real world into something actionable at a political level.
+This represents a type of knowledge synthesis, aimed at condensing the complexity of the real world into something that is relevant to decision makers and perhaps actionable at a political level.
 However, spatial aggregation can and will often change the interpretation of a metric and the descriptive properties and normative claims one can make based on it.
 Without a good enough understand of the pitfalls in spatial aggregation of information, is can also lead to unintended and undetected systematic bias, as well as downright logical errors.
-Although much attention has been devoted to the vertical aggregation of environmental indicators into indices (e.g. @langhans2014), as well as to the spatial aggregation of relatively unmodified or raw variables (e.g @allain2018) , there is to our knowledge no explicit deliberation on the special case of spatially aggregating highly modified indicators used for ecosystem condition accounting.
-This paper therefore focus on explaining and providing guidelines on the spatial aggregation inherent to the System of Environmental Economic Accounting - Ecosystem Accounting (SEEA EA) - the most used ecosystem accounting (natural resource accounting) framework in the world (ref).
+Although much attention has been devoted to the vertical aggregation of environmental indicators into indices (e.g. @langhans2014; @maes2020), as well as to the spatial aggregation of relatively unmodified or raw variables (e.g @allain2018) , there is to our knowledge no explicit deliberation on the special case of spatially aggregating highly modified indicators used for ecosystem condition accounting (but see @vanbeurden1999).
+This paper therefore focus on explaining and providing guidelines on the spatial aggregation inherent to the System of Environmental Economic Accounting - Ecosystem Accounting (SEEA EA) [@unitednations2021] - the most used ecosystem accounting (natural resource accounting) framework in the world (ref).
 We pay specific attention to the phenomenon of aggregation bias [@rastetter1992] and on the different ways to interpret the information in ecosystem condition variables versus indicators.
 
-[^1]: Words in bold are explained in Table 1
+[^1]: Words in bold are explained in @tbl-def
 
-@stein2001
+This paper has a rather narrow and defined focus.
+Related concepts are briefly mentioned in @nte-rel.
 
-@finke2002
+::: {#nte-rel .callout-note appearance="minimal" icon="false"}
+### Related concepts
 
-<https://www.sciencedirect.com/science/article/pii/S0016706198000779?casa_token=UTwC6C3DthYAAAAA:ZZ6eao2vlMClkMtTrdA043xgkyjfjwjpLsitDzfohdqiB3GvVPyQoDFzY1jgu4o176jpDjbWCZE>
+##### Vertical aggregation {.unnumbered}
 
-read bib in knotters...
+It is common in this field to use the term aggregation about the process of aggregating normalised indicators into indices (i.e. thematic or vertical aggregation; @langhans2014), but in this paper we are discussing spatial (i.e. horizontal) aggregation only.
 
-### Other types of aggregation not considered in this paper
+##### Upscaling {.unnumbered}
 
-Note that it is common in this field to use the term aggregation about the process of aggregating normalised indicators into indices (i.e. thematic or vertical aggregation; @langhans2014), but in this paper we are discussing spatial (i.e. horizontal) aggregation only.
-The term spatial aggregation is also sometimes used to refer to **upscaling** in the sense of taking local information and making it applicable of translate it to larger, e.g. landscape or regional, scales [@knotters2010].
+The term spatial aggregation is also sometimes used to refer to **upscaling** in the sense of taking local information and making it applicable or translate it to larger, e.g. landscape or regional, scales [@knotters2010; @finke2002].
 This process often involves predicting values across larger areas or surfaces, generally through models, including krieging-based models and distribution models.
 When the data (e.g. indicator values) are made wall-to-wall, one can then more easily get point estimates for larger areas via simple aggregation functions such as summation or by taking the mean.
-Using models to predict variable or indicator values is allowed under the SEEA EA. However, in this paper we are addressing the second part of this process only: of simplifying the spatial variation, from many to few data points.
+Using models to predict variable or indicator values is allowed under the SEEA EA. However, in this paper we are addressing the second part of this process only, of simplifying the spatial variation, from many to few data points.
+
+##### Modifiable area unit problem {.unnumbered}
+
+The modifiable area unit problem (MAUP; [@openshaw1984, @wong2009]) describes the sensitivity that spatially aggregated information has on the choice about the spatial units used for either collecting the data or for aggregating the data to. These units can be arbitrary (*modifiable*), yet different sizes and configuration of units can have large effects on the outcome of aggregation. Administrative units are often used as the ecosystem assets in SEEA EAs, yet they are in an ecological sense almost always arbitrary, and can also be subject to change over time. The original spatial units that data are collected at may be a pragmatic choice in much the same way. Further still, data may not be available at the original spatial scale, but may only be downloadable in preaggregated form [@vanbeurden1999].
+All these cases lead to some form of aggregation bias [@rastetter1992] where the aggregated information has a non-linear relationship with the true variable value.
+However, the issue of MAUP in SEEA EA deserves an in-depth analyses that we cannot provide here.
+
+##### Ecological fallacy {.unnumbered}
+
+The ecological fallacy [@robinson2009] explains the common misinterpretation of correlations between group (*i.e.* aggregated information) and some phenomena.
+Simply said, the mean of a group, or an area, cannot accurately describe the qualities of individuals in that group, or pin-points inside that area, yet it is common for people to interpret it that way.
+:::
 
 ### SEEA EA
 
-SEEA EA includes principles for compiling accounts for ecosystem extent, ecosystem condition, and ecosystem services.
+SEEA EA includes principles for compiling accounts for ecosystem extent, ecosystem condition, and ecosystem services [@unitednations2021 @unitednations2022].
 We will focus on the SEEA EA condition accounts in this paper.
 In these accounts, information about ecosystem condition is made spatially explicit by assigning **variable** or **indicator** values to individual ecosystem assets.
 Unless the underlying data are wall-to-wall maps, for example from satellite images, then this process of assigning values to ecosystem assets already here requires some spatial manipulations in the form of aggregation, dissaggregation, extrapolation or interpolation (ref Ewert 2011?), of which averaging or summing are the most common methods.
@@ -116,7 +129,7 @@ This is commonly done by anchoring specific variable values to predefined class 
 
 | Term                | Definition |
 |---------------------|------------|
-| Metric              |            |
+| Metric              | blablabla  |
 | Variable            |            |
 | Indicator           |            |
 | Reference levels    |            |
@@ -127,7 +140,7 @@ This is commonly done by anchoring specific variable values to predefined class 
 | Compensation        |            |
 | Aggregation pathway |            |
 
-: Definition of terms
+: Definition of terms {#tbl-def}
 
 # Why to we spatially aggregate data in ecosystem condition accounting
 
@@ -149,7 +162,7 @@ Similarly, one may chose to aggregate such that the spatial resolution matches s
 However, spatial aggregation can have several consequences that may or may not be desirable, such as smoothing out spatial variability, which can mask local patterns and trends.
 This smoothing out makes the data and its inherent information less suitable for some uses, such as depicting spatial variation that can be used to support local land use planning, or for aiding a debate about spatial conflicts.
 
-### Accounting for spatial autocorrelation {#-sec-auto}
+### Accounting for spatial autocorrelation {#sec-auto}
 
 One reason why we might want to spatially aggregate ecosystem condition metrics is to fix issues with spatial auto-correlation, that is to remove problematic spatial structure in the data.
 For example if data is collected opportunistically with sampling size varying between areas, then performing partial spatial aggregation to some intermediate size areaa will give equal weight or importance to to all areas regardless of how many data points are included in each.
