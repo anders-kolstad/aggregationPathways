@@ -56,18 +56,83 @@ editor:
 # Introduction
 
 Ecosystem accounting (EA), and other types of environmental assessments, are generally aimed at communicating major changes and trends in the extent and condition of ecosystems at a scale that is relevant for decision makers.
-For ecosystem condition accounting (ECA) and assessments, this often requires that **metrics**[^1] used to describe the condition of ecosystems are aggregated spatially to produce a single value for a larger area.
+For ecosystem condition accounting (ECA) and assessments, this often requires that **metrics**[^1] used to describe the condition of ecosystems are aggregated spatially, sometimes to produce a single value for a larger area.
 This represents a type of knowledge synthesis, aimed at condensing the complexity of the real world into something that is relevant to decision makers and perhaps actionable at a political level.
-However, spatial aggregation can and will often change the interpretation of a metric and the descriptive properties and normative claims one can make based on it.
-Without a good enough understand of the pitfalls in spatial aggregation of information, is can also lead to unintended and undetected systematic bias, as well as downright logical errors.
-Although much attention has been devoted to the vertical aggregation of environmental indicators into indices (e.g. @langhans2014; @maes2020), as well as to the spatial aggregation of relatively unmodified or raw variables (e.g @allain2018) , there is to our knowledge no explicit deliberation on the special case of spatially aggregating highly modified indicators used for ecosystem condition accounting (but see @vanbeurden1999).
-This paper therefore focus on explaining and providing guidelines on the spatial aggregation inherent to the System of Environmental Economic Accounting - Ecosystem Accounting (SEEA EA) [@unitednations2021] - the most used ecosystem accounting (natural resource accounting) framework in the world (ref).
-We pay specific attention to the phenomenon of aggregation bias [@rastetter1992] and on the different ways to interpret the information in ecosystem condition variables versus indicators.
+However, spatial aggregation affect how a metric should be interpreted, and the descriptive properties and normative claims one can make based on it.
+Without an understanding of the pitfalls during spatial aggregation of information, one risks introducing unintended and undetected systematic bias, as well as downright logical errors.
+Although much attention has been devoted to the vertical aggregation of environmental indicators into indices (e.g. @langhans2014; @maes2020; @oecd_2008\], as well as to the spatial aggregation of relatively unmodified or raw variables (e.g @allain2018) , there is to our knowledge no explicit deliberation on the special case of spatially aggregating highly modified indicators used for ecosystem condition accounting (but see @vanbeurden1999).
+This paper therefore focus on explaining and providing guidelines on the spatial aggregation inherent to the System of Environmental Economic Accounting - Ecosystem Accounting (SEEA EA) [@unitednations2024] - the most used ecosystem accounting (natural resource accounting) framework in the world [@comte2022].
+SEEA EA includes principles for compiling accounts for ecosystem extent, ecosystem condition, and ecosystem services [@unitednations2024 @unitednations2022].
+We will focus on the SEEA EA condition accounts in this paper, although spatial aggregation is a relevant topic also for the other parts of the account.
 
 [^1]: Words in bold are explained in @tbl-def
 
+We pay specific attention to the phenomenon of aggregation bias [@rastetter1992] and on the different ways to interpret the information in ecosystem condition variables versus indicators.
+
 This paper has a rather narrow and defined focus.
 Related concepts are briefly mentioned in @nte-rel.
+
+## Indicators vs. variables
+
+SEEA EA distinguishes between indicators and variables, and to be able to describe how these are affected by spatial aggregation, we need to spend some time to explaining the difference between them.
+Variables are metrics describing ecosystem characteristics [@unitednations2024 §5.41].
+They are typically either in percentages or fractions, or as raw biophysical units, such as biomass, density, or cover.
+Indicators on the other hand, are always on a unitless scale between 0 and 1, where 0 represent the worst condition, and 1 represents the best condition.
+Sometimes indicators are calculated directly, but usually indicators are made by **normalising** variables based on two or more **reference levels** [@unitednations2024 §5.60]. Although also variables may have normative properties (due to choices about how they are chosen, defined, aggregated or presented [@allain2018]) , the normalisation of variables into indicators makes indicators explicitly normative by introducing a clear directional interpretation, where increasing values always refer to an increase in condition.
+The information held by the indicator is also different from that of the variable since additional ecological knowledge can be introduced via the reference levels.
+The mathematical part of this normalisation contains two, sometimes three, steps [@fig-term].
+These steps can be performed simultaneously, but for clarity we discuss them as separate steps.
+The order of these steps can also change.
+
+Variables can be **scaled** using a minimum of two reference levels, defining variable values to be coded as zero (X~0~) or one (X~100~) on the indicator scale.
+Variables can be **truncated** to produce a bound indicator scale between 0 and 1.
+Sometimes variables are **transformed** to adjust the indicator scale to reflect potentially nonlinear relationships between the variable and ecosystem condition.
+This is commonly done by anchoring specific variable values to predefined class boundaries [@czúcz; @jakobsson_setting_2020], but may also be done without any additional reference levels, for example by using a sigmoid or exponential transformation.
+
+## Spatial aggregation
+
+In ECAs, information about ecosystem condition is made spatially explicit by assigning variable or indicator values to individual ecosystem assets.
+The process of assigning values to ecosystem assets requires some spatial manipulations of data, or scale changes [@ewert2011].
+The type of manipulation depends on the spatial resolution of the underlying data, as well as the size and configuration of the ecosystem assets.
+Two main types of data can be distinguished: sparse (i.e. spatially incomplete) data and complete data.
+
+<!--# Subsequently, spatial aggregation is required when going from ecosystem assets to large spaatial scale, ultimately the scale of the entire ecosystem accounting area (EAA).  -->
+
+Complete, or wall-to-wall data, include remote sensing products, as well as other types of pre-aggregated data, where sparse data are assigned to areal units.
+This last type of data is very common.
+A lot of demographic information for example is made available at the scale of administrative units, rather than at the individual level (which would be very ineffective and problematic also in terms of protecting sensitive information).
+Similar pre-aggregation is, however, ambiguous and true for most complete datasets.
+Consider as an example data from LiDAR (Light Detection And Ranging).
+The raw data is a point cloud, yet the most commonly available datasets are surface or canopy models; wall-to-wall generalisations of the point cloud.
+Also data such as rasters from satellite images ,or maps derived from such, have some inherent pre-aggregation where values are averaged for each raster cell.
+Often there is little we can do, as indicator developers, to affect this pre-aggregation step, but it is important to be aware of it in light of the ecological fallacy (@nte-rel).
+This issue will for example affect our ability to detect true maximum or minimum values (used in *worst case* aggregation, for example in the WFD) for the phenomena our variable is describing, since these extremes are already smoothed out in the pre-aggregation step.
+This will clearly affect the suitability of such data for identifying areas of high risk (very degraded areas, for example).
+The problem is the same when we deliberately aggregate data later in the indicator development process, and we always need to ensure that the spatial aggregation function we use does not have any unintentional effect on the type of inference that we can draw from the metric.
+
+For sparse data we are considering data where variable values are assigned to singular points or small areas.
+In these cases, there will be a lot of area inside each ecosystem asset for which we have no direct information.
+To assign variable value to all areas (as is required in the SEEA EA framework), we need to do some generalisations.
+One can assign values to areas via an aggregation functions used on data values that fall within a given ecosystem asset.
+Many aggregation functions are available, such as sum, worst-rule, different percentiles, arithmetic, geometric or harmonic means[^2] [@unitednations2024 §5.54] .
+This deliberate spatial aggregation is the main focus of this paper.
+When doing this aggregation, we need to account for the spatial structure (spatial correlations) of the data (@sec-auto).
+One way is to rely on design-based approaches (relying on random or balanced samples across the entire EEA), or using a step-wise aggregation via ecosystem assets.
+In our experience, the choice of which area units to use when doing this step-wise aggregation is often not reflected much upon.
+There may be limitations with the data, related to the type of pre-aggregation performed (see above).
+In other cases the areal units are decided politically, with little scientific reasoning behind it.
+However, the arbitrariness of this decision clearly affects the results of the spatial aggregation via a well-described (but often forgotten?) statistical problem referred to at the modifiable area unit problem (MAUP; @nte-rel).
+It is important for decision makers to see that the information they are basing their decision on is robust and insensitive to aggregation methods [@vanbeurden1999].
+The MAUP can, however, lead to inconsistencies between repeated or nested ECAs, leading to confusion and mistrust (@sec-comp).
+One option to reduce this discrepancy and arbitrariness is to use ecologically motivated areal units in the step-wise aggregation such as homogeneous ecosystem areas [@vallecillo2022] or homogeneous impact areas [@kolstad_making_2024].
+
+[^2]: When using means across areas, area weighting is required when following SEEA EA.
+
+Interpolation or other modeling can also be used to impute or predict data values between the points where we have information [@finke2002; @stein2001].
+However, this is not the focus of this paper, and in our experience this has not been common practice in SEEA EA accounts produced to date.
+
+When EU and EEA countries are in 2026 required to report ecosystem condition accounts to Eurostat and the European Commision (?), these accounts will be spatially aggregated to national levels, thus invoking the issue of the ecological fallacy, and many other potential pitfalls in the spatial aggregation of information.
+The point of having a robust methodological framework for the spatial aggregation of data and information is therefore quite pertinent.
 
 ::: {#nte-rel .callout-note appearance="minimal" icon="false"}
 ### Related concepts
@@ -99,81 +164,16 @@ The ecological fallacy [@robinson2009] explains the common misinterpretation of 
 Simply said, the mean of a group, or an area, cannot accurately describe the qualities of individuals in that group, or pin-points inside that area, yet it is common for people to interpret it that way.
 :::
 
-### SEEA EA
-
-SEEA EA includes principles for compiling accounts for ecosystem extent, ecosystem condition, and ecosystem services [@unitednations2021 @unitednations2022].
-We will focus on the SEEA EA condition accounts in this paper, although spatial aggregation is a relevant topic also for the other parts of the account.
-
-In ECAs, information about ecosystem condition is made spatially explicit by assigning **variable** or **indicator** values to individual ecosystem assets.
-The process of assigning values to ecosystem assets usually requires some spatial manipulations of data, or scale changes [@ewert2011].
-The type of manipulation depends on the spatial resolution of the underlying data, as well as the size and configuration of the ecosystem assets.
-To main types of data can be distinguished: sparse data and complete data.
-
-Complete, or wall-to-wall data, typically include remote sensing products.
-It can also include other types of pre-aggregated data, where sparse data, such as field survey summaries, are assigned to areal units.
-This is very common.
-A lot of demographic information for example is made available at the scale of administrative units, rather than at the individual level (which would be very ineffective and problematic also in terms of protecting sensitive information).
-Similar pre-aggregation is, however, ambiguous and true for most complete data.
-Consider as an example data from LiDAR (Light Detection And Ranging).
-The raw data is a point cloud, yet the most commonly available datasets are surface or canopy models; wall-to-wall generalisations of the point cloud.
-Also data such as rasters derived from satellite images, such as NDVI (extensively used in ECAs), have some inherent pre-aggregation where values are averaged for each raster cell.
-Often there is little we can do, as indicator developers, to affect this pre-aggregation step, but it is important to be aware of it in light of the ecological fallacy (@nte-rel).
-This issue will affect our ability to detect true maximum or minimum values (as used for *worst case* aggregation, for example in the WFD) for the phenomena our variable is describing, since these extremes are already smoothed out in the pre-aggregation step.
-This will clearly affect the suitability of such data in looking for areas of high risk (very degraded areas, for example).
-The problem is the same when we deliberately aggregate data later in the indicator development process, and we always need to ensure that the spatial aggregation function we use does not have any unintentional effect on the type of inference that we can draw from the metric.
-
-For sparse data we are considering type point data, with variable values assigned to singular points or small areas.
-In these cases, there will be a lot of area inside each ecosystem asset for which we have no direct information.
-To assign variable value to all areas (as is required in the SEEA EA framework), we need to do some generalisations.
-One can assign values to areas via an aggregation functions used on data values that fall within a given ecosystem asset.
-Many aggregation functions are available, such as sum, worst-rule, different percentiles, arithmetic, geometric or harmonic means.
-When using means, area weighting is required when following SEEA EA. This is what we refer to as deliberate spatial aggregation, and what is the main focus of this paper.
-When doing this, we need to account for the spatial structure (spatial correlations) of the data (@sec-auto).
-One way is to rely on design-based approaches (relying on random or balanced samples across the entire EEA), or using a step-wise aggregation via ecosystem assets.
-In our experience, the choice of which areal units to use when doing this step-wise aggregating is often not reflected much upon.
-It may be a limitation with the data related to the type of pre-aggregation performed (see above).
-In some cases the areal units are decided politically, wit little scientific reasoning behind it.
-However, the arbitrariness of this decision clearly affects the results of the spatial aggregation via a well-described (but often forgotten?) statistical problem referred to at the modifiable area unit problem (MAUP; @nte-rel).
-It arguable important for decision makers to see that the information they are basing their decision on is robust and insensitive to aggregation methods (REF).
-The MAUP can, however, lead to inconsistencies between repeated or nested ECAs, leading to confusion and mistrust (@sec-comp).
-One option to reduce this discrepancy and arbitrariness is to use ecologically motivated areal units in the step-wise aggregation such as homogeneous ecosystem areas [@vallecillo2022] or homogeneous impact areas [@kolstad_making_2024].
-
-Interpolation or other modeling can also be used to impute or predict data values between the points where we have information.
-However, this is not the focus of this paper, and in our experience this has not been common practice in SEEA EA accounts produced to date.
-
-When EU and EEA countries are in 2026 required to report ecosystem condition accounts to Eurostat and the European Commision (?), these accounts will be spatially aggregated to national levels, thus invoking the issue of the ecological fallacy, as well as many more concrete pitfalls in spatial aggregation of information.
-The point of having a robust methodological framework for the spatial aggregation of data and information is therefore quite pertinent.
-
-### Indicators vs. variables
-
-SEEA EA distinguishes between indicators and variables.
-Variables in ecosystem condition terminology are metrics describing ecosystem characteristics [@unitednations2021].
-They are typically either in units or percentages or fractions, or as raw biophysical units, such as biomass, density, or cover.
-Indicators on the other hand, are always on a scale between 0 and 1, where 0 represent the worst condition, and 1 represents the best condition.
-Sometimes indicators are calculated directly, but usually indicators are made by **normalising** variables based on two or more **reference levels**.
-Although also variables may have normative properties (due to choices about how they are chosen (ref), defined, aggregated or presented) (Alain et al), the normalisation of variables into indicators makes indicators explicitly normative by introducing a clear directional interpretation, where increasing values always refer to an increase in condition.
-The information held by the indicator is also different from that of the variable since additional ecological knowledge can be introduced via the reference levels.
-The mathematical part of this normalisation contains two, sometimes three, steps [@fig-term].
-These steps can be performed simultaneously, but for clarity we discuss them as separate steps.
-The order of these steps can also change.
-
-Variables can be **scaled** using a minimum of two reference levels, defining variable values to be coded as zero (X~0~) or one (X~100~) on the indicator scale.
-Variables can be **truncated** to produce a bound indicator scale between 0 and 1.
-Sometimes variables are **transformed** to adjust the indicator scale to reflect potentially nonlinear relationships between the variable and ecosystem condition.
-This is commonly done by anchoring specific variable values to predefined class boundaries [@czúcz], but may also be done without any additional reference levels, for example by using a sigmoid or exponential transformation.
-
-| Term                | Definition |
-|---------------------|------------|
-| Metric              | blablabla  |
-| Variable            |            |
-| Indicator           |            |
-| Reference levels    |            |
-| Scaling             |            |
-| Transformation      |            |
-| Truncation          |            |
-| Normalisation       |            |
-| Compensation        |            |
-| Aggregation pathway |            |
+| Term | Definition |
+|----|----|
+| Metric | A collective term for both variables and indicators |
+| Reference levels | Variable values corresponding and anchoring the variable to specific indicator values. A special terminology is used, based on @czúcz, which differs somewhat from that in @unitednations2024. See @fig-term. |
+| Scaling | A linear shrinking or enlarging the variable data range by anchoring X~0~ and X~100~ to the values 0 and 1, respectively. See @fig-term. |
+| Transformation |  |
+| Truncation |  |
+| Normalisation | Referred to as rescaling in @unitednations2024. This is the process of converting a variable to an indicator. |
+| Compensation |  |
+| Aggregation pathway |  |
 
 : Definition of terms {#tbl-def}
 
