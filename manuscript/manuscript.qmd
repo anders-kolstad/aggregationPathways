@@ -165,7 +165,7 @@ In these cases, there will be a lot of area inside each ecosystem asset for whic
 To assign variable value to all areas (as is required in the SEEA EA framework), we need to do some generalisations.
 One can assign values to areas via an aggregation functions used on data values that fall within a given ecosystem asset.
 Many aggregation functions are available, such as sum, worst-rule, different percentiles, arithmetic, geometric or harmonic means[^2] [@unitednations2024 §5.54] .
-When doing this aggregation, we need to account for the spatial structure (spatial correlations) of the data (@sec-auto).
+When doing this aggregation, we need to account for the spatial structure (spatial correlations) of the data.
 One way is to rely on design-based approaches (relying on random or balanced samples across the entire EEA), or using a step-wise aggregation via ecosystem assets.
 In our experience, the choice of which area units to use when doing this step-wise aggregation is often not reflected much upon.
 In some cases the areal units are even decided politically, for example to administrative units, with little ecological justification for this choice.
@@ -233,21 +233,14 @@ This is commonly referred to as *the* reason for normalising variables, but as w
 ```{r fig-agg1}
 #| echo: false
 #| fig-cap: |
-#|   Example showing the difference in indicator values (y-axis) obtained from taking the mean of two variable values (V1 and V1) that are on the original scale (i hat) or on the normalised indicator scale (i bar). Due to truncation at x100, the latter results in a comparatively lower indicator value. The solid coloured line represents the normalisation function f(V). V = variable value, i = indicator value. Modified from Rastsetter (1991).
-#| out-width: 400
+#|   Examples showing the difference in indicator values (y-axis) obtained from taking the mean of two variable values (V1 and V1) that are on the original scale (i hat) or on the normalised indicator scale (i bar). Pane A: Due to truncation at X~100~, the latter results in a comparatively lower indicator value. Pane B: Example where the normalisation function includes a transformation step (see Figure 1 for definition) that anchors X~60~ to 0.6 on the indicator scale. This reverses the order of i hat and i bar compared to example in pane A. The solid coloured line represents the normalisation function f(V). V = variable value, i = indicator value. Modified from Rastsetter (1991).
+#| out-width: 600
 
-knitr::include_graphics("../img/aggregation_bias_truncations.PNG")
+knitr::include_graphics("../img/aggregation_bias.PNG")
 
 ```
 
-```{r fig-agg2}
-#| echo: false
-#| fig-cap: |
-#|   Same figure as above, but showing an example where the normalisation function includes a transformation step (see Figure 1 for definition) that anchors X60 to 0.6 on the indicator scale.
-#| out-width: 400
 
-knitr::include_graphics("../img/aggregation_bias_x60.PNG")
-```
 
 # Aggregation bias
 
@@ -261,7 +254,7 @@ We now describe two ways that aggregation bias affects ECAs: by causing an incre
 
 ## Discrepancies between variables and indicators
 
-In ecosystem condition accounting the aggregation of both variables and indicators is common practice and raises the issue of **aggregation bias** (@fig-agg1; @fig-agg2) when variables have nonlinear relationships to the normalised indicators [@rastetter1992], which they typically do.
+In ecosystem condition accounting the aggregation of both variables and indicators is common practice and raises the issue of **aggregation bias** (@fig-agg1) when variables have nonlinear relationships to the normalised indicators [@rastetter1992], which they typically do.
 This means that the spatial aggregation of metrics leads to a divergence in the type of information held in variables and in their associated indicators, to a point where they become qualitatively very different.
 As an example, consider an indicator based on spatial information on the abundance of a large herbivore.
 The ecosystem characteristic that this metric is meant to describe is "*Appropriate herbivore pressure, balancing overgrazing and shrubification"*.
@@ -297,7 +290,7 @@ And when only variable estimates are given, extra care is give to describing the
 As we have seen, aggregation bias causes a divergence in the type of information made available through the spatial aggregation of variables versus indicators.
 In addition, unavoidable aggregation bias (for good and bad) will also affect the indicator values and the inferences that can be drawn from these.
 If not careful, aggregation bias may also cause errors to sneak into the indicator logic.
-A major determinant of the resulting aggregation bias from the spatial aggregation of ecosystem condition indicators (@fig-agg1; @fig-agg2), is the choice about the order of the different steps in the normalisation and aggregation process, i.e. the aggregation pathway (@fig-pathways).
+A major determinant of the resulting aggregation bias from the spatial aggregation of ecosystem condition indicators (@fig-agg1), is the choice about the order of the different steps in the normalisation and aggregation process, i.e. the aggregation pathway (@fig-pathways).
 If normalisation occurs early in the aggregation process, the amount of compensation is limited.
 However, sometimes complete or partial compensation is justified, as in the example in @sec-pti, or as we saw in @sec-match where indicator development involved an initial step of spatially aggregating variables to align with the spatial configuration of reference levels (pathways 2 and 3; @fig-pathways).
 Failure to harmonise the spatial scale between variables and reference levels before normalising the variable can lead to aggregation bias, as described in @sec-bill.
@@ -313,7 +306,7 @@ Consider an indicator originating from point-based field surveys.
 The sampling location are selected using a stratified protocol that ensures a representative sample of similar size (same *n*) is made for each ecosystem asset.
 If the variable is normalised early in the aggregation pathway to create indicator values for each locality, then the mean of indicator values for each region will be representative for those regions, and no area weighting is required.
 For the next spatial level, when information from all ecosystem assets should be used to create an estimate for the EAA, ecosystem assets with large extents should weight more in the calculations (following the SEEA EA prinsiples of area weighting).
-Note that one cannot skip this first level of spatial aggregation via ecosystem assets, since this is an integral part of the sampling design, leading to spatial autocorrelation (se @sec-auto).
+Note that one cannot skip this first level of spatial aggregation via ecosystem assets, since this is an integral part of the sampling design, leading to spatial autocorrelation.
 However, if in a later ECA, ecosystem assets are defined as subsets of the initial assets (a finer scale account), then the same indicator, when aggregated to the EAA level, will have a different value.
 A similar case would be is sampling was random and dispersed across the EAA, lets say a country, and indicator values were first calculated as some average across all sampling points, and then in a later account or assessment, the same indicator was estimated for separate regions.
 When aggregating the indicator values from regions to the whole country, using area weighting, the national estimate will differ, albeit slightly, from the initial national estimate that did not include this step-wise aggregation.
