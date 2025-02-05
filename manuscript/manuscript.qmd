@@ -51,6 +51,8 @@ execute:
 editor: 
   markdown: 
     wrap: sentence
+callout-appearance: simple
+callout-icon: false
 ---
 
 # Introduction
@@ -153,10 +155,11 @@ One will probably acknowledge the fact that animals move and distribute themselv
 Doing so would mean that regions perfectly aligned with the reference condition (in terms of animal densities with the region) will show as having sub-regions with sub-optimal condition, simply due to natural variation in where the animals are at any give time.
 Averaging (arguably the most common spatial aggregation function) the indicator values across sub-regions would not produce a regional indicator value that shows the region as being perfectly aligned with the reference condition, since truncation of variable values above X~100~ (assuming X~100~ \> X~0~) means we are only aggregating the negative deviations from the reference level, and that very high animal densities in some sub-regions are not allowed to compensate for low values elsewhere.
 This example with wild animal densities shows that sometimes variables need to be spatially aggregated before they can be normalised.
-See @nte-billberry for another example.
+See Box 1 for another example.
 
-::: {#nte-billberry .callout-note appearance="minimal" icon="false"}
-### Billberry example
+::: {.callout-note}
+
+**Box 1 -- Billberry example** \
 
 *Variable*: Horizontal coverage (vertical projection) of billberry (*Vaccinum myrtillus*) recorded in permanent vegetation plots.\
 
@@ -191,7 +194,7 @@ Similar pre-aggregation is, however, ambiguous and true for most complete datase
 Consider as an example data from LiDAR (Light Detection And Ranging).
 The raw data is a point cloud, yet the most commonly available datasets are rasters, such as surface or canopy models; wall-to-wall generalisations of the point cloud.
 Also data such as satellite images ,or maps derived from such, have some inherent pre-aggregation where values are averaged for each raster cell.
-Often there is little we can do, as indicator developers, to affect this pre-aggregation step, but it is important to be aware of it in light of the ecological fallacy (@nte-rel).
+Often there is little we can do, as indicator developers, to affect this pre-aggregation step, but it is important to be aware of it in light of the ecological fallacy (Box 2).
 This issue will for example affect our ability to detect true maximum or minimum values (used in *worst case* aggregation, for example in the WFD) for the phenomena our variable is describing, since these extremes are already smoothed out in the pre-aggregation step.
 This will clearly affect the suitability of such data for identifying areas of high risk (very degraded areas, for example).
 The problem is the same when we deliberately aggregate data later in the indicator development process, and we always need to ensure that the spatial aggregation function we use does not have any unintentional effect on the type of inference that we can draw from the metric.
@@ -205,28 +208,29 @@ When doing this aggregation, we need to account for the spatial structure (spati
 One way is to rely on design-based approaches (relying on random or balanced samples across the entire EEA), or using a step-wise aggregation via ecosystem assets.
 In our experience, the choice of which area units to use when doing this step-wise aggregation is often not reflected much upon.
 In some cases the areal units are even decided politically, for example to administrative units, with little ecological justification for this choice.
-However, this decision clearly affects the results of the spatial aggregation via a well-described (but often forgotten?) statistical problem referred to at the modifiable area unit problem (MAUP; @nte-rel).
+However, this decision clearly affects the results of the spatial aggregation via a well-described (but often forgotten?) statistical problem referred to at the modifiable area unit problem (MAUP; Box 2).
 It is important for decision makers to see that the information they are basing their decision on is robust and insensitive to aggregation methods [@vanbeurden1999].
 The MAUP can, however, lead to inconsistencies between repeated or nested ECAs, leading to confusion and mistrust (@sec-comp).
 One option to reduce this discrepancy and arbitrariness is to use ecologically motivated areal units in the step-wise aggregation such as homogeneous ecosystem areas [@vallecillo2022] or homogeneous impact areas [@kolstad_making_2024].
 
 [^2]: When using means across areas, area weighting is required when following SEEA EA.
 
-::: {#nte-rel .callout-note appearance="minimal" icon="false"}
-### Related concepts
+::: {.callout-note}
 
-##### Vertical aggregation {.unnumbered}
+**Box 2 -- Related concepts** \
+
+**Vertical aggregation**
 
 It is common in this field to use the term aggregation about the process of aggregating normalised indicators into indices (i.e. thematic or vertical aggregation; @langhans2014), but in this paper we are discussing spatial (i.e. horizontal) aggregation only.
 
-##### Upscaling {.unnumbered}
+**Upscaling**
 
 The term spatial aggregation is also sometimes used to refer to **upscaling** in the sense of taking local information and making it applicable or translate it to larger, e.g. landscape or regional, scales [@knotters2010; @finke2002].
 This process often involves predicting values across larger areas or surfaces, generally through models, including krieging-based models and distribution models.
 When the data (e.g. indicator values) are made wall-to-wall, one can then more easily get point estimates for larger areas via simple aggregation functions such as summation or by taking the mean.
 Using models to predict variable or indicator values is allowed under the SEEA EA. However, in this paper we are addressing the second part of this process only, of simplifying the spatial variation, from many to few data points (sometimes also included in the terms upscaling).
 
-##### Modifiable area unit problem {.unnumbered}
+**Modifiable area unit problem**
 
 The modifiable area unit problem (MAUP; [@openshaw1984, @wong2009]) describes the sensitivity that spatially aggregated information has on the choice about the spatial units used for either collecting the data or for aggregating the data to.
 These units can be arbitrary (*modifiable*), yet different sizes and configuration of units can have large effects on the outcome of aggregation.
@@ -236,7 +240,7 @@ Further still, data may not be available at the original spatial scale, but may 
 All these cases lead to some form of aggregation bias [@rastetter1992] where the aggregated information has a non-linear relationship with the true variable value.
 However, the issue of MAUP in SEEA EA deserves an in-depth analyses that we cannot provide here.
 
-##### Ecological fallacy {.unnumbered}
+**Ecological fallacy**
 
 The ecological fallacy [@robinson2009] explains the common misinterpretation of correlations between group (*i.e.* aggregated information) and some phenomena.
 Simply said, the mean of a group, or an area, cannot accurately describe the qualities of individuals in that group, or pin-points inside that area, yet it is common for people to interpret it that way.
@@ -276,7 +280,7 @@ For example, direct extrapolation based on uneven or spatially biased sampling l
 In this paper, however, we are mostly interested in what we consider an extended case of aggregation error, sensu @rastetter1992.
 They showed that when we take the average of two variables, each of which have associated attribute values (e.g. indicator values), then the attribute of the average variable value differs from the average of the attributes of the original variables.
 This displacement is refereed to as aggregation error, and its effect become more pronounced when the non-linearity is strong between variables and indicators.
-In the statistical standard for EAs and the recommended guidelines for ecosystem accounts [@unitednations2021; @unitednations2022], there is no mention of aggregation bias, and there seems to be little awareness in general of the ramification of choosing the wrong spatial aggregation method for variables.
+In the statistical standard for EAs and the recommended guidelines for ecosystem accounts [@unitednations2024; @unitednations2022], there is no mention of aggregation bias, and there seems to be little awareness in general of the ramification of choosing the wrong spatial aggregation method for variables.
 We now describe two ways that aggregation bias affects ECAs: by causing an increasing divergence in the type of information held in ecosystem condition variables versus indicators, and secondly, how it can cause confusion about the effects of chosing different **aggregation pathways** during indicator development.
 
 ## Discrepancies between variables and indicators
@@ -375,7 +379,7 @@ Pathways 7-8 describe the spatial aggregation of multiple indicators, as they al
 These are not the main topic of this paper, but are included here for completeness.
 In pathway 7, indicators are thematically aggregated to an index, which is then again aggregated spatially.
 In pathway 8, spatial aggregation is only done on individual indicators.
-The two pathways differ in how they handle more complicated schemes for weighted averages, with pathway 8 being more flexible, but it may interfere with the principle of commutativity [@unitednations2021].
+The two pathways differ in how they handle more complicated schemes for weighted averages, with pathway 8 being more flexible, but it may interfere with the principle of commutativity [@unitednations2024].
 
 Pathway 9 describe how a single indicators is aggregated hierarchically from region to region, whereas pathway 10 shows a case were the aggregation process always starts from scratch for each hierarchical spatial level.
 As for pathways 7 and 8, pathway 9 and 10 differ in how they propagate the indicator weight (typically area weight) between regions.
