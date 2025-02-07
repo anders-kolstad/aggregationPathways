@@ -23,7 +23,7 @@ author:
     affiliations:
       - ref: nina
 abstract: |
-  Ecosystem condition accounts (ECA) make use of variables and indicators to describe key ecosystem characteristics, reflecting their condition and deviations from a reference condition. These metrics are often spatially aggregated to represent larger areas, such as countries. However, spatial aggregation of information has the potential to alter the descriptive and normative interpretations one can make from these metrics. For example, aggregation bias causes the information held in variables and indicators to diverge when these are aggregated spatially. This process is influenced also by the order of steps involved in normalising and aggregating variables. This paper outlines the consequences of different aggregation pathways, emphasising their impact on the credibility of ECAs, and how these are interpreted by users. We introduce a standardized terminology for aggregation pathways specific to ecosystem condition indicators following the SEEA EA standard and provide recommendations for selecting appropriate pathways in various contexts. Our discussion of this topic is aimed at raising the general awareness of spatial aggregation issues and to guide indicator developers in choosing and reporting spatial aggregation methods.  
+  Ecosystem condition accounts (ECA) make use of variables and indicators to describe key ecosystem characteristics, reflecting their condition and deviations from a reference condition. These metrics are often spatially aggregated to represent larger areas, such as countries. However, spatial aggregation of information has the potential to alter the descriptive and normative interpretations one can make from these metrics. For example, aggregation bias causes the information held in variables and indicators to diverge when these are aggregated spatially. This process is influenced also by the order of steps involved in normalising and aggregating variables. This paper outlines the consequences of different aggregation pathways, emphasising their impact on the credibility of ECAs, and how these are interpreted by users. We introduce a standardised terminology for aggregation pathways specific to ecosystem condition indicators following the SEEA EA standard and provide recommendations for selecting appropriate pathways in various contexts. Our discussion of this topic is aimed at raising the general awareness of spatial aggregation issues and to guide indicator developers in choosing and reporting spatial aggregation methods.  
   
 keywords: 
   - SEEA EA
@@ -57,24 +57,23 @@ callout-icon: false
 
 # Introduction
 
-The world is facing a nature crisis of a magnitude that requires urgent political decision making and international coordination.
-Ecosystem accounting (EA) is a type of environmental assessments aimed at communicating on the status and trends in the extent and condition of ecosystems at a scale that is relevant for decision makers.
-For ecosystem condition accounting (ECA) and assessments, this often requires that metrics[^1] used to describe the condition of ecosystems are aggregated spatially, sometimes to produce a single value for a larger area.
-This represents a type of knowledge synthesis, aimed at condensing the complexity of the real world into something that is relevant to decision makers and perhaps actionable at a political level.
-However, spatial aggregation affect how a metric should be interpreted, and the descriptive properties and normative claims one can make based on it.
-Without an understanding of the pitfalls during spatial aggregation of information, one risks introducing unintended and undetected systematic bias, as well as downright logical errors, into the decition making process.
+The world is facing a nature crisis of a magnitude that requires urgent political decision making and international coordination [@ipbes_global_2019].
+Ecosystem accounting (EA) is a type of environmental assessments aimed at communicating on the status and trends in the extent and condition of ecosystems at a scale and in a format that is relevant for decision makers [@edens2022, @comte2022].
+For ecosystem condition accounting (ECA) and assessments, this often requires that metrics[^1] used to describe the condition of ecosystems are aggregated spatially to produce a single value for a larger area.
+This represents a type of knowledge synthesis, aimed at condensing the complexity of the real world into something that is relevant to decision makers and perhaps actionable at a political level [@king2024] <!--# read more -->.
+However, spatial aggregation affect how a metric should be interpreted, and the descriptive properties and normative claims one can make based on it [@allain2018], and without an understanding of the pitfalls during spatial aggregation of information, one risks introducing unintended and undetected systematic bias, as well as downright logical errors, into the decition making process.
 
 [^1]: We use the SEEA EA definitions of the terms variables, indicators (normalised variables) and metrics (refering to either a variable or a metric) [@unitednations2024]
 
-Although much attention has been devoted to the vertical aggregation of environmental indicators into indices (e.g. @langhans2014; @maes2020; @oecd_2008\], as well as to the spatial aggregation of relatively unmodified or raw variables (e.g @allain2018) , there is to our knowledge no explicit deliberation on the special case of spatially aggregating highly modified indicators used for ecosystem condition accounting (but see @vanbeurden1999).
-This paper therefore focus on explaining and providing guidelines on the spatial aggregation inherent to the System of Environmental Economic Accounting - Ecosystem Accounting (SEEA EA) [@unitednations2024] - the most used ecosystem accounting framework in the world [@comte2022].
+Although much attention has been devoted to the vertical aggregation of environmental indicators into indices [e.g. @langhans2014; @maes2020; @oecd_2008], as well as to the spatial aggregation of relatively unmodified or raw variables [e.g. @allain2018], there is to our knowledge no explicit deliberation on the special case of spatially aggregating highly modified indicators used for ecosystem condition accounting [but see @vanbeurden1999]. This paper therefore focus on explaining and providing guidelines on the spatial aggregation inherent to the System of Environmental Economic Accounting - Ecosystem Accounting (SEEA EA) [@unitednations2024] - the most used ecosystem accounting framework in the world [@comte2022].
 
-SEEA EA includes principles for compiling accounts for ecosystem extent, ecosystem condition, and ecosystem services [@unitednations2024 @unitednations2022].
-We will focus on the SEEA EA condition accounts in this paper, although spatial aggregation is a relevant topic also for the other parts of the account.
-When EU and EEA countries are in 2026 required to report ecosystem condition accounts to Eurostat and the European Commision (?), these accounts will be spatially aggregated to national levels, thus invoking the issue of the ecological fallacy (Box 1), and many other potential pitfalls in the spatial aggregation of information.
+SEEA EA includes principles for compiling accounts for ecosystem extent, ecosystem condition, and ecosystem services [@unitednations2024; @unitednations2022].
+We will focus on the SEEA EA condition accounts in this paper, although spatial aggregation is a relevant topic also for the other parts of the account, and to other types of indicator-based ecosystem assessments.
+When EU and EEA countries are in 2026 required to report ecosystem condition accounts to Eurostat and the European Commision (?), these accounts will be spatially aggregated to national levels.
 The point of having a robust methodological framework for the spatial aggregation of data and information is therefore quite pertinent.
+<!--# thus invoking the issue of the ecological fallacy (Box 1), and many other potential pitfalls in the spatial aggregation of information. -->
 
-This paper is aimed primarily at indicator developers, providing them with some recommendations for how to choose the right spatial aggregation method for variables and indicators, and how to report these choices.
+This paper is aimed primarily at indicator developers, providing them with some recommendations for how to choose the right spatial aggregation approach for variables and indicators, and how to report these choices.
 Indicator developer subjectivity affects ECAs, in part because the process of designing indicators and estimating indicator values often left entirely to the them, with little real involvement from indicator users.
 It is therefore important to be aware of the role that indicator developers have in shaping the type of information, and the narratives, that is presented to decision makers.
 This paper will make it easier for indicator developers to avoid some of the pitfalls from having a too casual approach to the choice of aggregation pathways.
@@ -193,7 +192,7 @@ Consider as an example data from LiDAR (Light Detection And Ranging).
 The raw data is a point cloud, yet the most commonly available datasets are rasters, such as surface or canopy models; wall-to-wall generalisations of the point cloud.
 Also data such as satellite images ,or maps derived from such, have some inherent pre-aggregation where values are averaged for each raster cell.
 Often there is little we can do, as indicator developers, to affect this pre-aggregation step, but it is important to be aware of it in light of the ecological fallacy (Box 1).
-This issue will for example affect our ability to detect true maximum or minimum values (used in *worst case* aggregation, for example in the WFD) for the phenomena our variable is describing, since these extremes are already smoothed out in the pre-aggregation step.
+This issue will for example affect our ability to detect true maximum or minimum values (used in *worst case* aggregation, for example in the WFD) for the phenomena our variable is describing, since these extremes are already smoothed out in the pre-aggregation step [@vanbeurden1999].
 This will clearly affect the suitability of such data for identifying areas of high risk (very degraded areas, for example).
 The problem is the same when we deliberately aggregate data later in the indicator development process, and we always need to ensure that the spatial aggregation function we use does not have any unintentional effect on the type of inference that we can draw from the metric.
 
@@ -477,8 +476,10 @@ Pathway 1 involves early normalisation using the perhaps most common order of th
 The three steps may be done simultaneously or in sequence.
 Finanlly, the indicator is spatially aggregated.
 
-Pathway 2 involves aggregating the variable before normalising.
+Pathway 2 involves aggregating the variable before normalising[^3].
 This preserves the ability for very high or very low variable values to compensate for very low or very high values elsewhere, respectively.
+
+[^3]: In a parallel terminology, normalisation can be considered modeling, and spatial aggregation before and after normalisation can be referred to as pre or post processing, respectively [@vanbeurden1999].
 
 Pathway 3 is similar, but here there are two aggregation steps: one before and one after normalisation.
 This can for example be the case when variables are aggregated to the scale corresponding to the reference levels before they can be normalised (Example 1).
