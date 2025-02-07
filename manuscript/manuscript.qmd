@@ -23,7 +23,7 @@ author:
     affiliations:
       - ref: nina
 abstract: |
-  Ecosystem condition assessments (ECA) and accounts use variables and indicators to describe key ecosystem characteristics reflecting the ecosystem condition and any potential deviations from a reference condition. These metrices are rutinely aggregation spatially to produce values representing the condition of a larger area, such as a country. However, we experience little awareness about the potential pitfals arising from aggregation bias of highly modified indicators. Here we outline some consequences regarding the order of the steps involed in normalising variables and aggregating them in space. We show that the choice of  aggregation pathways in non-trivial and has the potential to undermine the credibility and precition in ECAs, and to confuse the communication of their results. We introduce a common terminology for aggregation pathways, spesific to ecosystem condition indicators following SEEA EA standards, and make some recomendations about which pathway to use in different settings, and how to report these choices.   
+  Ecosystem condition accounts (ECA) make use of variables and indicators to describe key ecosystem characteristics, reflecting their condition and deviations from a reference condition. These metrics are often spatially aggregated to represent larger areas, such as countries. However, spatial aggregation of information has the potential to alter the descriptive and normative interpretations one can make from these metrics. For example, aggregation bias causes the information held in variables and indicators to diverge when these are aggregated spatially. This process is influenced also by the order of steps involved in normalising and aggregating variables. This paper outlines the consequences of different aggregation pathways, emphasising their impact on the credibility of ECAs, and how these are interpreted by users. We introduce a standardized terminology for aggregation pathways specific to ecosystem condition indicators following the SEEA EA standard and provide recommendations for selecting appropriate pathways in various contexts. Our discussion of this topic is aimed at raising the general awareness of spatial aggregation issues and to guide indicator developers in choosing and reporting spatial aggregation methods.  
   
 keywords: 
   - SEEA EA
@@ -488,7 +488,7 @@ This is the pathway commonly used for variable accounts in the SEE EA. For this,
 
 Pathway 5 is a common pathway in the WFD, which does not include spatial aggregation of indicator values.
 Instead one report the number of water bodies in each condition class (spatial statistics).
-Pathway 6 is a suggested pathway for handling WFD indicator in ECAs (see Example 3), where truncation is postponed until after the spatial aggregation for in that way to allow overshooting values to compensate for low indicator values esewhere (what we refer to as compensation).
+Pathway 6 is a suggested pathway for handling WFD indicator in ECAs (see Example 3), where truncation is postponed until after the spatial aggregation for in that way to allow overshooting values to compensate for low indicator values elsewhere (what we refer to as compensation).
 
 Pathways 7-8 describe the spatial aggregation of composite indicators (indices).
 These are not the main topic of this paper, but are included here for completeness.
@@ -516,36 +516,43 @@ knitr::include_graphics("../img/aggregationPathways.jpg")
 
 # Recommendation {#sec-rec}
 
-Based on the example above, we suggest some recommendations for developers of ecosystem condition indicators and assessment for trying to avoid some of the pitfalls from having a too casual approach to the choice of aggregation pathways.
+Based on the above discussion and examples, we here summarise four recommendations for developers of ecosystem condition indicators and assessments for avoiding some of the pitfalls from having a too casual approach to the choice of aggregation pathways.
 
 ### 1. Report the aggregation pathway, using standardised terminology {.unnumbered}
 
-In indicator documentation or ECA reports, authors should make an effort to make a precise description of the steps in the aggregation process.
-To do this we suggest using the terms as described in @fig-term.
-The description can be made even easier by referencing specific aggregation pathways in @fig-pathways by number.
-Besides making the indicator workflow itself more transparent and reproducible, ee believe this recommendation would help raise the general awareness about aggregation bias in EAs, both among readers and researchers.
-It will make the interpretation of assessment less prone to misunderstanding.
-It will also make troubleshooting easier, as i the billberry example where researchers had to spend several days looking though old code to identify the reason why two assessment produces dissimilar indicator values from the same underlying data.
+ECAs should be accompanied by detailed indicator documentation where a precise description of the steps in the aggregation process is presented.
+Verbose descriptions can be supplemented or replaced by a standardised short-hand annotation that we shall present now.
+We suggest using the terms as described in @fig-term and elsewhere in the paper: scale, truncate (abbreviated to *trunc.*), transform (*trans.*), spatial aggregation (*sp. agg.*), thematic aggregation (*th. agg.*) and spatial statistics (*sp. stat.*).
+These terms can be abbreviated as shown in the parentheses, and placed togeth into a single string, where operations performed simultaneously are enclosed in square brackets.
+For example, pathway 1 in @fig-pathways can be annotated as *scale - trunc. - trans. - sp. agg..* If the three normalisation steps are performed simultaneously this can be written as \[*scale - trunc. - trans.\] - sp. agg.* If there are more aggregation steps, then the spatial level at each step should be included in the description, e.g. for pathway 3: *sp. agg. (municipalities) - scale - sp. agg. (country). "*Municipality" and "country" could here be included as footnotes.
+Note also that in this example, normalisation only involved a scaling step.
+The description of indicator pathways can perhaps made even easier by referencing specific aggregation pathways in @fig-pathways by number, as we have done in this paper.
+
+Besides making the indicator workflow itself more transparent and reproducible, we believe this recommendation would help raise the general awareness about aggregation bias in EAs, both among users and developers.
+It will make the interpretation of ECAs less prone to misunderstanding and miss-use.
+It will also make troubleshooting easier, for example when trying to identify the reason why two ECAs produces dissimilar indicator values from the same underlying data.
 
 ### 2. Normalise variables early, but at the scale where the reference levels are relevant {.unnumbered}
 
-Normalising variables early in the aggregation pathway has several benefits, such as comparability between nested assessments (@sec-ali).
-It also means that you are aggregating normative measures of condition, which is generally what you want in ECAs.
-But same as variables and indicators, reference levels also have a spatial resolution, and they should only be used to normalise variables when the variable is at a scale which is relevant to the way the reference levels are defined.
-This was exemplified with the billberry example (@sec-bill).
+Normalising variables early in the aggregation pathway has several benefits, such as comparability between nested assessments (Example 4, @sec-comp).
+It also means that you are aggregating normative measures of condition, which is generally what you want in ECAs (@sec-norm).
+But same as for variables and indicators, reference levels also have a spatial resolution, and they should only be used to normalise variables when the variable is at a scale which is relevant to the way the reference levels are defined, i.e. they are at a commensurable scale (Example 1).
 
-### 3. Use the same aggregation pathway for all indicators in the same assessment {.unnumbered}
+### 3. Use a similar aggregation approach for all indicators in the same assessment {.unnumbered}
 
-It may be premature, or not even possible, to prescribe an aggregation pathway to be used for all ECAs, but internal consistency within assessments should be possible.
-As we saw in the wolves example (@sec-wolves), this eases interpretation and reduces the chance that the meaning of indicators are misunderstood.
+It may be premature, or not even possible, to prescribe an aggregation pathway to be used for all ECAs, or a type of aggregation pathway to be used given the data at hand.
+However, internal consistency within assessments should be possible, and this can make it easier to communicate and interpret the information conveyed though the indicator values.
+This can be achieved by for example always scaling early (see recommendation number 2 above) and using the same aggregation levels and same approach to step-wise aggregation across levels (@sec-comp), for all indicators.
 
-### 4. Use unique indicator IDs on indicators that are similar, but use different pathways {.unnumbered}
+### 4. Use unique indicator IDs , also for indicators that are similar, but use different aggregation pathways {.unnumbered}
 
-Indicators (and variables) often exist in multiple version, varying slightly in the raw data or in the methods used to produce the data or metrics.
+Indicators (and variables) often exist in multiple versions, varying slightly in the raw data or in the methods used to produce the data or metrics.
 Yet different versions are often refereed to by the same common name.
 This causes confusion about which indicator version is being used, and thus making it difficult to make out which aggregation pathway that has been used.
-We recommend making use of stable indicator IDs, unique for each version of the indicators sharing the same common name.
-This has for example been implemented in [ecRxiv](https://github.com/NINAnor/ecRxiv), a publishing platform for ecosystem condition indicators.
- 
+We recommend making use of stable and unique indicator IDs, also and especially for indicators that use the same common name.
+This has already been implemented in ecRxiv, a GitHub-based publishing platform for ecosystem condition indicators [@Kolstad_ecRxiv].
+On ecRxiv, indicator documentation follow a structured approach to both reporting and peer review (including code review).
+Each indicator version is given its own ID, and its own fact sheet with a persistent URL, so that ECA that report these indicators unequivocally can cite specific indicator versions, and how they looked at a given point in time.
+ecRxiv also includes standardised metadata reporting with fields, including ecosystem type (IUCN GET) and aggregation pathways (see recommendation number 1 above).
 
 # References {.unnumbered}
