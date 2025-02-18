@@ -167,21 +167,26 @@ The bilberry example (**Example 1**) shows that sometimes variables need to be s
 
 *Variable*: Horizontal coverage (vertical projection) of bilberry (*Vaccinum myrtillus*) recorded in permanent vegetation plots.\
 
-*Reference levels*: X~100~ was defined for each of 5 regions in Norway based on an expert elicitation.
+*Reference levels*: X~100~ is defined for each ecosystem asset based on an expert elicitation.
 Experts were informed by the distribution of the variable values both within and outside protected areas, and the regional distribution of major forest types.
 They also used their general knowledge about the effect of forestry and on the general vegetation structure of old-growth forests.
 X~0~ is a natural zero (bilberry completely absent).\
 
-The bilberry indicator exemplifies different spatial resolutions for the variable and for the reference levels.
-The variable is recorded at the scale of vegetation plots.
-The reference level however, is designed with a regional spatial scale in mind, especially because of how it encompasses the known variation in forest types in a region to estimate the mean billberry coverage under the reference condition.
-Because the normalisation includes a truncation step, normalisation the variable at the plot scale (pathway 1; @fig-agg1) would not allow overshooting values to compensate for lower values when aggregating regional indicator values, which would then be negatively displaced ($\bar i$) relative to when aggregating variable values ($\hat i$; @fig-agg1).
-This means one is essentially aggregating the negative deviations from the upper reference level X~100~.\
-<!-- Scaling at the plot scale would require unique reference levels for each forest type. However, both pathway 1 and 3 has been used for this variable in two different forest ecosystem condition assessments.
-Due to non-negligeable truncation of the variable during the normalisation, the two indicators were subject to different levels of aggregation bias, and consequently the spatially aggregated indicator values for the two assessments became different.
-This caused a general confusion about how how the same variable (and the same data) can produce different indicator values. -->
+| \-                   | Plot 1 | Plot 2 | EA 1         |
+|----------------------|--------|--------|--------------|
+| **Variable values**  | 2      | 36     | 18           |
+| **X~100~**           | 20\*   | 20\*   | 20           |
+| **Indicator values** | 0.1\*  | 1.0\*  | 0.9 (0.55\*) |
 
-*Conclusion*: Given that the reference levels are the way they are, this indicator should follow pathway 3 (@fig-agg1), and the variable should be spatially aggregated from plot scale to regional scale before normalising the variable and potentially aggregating it further.
+: Dummy data for the bilberry example. Variable values (% cover of bilberry) is recorded for each vegetation plot, and aggregated (arithmetic mean) to the ecosystem asset (EA) level. The X~100~ value is defined for the EA level, but in this hypothetical case it is also dis-aggregated to each vegetation plot and used for normalising variable values also at the plot level. The dis-aggregated X~100~ values, and subsequent values that rely on these, are marked with an asterisk (\*). {#tbl-billbery}
+
+The bilberry indicator exemplifies different spatial resolutions for the variable and for the reference levels (@tbl-billbery).
+The variable is recorded at the scale of vegetation plots.
+The reference level however, is designed with a regional spatial scale in mind, especially because of how it encompasses the known variation in forest types in each ecosystem asset to estimate the mean bilberry coverage under the reference condition.
+Because the normalisation includes a truncation step, normalisation the variable at the plot scale (pathway 1; @fig-agg1) does not allow overshooting values in plot 2 to compensate for lower values in plot 1 when spatially aggregating the indicator values.
+When normalising at the plot scale in this case, one is essentially aggregating only the negative deviations from the upper reference level X~100~, and the aggregated indicator value becomes negatively displaced (0.55) relative to when aggregating variable values (0.9).
+Given that X~100~ is defined the way it is, this indicator should follow pathway 3 (@fig-agg1) by spatially aggregating the variable from plot scale to ecosystem asset to allow spatial compensation between plots.
+At the scale of ecosystem assets, the variable and the reference levels are at a commensurable scale, and the variable can be normalised and potentially aggregating it further.
 :::
 
 ## Fitting data to ecosystem assets
@@ -224,7 +229,7 @@ One option to reduce this discrepancy and arbitrariness is to use ecologically m
 Interpolation, or other types of modeling, can also be used to impute or predict data values between the points where we have information [@finke2002; @stein2001].
 This approach can also be seen as a type of post-stratifiction, and it can result in better variable or indicator estimates for the ecosystem assets as a whole.
 It can also be motivated by a desire to know more about the fine-scale variation in variable values, and perhaps visualise this on a map.
-This type of spatial aggregation, or perhaps better named upscaling, is not the focus of this paper (but see **Box 1**), and in our experience this has not been common practice in SEEA EA accounts produced to date.
+This type of spatial aggregation, or perhaps better named upscaling, is not the focus of this paper (but see **Box 1**), and in our experience this has not been common practice in SEEA EA accounts produced to date [but see @kolstad_making_2024].
 
 ::: callout-note
 **Box 1 -- Related concepts**\
@@ -341,7 +346,7 @@ X~0~ = no wolves.
 | **X~100~**           | 10   | 10   | 5    | Sum = 25      |
 | **Indicator values** | 1.0  | 0.5  | 0.0  | Mean = 0.5    |
 
-: Dummy data fro the wolves example. EA = ecosystem asset (e.g. a municipality). EAA = ecosystem accounting area (e.g. country). {#tbl-wolf}
+: Dummy data for the wolves example. EA = ecosystem asset (e.g. a municipality). EAA = ecosystem accounting area (e.g. country). {#tbl-wolf}
 
 This hypothetical example (@tbl-wolf) shows how different the interpretation of a variable and an indicator can become when the information is spatially aggregated.
 When species-based indicators are aggregated to the EAA level, it is common for the general public to interpret this value (0.5) as the status for this species, for example the conservation status[^3].
@@ -383,10 +388,8 @@ As we have seen, aggregation displacement causes a divergence in the type of inf
 In addition, unavoidable aggregation displacement (for good and bad) will also affect the indicator values and the inferences that can be drawn from these.
 If not careful, aggregation displacement may also cause errors to sneak into the indicator logic.
 A major determinant of the resulting aggregation displacement from the spatial aggregation of ecosystem condition indicators (@fig-agg1), is the choice about the order of the different steps in the normalisation and aggregation process, i.e. the aggregation pathway (@fig-pathways).
-If normalisation occurs early in the aggregation process, the amount of compensation, or off-setting, is limited.
-However, sometimes complete or partial compensation is justified.
-In @sec-match we saw how indicator development involved an initial step of spatially aggregating variables to align with the spatial configuration of reference levels (pathways 2 and 3; @fig-pathways).
-In **Example 3** we see that compensation can be warranted, depending on how high the reference levels are set.
+If normalisation occurs early in the aggregation process, the amount of compensation, or off-setting, is limited (**Example 2**).
+However, sometimes complete or partial compensation is justified (**Example 1 and 3**).
 
 ::: callout-note
 **Example 3 -- Phytoplankton trophic index (PTI)**\
@@ -396,31 +399,28 @@ In **Example 3** we see that compensation can be warranted, depending on how hig
 <!-- Reference: https://github.com/NINAnor/NI_vannf -->
 
 *Variable*: Mean score of algal species present, based on a set of indicator species scored for phosphorus requirements/tolerance.
-The variable is recorded in water bodies (lakes of 0,5 km\^2 or more).
+The variable is recorded in water bodies (lakes of 0,5 km^2^ or more).
  
 
 *Reference levels*: X~100~ = median variable value for water bodies in reference condition.
 X~0~, X~20~, X~40~, X~60~ and X~80~ = intercalibrated threshold values, based on dose–response curves.\
 
-<!-- Pathway: 1 -->
-
-The Water Framework Directive (WFD) indicators uses aggregation pathway 7 [@fig-pathways], with truncation, scaling, and transformation, in that order.
+The Water Framework Directive (WFD) indicators uses aggregation pathway 7 (@fig-pathways), with truncation, scaling, and transformation, in that order.
 The value obtained after the first two steps is called an EQR (ecological quality ratio), and the value obtained after the third step nEQR (normalised EQR).
 Spatial aggregation, the way that we use the term here, is not done for the WFD.
 Instead, the proportion of water bodies in each condition class is the aggregated reporting metric.
 Therefore aggregation displacement is not an issue.
 When WFD data are put into use in other contexts, however, aggregation becomes important.\
-<!-- Relevant contexts in Norway are the Nature Index (ref) and ecological condition accounting. In both cases,  -->
 
-*Conclusion*: Because of how X~100~ is defined based on the median value across reference lakes, overshooting values (\> X~100~) should be preserved in the spatial aggregation.
-<!-- Otherwise, the condition of water bodies with X > X80 will be underreported.  --> Otherwise we get a negative displacement, making it practically impossible to reach an indicator value of 1.
+Because of how X~100~ is defined based on the median value across reference lakes, overshooting values (\> X~100~) should be preserved in the spatial aggregation.
+Otherwise we get a negative displacement, making it practically impossible to reach an indicator value of 1.
 
-This means that neither EQR values, nor nEQR values, can be uncritically aggregated spatially to be sued in a SEEA EA comlient in ECA.
+This means that neither EQR values, nor nEQR values, can be uncritically aggregated spatially to be used in a SEEA EA compliant in ECA.
 One solution, to enable the use of WFD indicators in ECAs, would be to change to pathway 6, with (1) scaling, (2) transforming, (3) aggregating and (4) truncating the values [@fig-pathways].\
 
-Furthermore, Eurostat [@eurostat2022] <!-- requires  --> encourages reporting of variable values.
+Furthermore, Eurostat [@eurostat2022] encourages reporting of variable values.
 These, however, cannot be aggregated spatially in any meaningful way for WFD indicators.
-The issue is the same as for all other variables for which normalised indicators exist, but is perhaps more extreme for WFD indicators due to different reference conditions and levels for different water body types, and strong non-linear transformation functions that inflate the aggreation displacement issuse.
+The issue is the same as for all other variables for which normalised indicators exist, but is perhaps more extreme for WFD indicators due to different reference conditions and levels for different water body types, and strong non-linear transformation functions that inflate the aggregation displacement issue.
 <!-- Can we have a figure of calculation exmaple here? -->
 :::
 
