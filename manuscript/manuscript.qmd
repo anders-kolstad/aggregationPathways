@@ -23,7 +23,7 @@ author:
     affiliations:
       - ref: nina
 abstract: |
-  Ecosystem condition accounts (ECA) make use of variables and indicators to describe key ecosystem characteristics, reflecting their condition and deviations from a reference condition. These metrics are often spatially aggregated to represent larger areas, such as countries. However, spatial aggregation of information has the potential to alter the descriptive and normative interpretations one can make from these metrics. For example, aggregation bias causes the information held in variables and indicators to diverge when these are aggregated spatially. This process is influenced also by the order of steps involved in normalising and aggregating variables. This paper outlines the consequences of different aggregation pathways, emphasising their impact on the credibility of ECAs, and how these are interpreted by users. We introduce a standardised terminology for aggregation pathways specific to ecosystem condition indicators following the SEEA EA standard and provide recommendations for selecting appropriate pathways in various contexts. Our discussion of this topic is aimed at raising the general awareness of spatial aggregation issues and to guide indicator developers in choosing and reporting spatial aggregation methods.  
+  Ecosystem condition accounts (ECA) make use of variables and indicators to describe key ecosystem characteristics, reflecting their condition and deviations from a reference condition. These metrics are often spatially aggregated to represent larger areas, such as countries. However, spatial aggregation of information has the potential to alter the descriptive and normative interpretations one can make from these metrics. For example, aggregation displacement causes the information held in variables and indicators to diverge when these are aggregated spatially. This process is influenced also by the order of steps involved in normalising and aggregating variables. This paper outlines the consequences of different aggregation pathways, emphasising their impact on the credibility of ECAs, and how these are interpreted by users. We introduce a standardised terminology for aggregation pathways specific to ecosystem condition indicators following the SEEA EA standard and provide recommendations for selecting appropriate pathways in various contexts. Our discussion of this topic is aimed at raising the general awareness of spatial aggregation issues and to guide indicator developers in choosing and reporting spatial aggregation methods.  
   
 keywords: 
   - SEEA EA
@@ -31,6 +31,8 @@ keywords:
   - ecosystem accounting
   - indicators
   - aggregation bias
+  - aggregation error
+  - aggregation displacement
   - upscaling
 date: last-modified
 bibliography: bibliography.bib
@@ -143,7 +145,7 @@ For example if data is collected opportunistically with sampling sizes varying b
 This approach represents a form of post-stratification that is also relevant to process data from hierarchical (e.g. blocked) sampling designs.
 
 | Example | Main illustrating point |
-|-------------------------|-----------------------------------------------|
+|-------------------------|----------------------------------------------|
 | Billbery | Commensurable spatial scales for variable and reference levels (@sec-match) |
 | Deer | Compensation, and discrepancy between variable and indicator (@sec-discrep) |
 | PTI | Compensation and the order of operations (@sec-pathways) |
@@ -246,7 +248,7 @@ These units can be arbitrary (*modifiable*), yet different sizes and configurati
 Administrative units are often used as the ecosystem assets in SEEA EAs, yet they are in an ecological sense almost always arbitrary, and can also be subject to change over time.
 The original spatial units that data are collected at may be a pragmatic choice in much the same way.
 Further still, data may not be available at the original spatial scale, but may only be downloadable in preaggregated form [@vanbeurden1999].
-All these cases lead to some form of aggregation bias [@rastetter1992] where the aggregated information has a non-linear relationship with the true variable value.
+All these cases lead to some form of aggregation error[@rastetter1992] where the aggregated information has a non-linear relationship with the true variable value.
 However, the issue of MAUP in SEEA EA deserves an in-depth analyses that we cannot provide here.
 \\
 
@@ -260,9 +262,8 @@ Simply said, the mean of a group, or an area, cannot accurately describe the qua
 
 Normalisation of ecosystem condition indicators, as defined in @fig-term, serves at least three purposes.
 Firstly, it gives a normative interpretation of a variable, defining a good and a bad state, and simultaneously a directionality to say when something is getting better or worse over time [@czucz_selection_2021].
-SEEA EA encourages normalisation (which they refer to as rescaling), but other environmental assessment or natural resource accounting frameworks, refrains from these kinds of value judgments, or leaves more of this task up to the end users (ref?).
-
-Secondly, normalisation sets a limit to how much a high variable value in one place can compensate for a low value somewhere else, and vice versa [@pedersen2016].
+SEEA EA encourages normalisation (which they refer to as rescaling), but other environmental assessment or natural resource accounting frameworks, refrains from these kinds of value judgments, or leaves more of this task up to the end users.
+<!-- ref? --> Secondly, normalisation sets a limit to how much a high variable value in one place can compensate for a low value somewhere else, and vice versa [@pedersen2016].
 This is because truncation effectively means that when we spatially aggregate an indicator, we are always aggregating the negative deviations from the upper reference level X~100~, and ignoring any positive deviations which would otherwise compensate for the negative ones (see **Example 2**).
 Transformation can sometimes also have this effect, e.g. sigmoid transformations.
 One reason to want to aggregate the negative deviations only, is because the X~100~ is set (or should be set) so that values above this limit (assuming X~100~ \> X~0~) do not represent any further increase in ecosystem condition (for an exception, see **Example 3**).
@@ -278,26 +279,28 @@ This is commonly referred to as *the* reason for normalising variables, but as w
 ```{r fig-agg1}
 #| echo: false
 #| fig-cap: |
-#|   Examples showing the difference in indicator values (y-axis) obtained from taking the mean  of two variable values (V1 and V1) that are on the original scale (i hat) or on the normalised indicator scale (i bar). Pane A: Due to truncation at X~100~, the latter results in a comparatively lower indicator value. Pane B: Example where the normalisation function includes a transformation step (see Figure 1 for definition) that anchors X~60~ to 0.6 on the indicator scale. This reverses the order of i hat and i bar compared to example in pane A. The solid coloured line represents the normalisation function f(V). V = variable value, i = indicator value. Modified from Rastsetter (1991).
+#|   Examples showing the difference in indicator values (y-axis) obtained from taking the mean (V bar) of two variable values (V1 and V1) that are on the original scale (i hat) or on the normalised indicator scale (i bar). Pane A: Due to truncation at X~100~, the latter results in a comparatively lower indicator value. Pane B: Example where the normalisation function includes a transformation step (see Figure 1 for definition) that anchors X~60~ to 0.6 on the indicator scale. This reverses the order of i hat and i bar compared to example in pane A. The solid coloured line represents the normalisation function f(V). V = variable value, i = indicator value. Modified from Rastsetter (1991).
 #| out-width: 600
 
 knitr::include_graphics("../img/aggregation_bias.PNG")
 
 ```
 
-# Aggregation bias
+# Aggregation displacement and spatial compensation {#sec-agg}
 
 The spatial aggregation of data can lead to biases arising from a number of sources.
 For example, direct extrapolation based on uneven or spatially biased sampling leads to biased estimates [@kolstad_making_2024].
 We will, however, focus now on what we consider an extended case of aggregation error, sensu @rastetter1992.
-They showed that when we take the average of two variables, each of which have associated attribute values (e.g. indicator values), then the attribute of the average variable value differs from the average of the attributes of the original variables.
-This displacement is refereed to as aggregation error, and its effect become more pronounced when the non-linearity is strong between variables and indicators.
-In the statistical standard for EAs and the recommended guidelines for ecosystem accounts [@unitednations2024; @unitednations2022], there is no mention of aggregation bias, and there seems to be little awareness in general of the ramification of choosing the wrong spatial aggregation method for variables.
-We now describe two ways that aggregation bias affects ECAs: by causing an increasing divergence in the type of information held in ecosystem condition variables versus indicators, and secondly, how it can cause confusion about the effects of chosing different aggregation pathways (see @sec-pathways) during indicator development.
+They showed that when we take the average of two variables, each of which have attribute values (e.g. indicator values) associated with them via some non-linear function, then the attribute of the average variable value differs from the average of the attributes of the original variables.
+@rastetter1992 referred to this as aggregation error and used it to describe some of the dangers associated with upscaling in the sense of using precise fine-scale information to explain or predict large scale phenomena.
+However, in our case the difference between variables and indicators is an intentional one, and we therefore to refer to what is essentially the same mathematical effect, with the less derogatory term aggregation displacement.
+
+In the statistical standard for EAs and the recommended guidelines for ecosystem accounts [@unitednations2024; -@unitednations2022], there is no mention of aggregation displacement, and there seems to be little awareness in general of the ramification of choosing the wrong spatial aggregation method for variables.
+We now describe two ways that aggregation displacement affects ECAs: by causing an increasing divergence in the type of information held in ecosystem condition variables versus indicators (@sec-discrep), and secondly, how it can cause confusion about the effects of choosing different aggregation pathways during indicator development (@sec-develop).
 
 ## Discrepancies between variables and indicators {#sec-discrep}
 
-In ecosystem condition accounting the aggregation of both variables and indicators is common practice and raises the issue of aggregation bias (@fig-agg1) when variables have nonlinear relationships to the normalised indicators [@rastetter1992], which they typically do.
+In ecosystem condition accounting the aggregation of both variables and indicators is common practice and raises the issue of aggregation displacement (@fig-agg1) when variables have nonlinear relationships to the normalised indicators [@rastetter1992], which they typically do.
 This means that the spatial aggregation of metrics leads to a divergence in the type of information held in variables and in their associated indicators, to a point where they become qualitatively very different.
 As an example, consider an indicator based on spatial information on the abundance of a large herbivore.
 The ecosystem characteristic that this metric is meant to describe is "*Appropriate herbivore pressure, balancing overgrazing and shrubification"*.
@@ -311,17 +314,17 @@ The levels may be such that the high density region is considered as having an o
 When normalised, the indicator value will be low for both regions, and the spatially aggregated value will also be low.
 The indicator will describe the average condition for the intended ecosystem characteristic, whereas the variable will in essence not show anything that can be interpreted as such.
 
-The wolves example (Example 2) also highlight the importance of making clear the differences in the interpretation of variables and indicators.
+The wolves example (**Example 2**) also highlight the importance of making clear the differences in the interpretation of variables and indicators.
 Indicators and variables are sometimes presented side-by-side in ecosystem condition assessments or accounts.
 This is also recommended practice following the SEEA EA [@unitednations2024; ch. 5.3.4].
-However, due to aggregation bias, spatially aggregated indicators should not be interpreted as normalised versions of aggregated variables.
+However, due to aggregation displacement, spatially aggregated indicators should not be interpreted as normalised versions of aggregated variables.
 Aggregated indicators reflect the average ecosystem condition, where areas in very good or very poor condition have limited ability to compensate for opposite extreme values elsewhere.
 The spatially aggregated variable on the other hand, may reflect something like a sum of individuals, an average of a population, or some other aspect where values above and below the reference levels are able to compensate for each other.
 
 Aggregated variables and the associated aggregated indicators cannot act as alternative evidence or interpretations for the state of nature.
 While this may initially seem like a democratic and transparent approach to reporting, this practice places a significant burden on both the end user and the indicator developer.
 Miss-use can ensue, for example by taking the variable value and assigning it the same interpretation as the indicator value.
-t the very least, the developer must clarify to the user how the two metrics have diverged significantly during spatial aggregation and normalisation, complicating the comparison of their respective information.
+At the very least, the developer must clarify to the user how the two metrics have diverged significantly during spatial aggregation and normalisation, complicating the comparison of their respective information.
 
 ::: callout-note
 **Example 2 -- Wolves**\
@@ -364,12 +367,12 @@ Although variable accounts are allowed under the SEEA EA framework, ans is indee
 We would therefore argue that when an indicator has been developed, the original variable is not presented.
 And when only variable estimates are given, extra care is given to describing the spatial aggregation pathway.
 
-## Aggregation bias in indicator development
+## Aggregation displacement in indicator development {#sec-develop}
 
-As we have seen, aggregation bias causes a divergence in the type of information made available through the spatial aggregation of variables versus indicators.
-In addition, unavoidable aggregation bias (for good and bad) will also affect the indicator values and the inferences that can be drawn from these.
-If not careful, aggregation bias may also cause errors to sneak into the indicator logic.
-A major determinant of the resulting aggregation bias from the spatial aggregation of ecosystem condition indicators (@fig-agg1), is the choice about the order of the different steps in the normalisation and aggregation process, i.e. the aggregation pathway (@fig-pathways).
+As we have seen, aggregation displacement causes a divergence in the type of information made available through the spatial aggregation of variables versus indicators.
+In addition, unavoidable aggregation displacement (for good and bad) will also affect the indicator values and the inferences that can be drawn from these.
+If not careful, aggregation displacement may also cause errors to sneak into the indicator logic.
+A major determinant of the resulting aggregation displacement from the spatial aggregation of ecosystem condition indicators (@fig-agg1), is the choice about the order of the different steps in the normalisation and aggregation process, i.e. the aggregation pathway (@fig-pathways).
 If normalisation occurs early in the aggregation process, the amount of compensation, or off-setting, is limited.
 However, sometimes complete or partial compensation is justified.
 In @sec-match we saw how indicator development involved an initial step of spatially aggregating variables to align with the spatial configuration of reference levels (pathways 2 and 3; @fig-pathways).
@@ -395,7 +398,7 @@ The Water Framework Directive (WFD) indicators uses aggregation pathway 7 [@fig-
 The value obtained after the first two steps is called an EQR (ecological quality ratio), and the value obtained after the third step nEQR (normalised EQR).
 Spatial aggregation, the way that we use the term here, is not done for the WFD.
 Instead, the proportion of water bodies in each condition class is the aggregated reporting metric.
-Therefore aggregation bias is not an issue.
+Therefore aggregation displacement is not an issue.
 When WFD data are put into use in other contexts, however, aggregation becomes important.\
 <!-- Relevant contexts in Norway are the Nature Index (ref) and ecological condition accounting. In both cases,  -->
 
@@ -407,7 +410,7 @@ One solution, to enable the use of WFD indicators in ECAs, would be to change to
 
 Furthermore, Eurostat [@eurostat2022] <!-- requires  --> encourages reporting of variable values.
 These, however, cannot be aggregated spatially in any meaningful way for WFD indicators.
-The issue is the same as for all other variables for which normalised indicators exist, but is perhaps more extreme for WFD indicators due to different reference conditions and levels for different water body types, and strong non-linear transformation functions that inflate the aggreation bias issuse.
+The issue is the same as for all other variables for which normalised indicators exist, but is perhaps more extreme for WFD indicators due to different reference conditions and levels for different water body types, and strong non-linear transformation functions that inflate the aggreation displacement issuse.
 <!-- Can we have a figure of calculation exmaple here? -->
 :::
 
@@ -545,7 +548,7 @@ For example, pathway 1 in @fig-pathways can be annotated as *scale - trunc. - tr
 Note also that in this example, normalisation only involved a scaling step.
 The description of indicator pathways can perhaps made even easier by referencing specific aggregation pathways in @fig-pathways by number, as we have done in this paper.
 
-Besides making the indicator workflow itself more transparent and reproducible, we believe this recommendation would help raise the general awareness about aggregation bias in EAs, both among users and developers.
+Besides making the indicator workflow itself more transparent and reproducible, we believe this recommendation would help raise the general awareness about aggregation displacement in EAs, both among users and developers.
 It will make the interpretation of ECAs less prone to misunderstanding and miss-use.
 It will also make troubleshooting easier, for example when trying to identify the reason why two ECAs produces dissimilar indicator values from the same underlying data.
 
