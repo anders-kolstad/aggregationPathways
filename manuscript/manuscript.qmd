@@ -145,9 +145,9 @@ For example if data is collected opportunistically with sampling sizes varying b
 This approach represents a form of post-stratification that is also relevant to process data from hierarchical (e.g. blocked) sampling designs.
 
 | Example | Main illustrating point |
-|-------------------------|----------------------------------------------|
+|--------------------------|----------------------------------------------|
 | Billbery | Commensurable spatial scales for variable and reference levels (@sec-match) |
-| Deer | Compensation, and discrepancy between variable and indicator (@sec-discrep) |
+| Wolves | Spatial compensation and discrepancy between variable and indicator (@sec-discrep) |
 | PTI | Compensation and the order of operations (@sec-pathways) |
 | Alien species | Agreements across scales (@sec-comp) |
 
@@ -329,29 +329,39 @@ At the very least, the developer must clarify to the user how the two metrics ha
 ::: callout-note
 **Example 2 -- Wolves**\
 
-*Variable*: Number of wolves en each carnivore management area (CMA).\
+*Variable*: Number of wolves.\
 
-*Reference levels:*   X~0~ = zero wolves present.\
-X~100~= Number of wolves equal to what experts think the ecosystem would support under the reference condition.
-The reference levels are unique to each (CMA).\
+*Reference levels:* X~100~= Number of wolves equal to what experts think the ecosystem would support under the reference condition.
+This is number is informed by data on habitat quality, food supply, and more.
+X~0~ = no wolves.
 
-This example is from Norway, where wolves are extinct in most of the country.
-Therefore, most carnivore management areas will get an indicator value of 0.
-Wolves exist in designated wolf zones in south-east Norway, although in small numbers.
-In the Norwegian Nature Index [@jakobsson2020], the variable follows pathway 1 and is normalised at the CMA level.
-When aggregating the indicator to a national value, it is common for the general public to interpret this value as the status for wolves in Norway, and to connect this value to Norway's international obligations to maintain wolf numbers.
-But note that even an unlimited number of wolves inside the wolf zones would not to bring the national indicator value up to a very hight level.
-This is because the normalisation process truncates the variable, and does not allow overshooting values to compensate for lower values in the rest of the country.
-The Norwegian Nature Index uses (approximately) the same pathway for all indicators, so this common misunderstandings about what indicator values represents can be explaind just one time, and not for each indicator specifically.\
+|                      | EA 1 | EA 2 | EA 3 | EAA aggregate |
+|----------------------|------|------|------|---------------|
+| **Variable values**  | 20   | 5    | 0    | Sum = 25      |
+| **X~100~**           | 10   | 10   | 5    | Sum = 25      |
+| **Indicator values** | 1.0  | 0.5  | 0.0  | Mean = 0.5    |
+
+: Dummy data fro the wolves example. EA = ecosystem asset (e.g. a municipality). EAA = ecosystem accounting area (e.g. country). {#tbl-wolf}
+
+This hypothetical example (@tbl-wolf) shows how different the interpretation of a variable and an indicator can become when the information is spatially aggregated.
+When species-based indicators are aggregated to the EAA level, it is common for the general public to interpret this value (0.5) as the status for this species, for example the conservation status[^3].
+However, for the EAA seen overall, the population size is actually equal to the expected population size in the reference condition.
+Instead, the spatially aggregated indicator value describes the ecosystem condition for the different *areas* in terms of wolf under-abundance.
+Then we see that the first ecosystem asset have more wolves than than we would expect under the reference condition, whereas the other two have less.
+Because variable values above X~100~ are truncated, the high wolf numbers in ecosystem asset one does not compensate for the low indicator value in assets two and three, and hence the mean indicator value is less then the sum of the variable values divided by the sum of the X~100~values.
+But the high wolf numbers in asset 1 *does compensate* when looking at the aggregated variable value.
 
 ```{=html}
 <!-- \*Conclusion\*: Indicators should make intuitive sense to the readers.
 However, there are sometimes good reasons for making things complicated. -->
 ```
-
-It can, however, be a good idea to sometimes go back to the variable, and see if it can be defined differently to avoid these kinds of confusions.
-Wolf numbers could in this example be converted to wolf density.
 :::
+
+[^3]:
+    ::: callout-note
+    It is sometimes worth going back to the variable, and see if it can be defined differently to avoid this kind of confusions.
+    Wolf numbers could in this example be converted to wolf density.
+    :::
 
 ```{=html}
 <!-- The indicator arguably has much less room for miss-interpretation (relative to its intended use).
@@ -495,10 +505,10 @@ Pathway 1 involves early normalisation using the perhaps most common order of th
 The three steps may be done simultaneously or in sequence.
 Finanlly, the indicator is spatially aggregated.
 
-Pathway 2 involves aggregating the variable before normalising[^3].
+Pathway 2 involves aggregating the variable before normalising[^4].
 This preserves the ability for very high or very low variable values to compensate for very low or very high values elsewhere, respectively.
 
-[^3]: In a parallel terminology, normalisation can be considered modeling, and spatial aggregation before and after normalisation can be referred to as pre or post processing, respectively [@vanbeurden1999].
+[^4]: In a parallel terminology, normalisation can be considered modeling, and spatial aggregation before and after normalisation can be referred to as pre or post processing, respectively [@vanbeurden1999].
 
 Pathway 3 is similar, but here there are two aggregation steps: one before and one after normalisation.
 This can for example be the case when variables are aggregated to the scale corresponding to the reference levels before they can be normalised (Example 1).
