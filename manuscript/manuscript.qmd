@@ -57,6 +57,12 @@ callout-appearance: simple
 callout-icon: false
 ---
 
+```{r setup, include=FALSE}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+```
+
 # Introduction
 
 The world is facing a nature crisis of a magnitude that requires urgent political decision making and international coordination [@ipbes_global_2019].
@@ -231,13 +237,12 @@ This approach can also be seen as a type of post-stratifiction, and it can resul
 It can also be motivated by a desire to know more about the fine-scale variation in variable values, and perhaps visualise this on a map.
 This type of spatial aggregation, or perhaps better named upscaling, is not the focus of this paper (but see **Box 1**), and in our experience this has not been common practice in SEEA EA accounts produced to date [but see @kolstad_making_2024].
 
-::: callout-note
+::: {.callout-note}
 **Box 1 -- Related concepts**\
 
 **Vertical aggregation**
 
-It is common in the ECA community of practice to use the term aggregation about the process of aggregating normalised indicators into indices (i.e. thematic or vertical aggregation; @langhans2014), but in this paper we are primarily discussing spatial (i.e. horizontal) aggregation.
-\\
+It is common in the ECA community of practice to use the term aggregation about the process of aggregating normalised indicators into indices (i.e. thematic or vertical aggregation; @langhans2014), but in this paper we are primarily discussing spatial (i.e. horizontal) aggregation. \
 
 **Upscaling**
 
@@ -254,8 +259,7 @@ Administrative units are often used as the ecosystem assets in SEEA EAs, yet the
 The original spatial units that data are collected at may be a pragmatic choice in much the same way.
 Further still, data may not be available at the original spatial scale, but may only be downloadable in preaggregated form [@vanbeurden1999].
 All these cases lead to some form of aggregation error[@rastetter1992] where the aggregated information has a non-linear relationship with the true variable value.
-However, the issue of MAUP in SEEA EA deserves an in-depth analyses that we cannot provide here.
-\\
+However, the issue of MAUP in SEEA EA deserves an in-depth analyses that we cannot provide here. \
 
 **Ecological fallacy**
 
@@ -378,9 +382,11 @@ Sometimes changing the indicator name, or redefining the indicator, goes a long 
 ```
 
 Generally, because of the normalisation process, indicators are more aligned with the purpose of ECA with describing ecosystem condition in normative terms.
-Although variable accounts are allowed under the SEEA EA framework, ans is indeed a central feature, we believe they should be seen as interim accounts for metrics that cannot or have not yet been normalised.
+Although variable accounts are allowed under the SEEA EA framework, and is indeed a central feature, we believe they should be seen as interim accounts for metrics that cannot or have not yet been normalised.
 We would therefore argue that when an indicator has been developed, the original variable is not presented.
 And when only variable estimates are given, extra care is given to describing the spatial aggregation pathway.
+Furthermore, Eurostat [@eurostat2022] encourages reporting of variable values.
+Sometimes, however, variable values cannot be aggregated spatially in any meaningful way (see **Example 3**).
 
 ## Aggregation displacement in indicator development {#sec-develop}
 
@@ -389,39 +395,62 @@ In addition, unavoidable aggregation displacement (for good and bad) will also a
 If not careful, aggregation displacement may also cause errors to sneak into the indicator logic.
 A major determinant of the resulting aggregation displacement from the spatial aggregation of ecosystem condition indicators (@fig-agg1), is the choice about the order of the different steps in the normalisation and aggregation process, i.e. the aggregation pathway (@fig-pathways).
 If normalisation occurs early in the aggregation process, the amount of compensation, or off-setting, is limited (**Example 2**).
-However, sometimes complete or partial compensation is justified (**Example 1 and 3**).
+However, sometimes complete or partial compensation is justified (**Example 1** and **3**).
 
 ::: callout-note
 **Example 3 -- Phytoplankton trophic index (PTI)**\
 
-<!-- Dataset: “Vannmiljø”, the Norwegian Environment Agency’s database for Water Framework Directive relevant measurements -->
-
-<!-- Reference: https://github.com/NINAnor/NI_vannf -->
-
 *Variable*: Mean score of algal species present, based on a set of indicator species scored for phosphorus requirements/tolerance.
-The variable is recorded in water bodies (lakes of 0,5 km^2^ or more).
+The variable is recorded in water bodies (lakes of 0.5 km^2^ or more).
  
 
 *Reference levels*: X~100~ = median variable value for water bodies in reference condition.
 X~0~, X~20~, X~40~, X~60~ and X~80~ = intercalibrated threshold values, based on dose–response curves.\
 
-The Water Framework Directive (WFD) indicators uses aggregation pathway 7 (@fig-pathways), with truncation, scaling, and transformation, in that order.
+```{r read}
+#| include: false
+dat <- readxl::read_xlsx(here::here("data/PTI_data.xlsx")) |>
+  mutate(X = X |> str_replace_all("%", "\\\\%"))
+cn <- colnames(dat) |>
+    str_replace_all("2", "") |>
+    str_replace_all("X", "") |>
+    str_replace_all("RL", "X\\\\textsubscript{100}")
+```
+
+```{r tbl-pti}
+#| echo: false
+#| tbl-cap: "Dummy data for the PTI example. value = value for a hypothetical variable. agg. = spatial aggregation (arithemtic mean); trunc. truncation; stat. = spatial statistics. The transformation step is left out for simplicity. Pathways refer to figure 3."
+
+kbl(dat, format = "latex",
+    booktabs = TRUE,
+    col.names = cn,
+    escape = F
+    ) |>
+  kable_styling() %>%
+  add_header_above(c(
+    " " = 3, 
+    "Pathway 5" = 4,
+     "Pathway 6" = 3)) |>
+  collapse_rows(
+    columns = c(9,10),
+    latex_hline = "major"
+  )
+
+```
+
+The Water Framework Directive (WFD) indicators uses aggregation pathway 5 (@fig-pathways), with truncation, scaling, and transformation, in that order (see worked example in @tbl-pti).
 The value obtained after the first two steps is called an EQR (ecological quality ratio), and the value obtained after the third step nEQR (normalised EQR).
 Spatial aggregation, the way that we use the term here, is not done for the WFD.
 Instead, the proportion of water bodies in each condition class is the aggregated reporting metric.
 Therefore aggregation displacement is not an issue.
-When WFD data are put into use in other contexts, however, aggregation becomes important.\
+When WFD data are put into use in other contexts, however, aggregation becomes important.
 
+\
 Because of how X~100~ is defined based on the median value across reference lakes, overshooting values (\> X~100~) should be preserved in the spatial aggregation.
 Otherwise we get a negative displacement, making it practically impossible to reach an indicator value of 1.
-
 This means that neither EQR values, nor nEQR values, can be uncritically aggregated spatially to be used in a SEEA EA compliant in ECA.
-One solution, to enable the use of WFD indicators in ECAs, would be to change to pathway 6, with (1) scaling, (2) transforming, (3) aggregating and (4) truncating the values [@fig-pathways].\
-
-Furthermore, Eurostat [@eurostat2022] encourages reporting of variable values.
-These, however, cannot be aggregated spatially in any meaningful way for WFD indicators.
-The issue is the same as for all other variables for which normalised indicators exist, but is perhaps more extreme for WFD indicators due to different reference conditions and levels for different water body types, and strong non-linear transformation functions that inflate the aggregation displacement issue.
-<!-- Can we have a figure of calculation exmaple here? -->
+One solution, to enable the use of WFD indicators in ECAs, would be to change to pathway 6, with (1) scaling, (2) transforming, (3) aggregating and (4) truncating the values.
+In our hypothetical example (@tbl-pti) this gives and aggregated value of 0.85, whereas the mean value for the nEQRs would be 0.75 (i.e. negatively displaced).
 :::
 
 # Aggreements across nested ECAs {#sec-comp}
