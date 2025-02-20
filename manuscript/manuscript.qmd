@@ -504,17 +504,12 @@ This is often the case, since ECA are frequently geared towards high level ecosy
 Pathway 8 is therefore more flexible in this regard, but it may interfere with the principle of commutativity [@unitednations2024].
 We feel this is a very much unresolved issue in the SEEA EA.
 
-Pathway 9 describe how a single indicators can be aggregated hierarchically from region to region, whereas pathway 10 shows a case were the aggregation process always starts from scratch for each hierarchical spatial level.
-As for pathways 7 and 8, pathway 9 and 10 differ in how they propagate the indicator weight (typically area weight) between regions.
-SEEA EA describes and prescribes a hierarchical spatial aggregation (pathway 9).
-Note that can cause issues with comparability across nested assessment, if one alters the number or size of sub-regions (@sec-comp).
-
 ```{r fig-pathways}
 #| fig-cap: |
 #|   Flowchart showing pathways for the spatial aggregation of variables in ecosystem condition accounting. Normalisation refers to the steps that make a variable conform to the definition of an indicator in SEEA EA, which may include some, but not necesarily all the steps scale, truncate and transform.
 #| out-width: 400
 #| echo: false
-knitr::include_graphics("../img/aggregationPathways.jpg")
+knitr::include_graphics("../img/aggregationPathways.png")
 ```
 
 # Recommendation {#sec-rec}
