@@ -155,7 +155,6 @@ This approach represents a form of post-stratification that is also relevant to 
 | Billbery | Commensurable spatial scales for variable and reference levels (@sec-match) |
 | Wolves | Spatial compensation and discrepancy between variable and indicator (@sec-discrep) |
 | PTI | Compensation and the order of operations (@sec-pathways) |
-| Alien species | Agreements across scales (@sec-comp) |
 
 : Examples used in this paper, and how they illustrate specific points raised {#tbl-examples}
 
@@ -465,31 +464,6 @@ SEEA EA uses a the term aggregation commutativity for the property that the orde
 This is indeed a desirable property, however, when indicators that make up an index have different extents (e.g. they relate to different ecosystem sub-types or have sparse data coverage), then the indicator-specific areal weights will not be transferable in the spatial aggregation of indices (see description of pathways 7 and 8 in @sec-pathways).
 A similar commutativity can be envisioned for step-wise aggregation of a single indicator, where it does not matter if the original data is aggregated directly from the original measurement scale to the EAA level, or via some intermittent scale, such as ecosystem assets or larger regions.
 This is achievable when aggregating indicators using area weighting, and when one is aware of the need for post-stratification when using stratified data sampling.
-
-<!--# We do not presume that ECA end users will have the capacity, nor interest, to reflect very much upon the effect that spatial aggregation has had on the properties of the information they are presented with. It should simply work, without the need for elaborate explanations. -->
-
-::: callout-note
-**Example 4 -- Alien species**\
-
-*Variable*: The local ecological effect from alien species (mostly vascular plants) recorded on a 7-step ordinal scale (1 = no alien species, 7 = only alien species).
-The data comes from nature type monitoring with reference to individual occurrences (polygons).\
-
-*Reference levels*: X~0~ = total dominance from alien species (variable value 7).
-X~100~ = zero influence from alien species (variable value 1).
-X~60~ = \~2-5% alien plant cover (variable value 3).\
-
-In this example, the reference levels are uniform throughout the EAA, and the normalisation includes a transformation in the form of a piecewise-linear transformation by anchoring X~60~ to 0.6 on the indicator scale (similar to @fig-agg1 pane B, but without truncation, as that is not needed in this example).
-When performing an ECA, one has the option to either aggregate variable values for each ecosystem asset, and then normalise that value (pathway 2 and 3), or to normalise the variable at the scale of the original nature type polygons (Basal spatial unit (BSU) scale), and then aggregate the indicator values to the regional level (pathway 1).
-Arguably the variable and the reference levels are at commensurable scales in both cases (cf. Example 1), and other arguments for choosing one over the other must be found.\
-
-One benefit of early normalisation is that two nested assessments, such as one national, and one assessment of region *Y* inside the same country, will get the same spatially aggregated value for region *Y*.
-Separate assessments should give identical indicator values for the same areas, given the same underlying data.
-When this is not true it raises concerns about reproducibility and sacrifices the credibility of both assessments.
-The other thing to ask oneself here is: *Why do we normalise* in the first place (@sec-norm)?
-One reason is that we want to summarise information in space about the ecosystem condition.
-It is the indicator values that hold this information, and not the variable.
-We would therefore favor pathway 1 for this example.
-:::
 
 # Aggregation pathways {#sec-pathways}
 
