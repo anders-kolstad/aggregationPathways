@@ -34,3 +34,5 @@ po/*~
 # RStudio Connect folder
 rsconnect/
 when-to-scale.Rproj
+presentations/understanding the problem.html
+R/scratch/
