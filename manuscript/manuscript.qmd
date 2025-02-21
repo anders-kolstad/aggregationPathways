@@ -84,7 +84,7 @@ SEEA EA includes principles for compiling accounts for ecosystem extent, ecosyst
 We will focus on the SEEA EA condition accounts in this paper, although spatial aggregation is a relevant topic also for the other parts of the account, and to other types of indicator-based ecosystem assessments.
 When EU and EEA countries are in 2026 required to report ecosystem condition accounts to Eurostat and the European Commision (?), these accounts will be spatially aggregated to national levels.
 The point of having a robust methodological framework for the spatial aggregation of data and information is therefore quite pertinent.
-<!--# thus invoking the issue of the ecological fallacy (Box 1), and many other potential pitfalls in the spatial aggregation of information. -->
+
 
 This paper is aimed primarily at indicator developers, providing them with some recommendations for how to choose the right spatial aggregation approach for variables and indicators, and how to report these choices.
 Indicator developer subjectivity affects indicator interpretation [@allain2018] and finally the conclusion from ECAs.
@@ -169,7 +169,6 @@ For example, variable values may exist for unique 10 × 10 m grid cells, but the
 Variables should not be normalised based on reference levels unless they are at a commensurable spatial scale.
 The bilberry example (**Example 1**) shows that sometimes variables need to be spatially aggregated before they can be normalised.
 
-<!--# Let's illustrate this with an example using a hypothetical variable depicting wild animal densities. If the upper reference level (X100) for this variable is given by the assumed (or measured) animal densities under the reference condition, then that reference level needs to be assigned a relevant spatial scale, for example a region where the densities are calculated over. One will probably acknowledge the fact that animals move and distribute themselves non-randomly within these regions, and it therefore makes little sense to normalise the variable at a finer scale than region. Doing so would mean that regions perfectly aligned with the reference condition (in terms of animal densities with the region) will show as having sub-regions with sub-optimal condition, simply due to natural variation in where the animals are at any give time. Averaging (arguably the most common spatial aggregation function) the indicator values across sub-regions would not produce a regional indicator value that shows the region as being perfectly aligned with the reference condition, since truncation of variable values above X100 (assuming X100 > X0) means we are only aggregating the negative deviations from the reference level, and that very high animal densities in some sub-regions are not allowed to compensate for low values elsewhere. -->
 
 \clearpage
 
@@ -207,8 +206,6 @@ This process requires some spatial manipulations of data, or scale changes [@ewe
 The type of manipulation depends on the spatial resolution of the underlying data, as well as the size and configuration of the ecosystem assets.
 To elaborate on this issue we first make a distinction between two main types of data: sparse (i.e. spatially incomplete) data and complete data.
 
-<!--# Subsequently, spatial aggregation is required when going from ecosystem assets to large spatial scale, ultimately the scale of the entire ecosystem accounting area (EAA).  -->
-
 Complete, or wall-to-wall data, include remote sensing products, but also other types of pre-aggregated data, where sparse data are assigned to areal units.
 This last type of data is very common.
 A lot of demographic information for example is made available at the scale of administrative units, rather than at the individual level (which would be very ineffective and problematic also in terms of protecting sensitive information).
@@ -230,7 +227,7 @@ When doing this aggregation, we need to account for the spatial structure (spati
 One way is to rely on design-based approaches (e.g. relying on random or balanced samples across the entire EEA), or using a step-wise aggregation via ecosystem assets or some smaller basal spatial units.
 In our experience, the choice of which area units to use when doing this step-wise aggregation is often not reflected much upon.
 In some cases the areal units are even decided politically, for example to administrative units, with little ecological justification for this choice.
-However, this decision clearly affects the results of the spatial aggregation via a well-described (but often forgotten?) statistical problem referred to at the modifiable area unit problem (MAUP; Box 1).
+However, this decision clearly affects the results of the spatial aggregation via a well-described (but often forgotten?) statistical problem referred to at the modifiable area unit problem (MAUP; **Box 1**).
 It is important for decision makers to see that the information they are basing their decision on is robust and insensitive to aggregation methods [@vanbeurden1999].
 The MAUP can, however, lead to inconsistencies between repeated or nested ECAs, leading to confusion and mistrust (@sec-comp).
 One option to reduce this discrepancy and arbitrariness is to use ecologically motivated areal units in the step-wise aggregation such as homogeneous ecosystem areas [@vallecillo2022] or homogeneous impact areas [@kolstad_making_2024].
@@ -367,10 +364,7 @@ Then we see that the first ecosystem asset has more wolves than we would expect 
 Because variable values above X~100~ are truncated, the high wolf numbers in ecosystem asset one does not compensate for the low indicator value in assets two and three, and hence the mean indicator value is less then the sum of the variable values divided by the sum of the X~100~values.
 But the high wolf numbers in asset 1 *does compensate* when looking at the aggregated variable value.
 
-```{=html}
-<!-- \*Conclusion\*: Indicators should make intuitive sense to the readers.
-However, there are sometimes good reasons for making things complicated. -->
-```
+
 :::
 
 [^3]:
