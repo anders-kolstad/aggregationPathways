@@ -429,8 +429,8 @@ In our hypothetical example (@tbl-pti) this gives an aggregated value of 0.85, w
 
 # Agreement across nested ECAs {#sec-comp}
 
-We believe it is a very desirable property that variable and indicator values are comparable across repeated ECAs, and harmonised across assessment scales and so that accounts from sub-areas should be able to recreate the account of the larger area.
-This can, however, happen when ECAs use different aggregation pathways for the same indicator.
+We believe it is a very desirable property that variable and indicator values are comparable across repeated ECAs and harmonised across assessment scales so that accounts from sub-areas should be able to recreate the account of the larger area.
+This can, however, fail to happen when ECAs use different aggregation pathways for the same indicator.
 Cases when two accounts or assessments use what is considered the same metric, but find different values for the same areas, is cause for both confusion, and could result in reduced general credibility for ECAs.
 
 We believe one solution to this is to acknowledge that the aggregation pathway can affect the indicators so much, sometimes as much as variation in the variable itself, that the use of different pathways imply that metrics are named and treated uniquely, for example using different common names, but perhaps better still, different version numbers or indicator IDs.
@@ -438,9 +438,58 @@ For each unique indicator the precise aggregation pathway should be specified as
 This would show ECA users if two accounts are using different metrics that cannot be assumed to behave similarly or report the same thing, even if they have the same common name and data source.
 
 SEEA EA uses the term aggregation commutativity for the property that the order of vertical and horizontal aggregation is irrelevant to the end result.
-This is indeed a desirable property.
-A similar commutativity can be envisioned for step-wise aggregation of a single indicator, where it does not matter if the original data is aggregated directly from the original measurement scale to the EAA level, or via some intermittent scale, such as ecosystem assets or larger regions.
-This is achievable when aggregating metrics using area weighting, and when one is aware of the need for post-stratification when using stratified data sampling.
+This is indeed a desirable property, although not always possible.
+**Example 4** shows a case where the spatial aggregation of an indicator uses area weighs that are different from the total extent of the EA (which is what is recommended by SEEA EA).
+Such alternative weights can be appropriate when the indicator only covers part of the ecosystem covered in the account, for example if it covers only one of many habitat types.
+In these cases, each indicator in an index might require different weights when spatially aggregated, but this is of coarse not possible after the indicators are combined into a single index.
+
+A similar aggregation commutativity can be envisioned for step-wise aggregation of a single indicator, where it does not matter if the original data is aggregated directly from the original measurement scale to the EAA level, or via some intermittent scale, such as ecosystem assets or larger regions.
+This is possible when aggregating metrics using area weighting, and when one is aware of the need for post-stratification when using stratified data sampling.
+However, **Example 4** again shows how
+
+::: callout-note
+**Example 4 -- Glacier area**\
+*Variable*: Extent of glacier area *anno* 2018-2019 (@fig-mapsGlaciers; A).
+
+*Reference levels*: X~100~ is defined as the extent of glacier area *anno* 1947-1985. X~0~ is an absence of glaciers, and X~60~ is a 90% loss of glaciers.
+
+This indicator [@kolstad_area_2025] uses historical data as the reference levels against which to normalise the variable.
+Both the variable and the reference levels are maps, but the metric itself needs to be numbers assigned to distinct ecosystem assets (EA).
+Seventy EAs (@fig-mapsGlaciers; B) were defined as unique combinations of geographical regions (@fig-mapsGlaciers; C) and bioclimatic regions.
+There is then some spatial aggregation done to get the summed glacier area for each EA.
+Of the 70 EAs, 29 had glaciers in the historical glacier map.
+The remaining EAs did not get assigned indicator values.
+
+The point estimates for each EA was then turned into probability distributions by sampling from a normal distribution with a standard deviation equal to 3% of the mean (the uncertainty reported for the maps).
+To further aggregate the data to geographical regions (@fig-mapsGlaciers; C), these distributions were resampled with replacement and with an *n* corresponding to the extent of glaciers in the historical map, i.e. using historical glacier extent as the area weights.
+The same bootstrapping procedure was done for aggregation to the country (EAA) level.
+
+In SEEA EA it says that "\[...\] the values recorded in an ecosystem condition variable account should be calculated as the area-weighted arithmetic mean of ecosystem assets belonging to the particular ecosystem type within the EAA" [@unitednations2024, p. 104].
+However, in this case the weighs were not the total area (i.e. the alpine area, since that is the ecosystem that this indicator is designed for).
+Instead the weights were defined by the extent of glaciers in the historic map.
+This implied that EAs with no glaciers in the historic map were coded as *NA* and did not contribute to the EAA estimate, with the argument that the indicator is not valid or relevant for those areas.
+It also ment that areas inside the EA with no initial glacier cover was seen as similarly non-relevant to the indicator.
+Alternatively, using alpine extent as the weight during the spatial aggregation caused the indicator values to become considerably lower (@fig-ridge).
+This was partly due to cases where EAs with large alpine extent, but marginal glacier extent in the historic map, had lost all its glaciers in recent time.
+These EA would then get a very low indicator value and also weight very heavy towards the EAA estimate, even though the actual change in absolute glacier extent for that EA was very little.
+It was therefore argued that the area weight should be defined based on the area within the alpine ecosystem for which the indicator was considered relevant, and not defined base on the total EA extent.
+
+The spatial delineation of EAs can affect the indicator estimate at the EAA level.
+In this case the EAA estimates were not identical, but qualitatively similar (@fig-ridge).
+However, using larger EAs generally led to more narrow probability distributions which we believe is an artifact, and not a real reduction in uncertainty.
+In any case, this exemplifies how the MAUP and the choice of spatial units can affect the aggregated values.
+
+
+```{r fig-mapsGlaciers}
+#| fig-cap: 'Extent of glaciers in Norway can be visualised either as actuall occurences (A) or as the summed area for fifferent spatial units: B) ecosystem asset; C) gegrapical regions; D) the whole country. The legend is omitted for simplicity. The different maps exemplifies the modifiable area unit problem. From Kolstad (2025)'
+knitr::include_graphics("../img/maps.png")
+```
+
+```{r fig-ridge}
+#| fig-cap: 'Indicator values (probability distributions; vertical lines are quartiles) for the indicator _Glacier extent_ aggregated to EAA (country) level. The *indicator* is first normalised at the scale of the original EAs; *indicator_level2* is pre-aggregated to geographical regions before it it normalised, and; *indicator_level3* is normalised at the EAA scale with no further spatial aggregation. The difference between these three distributions show that the definition of the spatial untis and and especially the sice of the ecosystem assets does matter to the EAA estimate. *indicator_mtArea* is an indicator normalised at the EA scale (similar to *indicator*), but which is aggregted using the total alpine extent for each EA rather than the intial glacer extent as the weights. This approach puts a lot more emphasis on areas especially in the south of the country where there is a lot of alpine area but little intial glacer extent. Any loss of glacers, even if quite small in absolute terms, had a great effect on lowering the indicator estimates which where then propagated to the EAA level.'
+knitr::include_graphics("../img/ridge.png")
+```
+:::
 
 # Aggregation pathways {#sec-pathways}
 
@@ -469,8 +518,13 @@ Pathway 5 is a common pathway in the WFD, which does not include spatial aggrega
 Instead one reports the number of water bodies in each condition class (spatial statistics).
 Pathway 6 is a suggested pathway for handling WFD indicator in ECAs (see **Example 3**), where truncation is postponed until after the spatial aggregation for in that way to allow overshooting values to compensate for low indicator values elsewhere (what we refer to as compensation).
 
-Pathway 7 describe an alternative to pathway 1 for a model-assisted aggregation pathway, where the original sample is the result of a defined sampling strategy, but where a model is used to extrapolate or interpolate (depending on the case) values to other spatial points or locations that were not sampled.
+Pathway 7 describe an alternative to pathway 1 for a model-assisted aggregation pathway, where the original sample is the result of a defined sampling strategy, but where a model is used to project (extrapolate or interpolate, depending on the case) values to other spatial points or locations that were not sampled.
 The resulting map (field of values) is then normalised, (re)sampled (which could imply taking all the discrete population units (e.g. all rivers), and finally aggregated.
+
+Pathways 8 and 9 describe alternative ways to create indecies at different spatial scales,
+either by spatially aggregating the indecies (pathway 8), or by aggregating the indicators seperately and
+recalcuating the indecies at differet spatial scales (pathway 9).
+If the 
 
 ```{r fig-pathways}
 #| fig-cap: |
