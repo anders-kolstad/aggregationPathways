@@ -226,15 +226,15 @@ In these cases, there will be a lot of area inside each ecosystem asset for whic
 To assign variable value to all areas (as is required in the SEEA EA framework), we need to do some statistical inference.
 Both design-based and model-based approaches are valid under SEEA EA. However, transparency, validity and simplicity are all very desirable properties from ECAs, which favours a design-based approach that makes no modeling assumptions [@brus2021].
 We will therefore consider design-based approaches here.
-Model-based approaches also generally means that the variables are simpler to aggregate spatially since the spatial structure of the variables will already be accounted for via the prediction process.
+Model-based approaches (e.g. interpolation) also generally means that the variables become simpler to aggregate spatially since the spatial structure of the variables will already be accounted for via the prediction process.
 For example, if using kriging to create local predictions for a variable across an ecosystem asset, then the variable is considered random, and the sampling locations may be considered as fixed.
 Thus a simple systematic sampling of the field of values across the ecosystem asset will be valid, and give representative grounds for statistical inference [@brus2021].
 
 For design-based approaches, one can assign values to areas via simple aggregation functions used on data values that fall within a given ecosystem asset.
-Many aggregation functions are available, such as sum, worst-rule, different percentiles, arithmetic, geometric or harmonic means[^2] [@unitednations2024 §5.54].
+Many aggregation functions are available, such as sum, worst-rule, different percentiles, arithmetic, geometric or harmonic means[^2] [@unitednations2024 §5.54]. In addition, non-paramteric bootstrapping (GLACIERS) and bayesian updating (KOLSTAD et al ) can be used to possibly obtain better descriptions of the variation or the uncertainty in the sample. 
 If the inclusion probabilities are known, or they can be estimated, then the Horvitz-Thomson estimator for the sum or the mean (and variance) of a spatial sample is appropriate and useful, especially when the data originated from a stratified sample.
 For balanced samples, or samples from a simple random sampling process, we can apply these functions directly, but depending on the random process used to select the sampling points we may need to account for the spatial structure (spatial autocorrelation) of the data as well, when doing this aggregation.
-This can be addressed in several ways, such as model-assisted approaches [@brus2021], e.g. using regression models @brus2000. One can also use add an intermediate aggregation step via homogeneous areas (domains), ecosystem assets or some smaller basal spatial units, to control for this spatial non-independence, and thus reduce the sampling bias and variance.
+This can be addressed in several ways, such as model-assisted approaches [@brus2021], e.g. using regression models @brus2000. One can also add an intermediate aggregation step via homogeneous areas (domains), ecosystem assets or some smaller basal spatial units, to control for this spatial non-independence, and thus reduce the sampling bias and variance.
 
 [^2]: When using means across areas, area weighting is required when following SEEA EA.
 
