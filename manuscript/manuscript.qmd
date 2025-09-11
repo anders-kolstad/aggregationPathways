@@ -18,11 +18,11 @@ author:
     orchid: https://orcid.org/0000-0002-5889-1606
     affiliations:
       - ref: nina
-  - name: Bálint Czúcz
+  - name: BC!lint CzC:cz
     email: balint.czucz@nina.no
     affiliations:
       - ref: nina
-  - name: Chloé R. Nater
+  - name: ChloC) R. Nater
     email: chloe.nater@nina.no
     affiliations:
       - ref: nina
@@ -70,58 +70,54 @@ library(kableExtra)
 # Introduction
 
 The world is facing a nature crisis of a magnitude that requires urgent political decision making and international coordination [@ipbes_global_2019].
-Ecosystem accounting (EA) is a type of environmental assessments aimed at communicating on the status and trends in the extent and condition of ecosystems at a scale and in a format that is relevant for decision makers [@edens2022, @comte2022].
+Ecosystem accounting (EA) has been fronted as a framework for providing a knowledge base for this.  EAs are environmental assessments aimed at communicating on the status and trends in the extent and condition of ecosystems at a scale and in a format that is relevant for decision makers [@edens2022, @comte2022].
 For ecosystem condition accounting (ECA) and assessments, this often requires that metrics[^1] used to describe the condition of ecosystems are aggregated spatially to produce a single value for a larger area.
-This represents a type of knowledge synthesis, aimed at condensing the complexity of the real world into something that is relevant to decision makers and perhaps actionable at a political level [@king2024].
-However, spatial aggregation affect how a metric should be interpreted, and the descriptive properties and normative claims one can make based on it [@allain2018], and without an understanding of the pitfalls during spatial aggregation of information, one risks introducing unintended and undetected systematic bias, as well as downright logical errors, into the decision making process.
+This represents a type of knowledge synthesis, aimed at condensing the complexity of the real world into something that is relevant to decision makers and potentially actionable at a political level [@king2024].
+However, the way spatial aggregation is done affects how a metric should be interpreted, and the descriptive properties and normative claims one can make based on it [@allain2018]. Without an understanding of the pitfalls during spatial aggregation of information, one risks introducing unintended and undetected systematic bias into the decision making process.
 
-[^1]: We use the SEEA EA definitions of the terms variables, indicators (normalised variables) and metrics (referring to either a variable or a metric) [@unitednations2024]
+[^1]: We use the SEEA EA definitions of the terms variables, indicators (normalised variables) and metrics (referring to either a variable or an indicator) [@unitednations2024]
 
-Although much attention has been devoted to the vertical aggregation of environmental indicators into indices [e.g. @langhans2014; @maes2020; @oecd_2008], as well as to the spatial aggregation of relatively unmodified or raw variables [e.g. @allain2018], there is to our knowledge no explicit deliberation on the special case of spatially aggregating highly modified indicators used for ecosystem condition accounting [but see @vanbeurden1999].
-This paper therefore focuses on explaining and providing guidelines on the spatial aggregation inherent to the System of Environmental Economic Accounting - Ecosystem Accounting (SEEA EA) [@unitednations2024] - the most used ecosystem accounting framework in the world [@comte2022].
+Although much attention has been devoted to the vertical aggregation of environmental indicators into composite indices [e.g. @langhans2014; @maes2020; @oecd_2008], as well as to the spatial aggregation of relatively unmodified or raw variables [e.g. @allain2018], there is a lack of explicit deliberation on the special case of spatially aggregating highly modified indicators used for ecosystem condition accounting [but see @vanbeurden1999].
+This paper therefore focuses on explaining and providing guidelines for the spatial aggregation of ecosystem indicators in the context of the System of Environmental Economic Accounting - Ecosystem Accounting (SEEA EA) [@unitednations2024] - the most used ecosystem accounting framework in the world [@comte2022].
 
 SEEA EA includes principles for compiling accounts for ecosystem extent, ecosystem condition, and ecosystem services [@unitednations2024; -@unitednations2022].
-We will focus on the SEEA EA condition accounts in this paper, although spatial aggregation is a relevant topic also for the other parts of the account, and to other types of indicator-based ecosystem assessments.
-When EU and EEA countries are in 2026 required to report ecosystem condition accounts to Eurostat and the European Commision (?), these accounts will be spatially aggregated to national levels.
-The point of having a robust methodological framework for the spatial aggregation of data and information is therefore quite pertinent.
+We will focus on the SEEA EA condition accounts in this paper, although spatial aggregation is also a relevant topic for the other parts of the account, and for other types of indicator-based ecosystem assessments.
+In 2026, EU and EEA countries will be required to report ecosystem condition accounts to Eurostat and the European Commission (?), and these accounts will have to be spatially aggregated to national levels. This underlines the importance of having a robust methodological framework for the spatial aggregation of data and information.
 
-This paper is aimed primarily at indicator developers, providing them with some recommendations for how to choose the right spatial aggregation approach for variables and indicators, and how to report these choices.
-Indicator developer subjectivity affects indicator interpretation [@allain2018] and finally the conclusion from ECAs.
-Still, the process of designing indicators and estimating indicator values is often left entirely to them, with little real involvement from indicator users.
-It is therefore important to be aware of the role that indicator developers have in shaping the type of information, and the narratives, that are presented to decision makers.
-This paper will make it easier for indicator developers to avoid some of the pitfalls from having a too casual approach to the choice of aggregation pathways.
-We use three examples to illustrate some of our main points (@tbl-examples).
-In @sec-pathways we describe a new reporting terminology for spatial aggregation pathways.
-And finally, in @sec-rec we give five concrete recommendations aimed at indicator developers that will help ensure a sensible and informed approach to spatial scaling of ecosystem condition metrics.
+This paper is aimed primarily at indicator developers, providing them with recommendations for how to choose the right spatial aggregation approach for variables and indicators, and how to report these choices in an accessible and transparent way.
+Indicator developer subjectivity affects indicator interpretation [@allain2018] and thus ultimately  the conclusion from ECAs.
+Still, the process of designing indicators and estimating indicator values is often left entirely to them, with little real involvement from indicator users, such as regional and local land managers and policy makers.
+It is therefore important to be aware of the role that indicator developers play in shaping the type of information and the narratives that are presented to decision makers.
+This paper will make it easier for indicator developers to avoid some common pitfalls that are associated with choosing aggregation pathways.
+We use four examples to illustrate some of our main points (@tbl-examples).
+In @sec-pathways we describe a new reporting terminology for spatial aggregation pathways, and finally, in @sec-rec we give five concrete recommendations aimed at indicator developers that will help ensure a sensible and informed approach to spatial scaling of ecosystem condition metrics.
 
 ## Terminology {#sec-term}
 
 There is a jungle of terms used for similar metrics or operations across relevant theoretical frameworks for ecosystem assessments, such as the SEEA EA, WFD, MSFD, IBECA, OSPAR, PAEC, HD, CFP, and others.
 We see a need for a common, more standardised terminology across these fields of practice in order to ease communication and avoid misunderstandings.
-For now we will now define the terms and how we use them in this paper.
+In the following, we define the terms as we use them in this paper.
 
 We follow the definition in @bierkens2002 and treat spatial aggregation as the process of increasing the support (i.e. reducing the grain).
 We see this as a separate process to models that create spatially continuous data from point data by either increasing the extent (extrapolation) or cover (interpolation).
 However, these operations are in practice often intertwined with spatial aggregation.
-Either explicitly, for example by using model-based spatial estimation methods (e.g. geostatistics) and subsequent spatial sampling of this field of random values [@brus1997].
-Inter- or extrapolation can also be combined with spatial aggregation more inadvertently, for example by averaging point data and attributing this value to entire polygons, thus relying on a design-based estimation process [@gruijter1990].
-The term upscaling is sometimes used synonymously to our definition of spatial aggregation, but it has also a wider use, related especially to the ambiguous use of the terms scale to mean either grain or extent.
+Intertwinement can be explicit, for example when using model-based spatial estimation methods (e.g. geostatistics) and subsequent spatial sampling of this field of random values [@brus1997]. In other cases, inter- or extrapolation can also be combined with spatial aggregation more inadvertently, for example by averaging point data and attributing this value to entire polygons, thus relying on a design-based estimation process [@gruijter1990].
+The term “upscaling” is sometimes used synonymously to our definition of spatial aggregation, but it also has a wider use, related especially to the ambiguous use of the terms scale to mean either grain or extent.
 
 SEEA EA distinguishes between indicators and variables, as do we.
 Variables are metrics describing ecosystem characteristics [@unitednations2024 §5.41].
 They are typically either in percentages or fractions, or as raw biophysical units, such as biomass or density.
-Indicators on the other hand, are always on a unitless scale between 0 and 1, where 0 represents very poor condition, and 1 represents the very good, or the best possible condition.
+Indicators, on the other hand, are always on a unitless scale between 0 and 1, where 0 represents very poor (or the worst possible) condition, and 1 represents very good (or the best possible) condition.
 Sometimes indicators are calculated directly [e.g. @åström], but usually indicators are made by normalising variables based on two or more reference levels [@unitednations2024 §5.60].
-Although also variables may have normative properties (due to choices about how they are chosen, defined, aggregated or presented [@allain2018]), the normalisation of variables into indicators makes them explicitly normative by introducing a clear directional interpretation, where increasing values always refer to an increase in condition in the direction of a reference condition.
+Although some variables may have normative properties (due to decisions about how they are chosen, defined, aggregated or presented [@allain2018]), the normalisation of variables into indicators makes them explicitly normative by introducing a clear directional interpretation, where increasing values always refer to an increase in condition in the direction of a reference condition.
 The information held by the indicator is also different from that of the variable since additional ecological knowledge can be introduced via the reference levels.
 The mathematical part of this normalisation contains several steps (@fig-term).
-These can be performed simultaneously, but for clarity we discuss them as separate steps.
-The order of the steps can also change.
+These can be performed simultaneously, but for clarity we discuss them as separate steps that may be implemented in different order. 
 
-Variables can be scaled using a minimum of two reference levels, a lower and an upper, that defines which variable values to be coded as zero (X~0~) and as one (X~100~) on the indicator scale.
+Variables can be scaled using a minimum of two reference levels, a lower and an upper, that define which variable values are to be coded as zero (X~0~) and as one (X~100~) on the indicator scale.
 Variables can, if needed, be truncated to produce a bound indicator scale between 0 and 1.
 Sometimes variables are transformed to adjust the indicator scale to reflect potentially nonlinear relationships between the variable and ecosystem condition.
-This is commonly done by anchoring specific variable values to predefined class boundaries [@czúcz; @jakobsson_setting_2020], but may also be done without any additional reference levels, for example by using a sigmoid or exponential transformation [@mienna2024].
+This is commonly done by anchoring specific variable values to predefined class boundaries (sensu WFD) which we call reference levels [@czúcz; @jakobsson_setting_2020], but may also be done without explicit reference levels, for example by using a sigmoid or exponential transformation [@mienna2024].
 Finally, the indicator scale can also be divided into discrete fractions, either based on additional reference levels, or some other rule (e.g. equal range for each class).
 We refer to this step as categorisation.
 
@@ -132,33 +128,33 @@ We refer to this step as categorisation.
 knitr::include_graphics("../img/terminologi.png")
 ```
 
-# Why do we spatially aggregate data in ecosystem condition accounting
+# Spatial aggregation of data in ecosystem condition accounting
 
-Spatial aggregation of data refers to the conversion of fine-resolution data into coarser-resolution data, and depending on both the purpose and the nature of the metric, there can be several reasons both for performing and for refraining from spatial aggregation.
+Spatial aggregation of data refers to the conversion of fine-resolution data into coarser-resolution data and, depending on both the purpose and the nature of the metric, there can be several reasons for both performing and refraining from spatial aggregation.
 Readers are referred to @allain2018 for a more comprehensive review of different reasons for spatially aggregating variables.
-As we shall see, there are several requirements in the SEEA EA that make spatial aggregation necessary.
-However, spatial aggregation also comes with a whole suite of (sometimes undesirable) side-effects.
+As we will illustrate below, there are several requirements in the SEEA EA that make spatial aggregation necessary.
 
-Generally, spatial aggregation increases the tangibility of a metric, because it simplifies or compresses the information, sometimes into just a single number (total aggregation).
-This is sometimes necessary in ecosystem accounting when information is required at a relatively high administrative level (e.g. nations) and when variables and indicators need to be presented in standardised tables which don't allow for describing a lot of spatial variation.
+Generally, spatial aggregation increases the clarity and accessibility of a metric because it simplifies or compresses the information, sometimes into just a single number (total aggregation).
+This may be necessary in some cases of ecosystem accounting when information is required at a relatively high administrative level (e.g. nations) and when variables and indicators need to be presented in standardised tables which don't allow for describing a lot of spatial variation.
 
 Sometimes total aggregation of a metric is required for it to actually fit its purpose and become relevant to what it is designed to describe.
 For example, a hypothetical variable "*proportion of total land area above critical nitrogen load",* informed from a spatial map of nitrogen loads, would only make sense if data was aggregated across some defined area.
 The reason and need for aggregation may therefore originate in the original idea for the metric.
 
 Data may also be only party aggregated, or the same metric may be presented at different levels of aggregation [@allain2018].
-A minimum level of aggregation may be decided based on uncertainties in the data: High spatially resolute data may be imprecise at fine scales, leading to false conclusion and potential miss-use [@lyytimäki2013], but these values seen over a larger area may be assumed to converge on some true value, making spatially aggregated data better suited for communication to users.
+A minimum level of aggregation may be decided based on uncertainties in the data: high spatially resolute data may be imprecise at fine scales, leading to false sense of certainty and potential misinterpretation [@lyytimäki2013], but these same data seen over a larger area may be assumed to converge on some true value, making spatially aggregated data better suited for communication to users.
 Other common arguments for performing spatial aggregation are to ease visualisation and to allow relevant comparisons [@allain2018].
 For example, ecosystem condition metrics can be visualised on a map, but when both the spatial resolution and spatial variation is high, maps become too complex, even unintelligible.
-It is therefore common to partially aggregate the data and provide a coarser map where different colours, representing values on the map, become distinguishable from each other.
+It is therefore common to partially aggregate the data and provide a coarser map where different colours are used to distinguish different values.
 Similarly, one may choose to aggregate such that the spatial resolution matches some meaningful delineation, notably ecosystem assets in SEEA EA, which makes it possible to easily compare the ecosystem condition between these areas.
+
+Spatial aggregation of ecosystem condition metrics may also be applied to alleviate issues of spatial auto-correlation.
+For example, if data is collected opportunistically with sampling sizes or sampling effort varying between areas, then performing partial spatial aggregation to some intermediate-sized, homogeneous areas, will give equal weight or importance to all areas regardless of how many data points are included in each.
+This approach represents a form of post-stratification that is also relevant to process data from hierarchical (e.g. blocked) sampling designs.
 
 Spatial aggregation can have several consequences that may or may not be desirable, such as smoothing out spatial variability, which can mask local patterns and trends.
 This smoothing out makes the data and its inherent information less suitable for some use cases, such as depicting spatial variation that can be used to support local land-use planning, for aiding a debate about spatial conflicts or identification of high risk areas [@vanbeurden1999].
 
-Spatial aggregating of ecosystem condition metrics is applied to alleviate issues of spatial auto-correlation.
-For example if data is collected opportunistically with sampling sizes or sampling effort varying between areas, then performing partial spatial aggregation to some intermediate sized, homogeneous areas, will give equal weight or importance to all areas regardless of how many data points are included in each.
-This approach represents a form of post-stratification that is also relevant to process data from hierarchical (e.g. blocked) sampling designs.
 
 |   | Example | Main illustrating point |
 |--|--------------------------|---------------------------------------------|
@@ -179,7 +175,7 @@ The bilberry example (**Example 1**) shows that sometimes variables need to be s
 ::: callout-note
 **Example 1 -- Bilberry**\
 
-*Variable*: Horizontal coverage (vertical projection) of bilberry (*Vaccinum myrtillus*) recorded in permanent vegetation plots.\
+*Variable*: Horizontal coverage (vertical projection) of European blueberry or bilberry (*Vaccinum myrtillus*) recorded in permanent vegetation plots.\
 
 *Reference levels*: X~100~ is defined for each ecosystem asset based on an expert elicitation.
 Experts were informed by the distribution of the variable values both within and outside protected areas, and the regional distribution of major forest types.
@@ -188,11 +184,11 @@ X~0~ is a natural zero (bilberry completely absent).\
 
 | \-               | Plot 1 | Plot 2 | EA 1         |
 |------------------|--------|--------|--------------|
-| Variable values  | 2      | 36     | 18           |
+| Variable values  | 2      | 36     | 19           |
 | X~100~           | 20\*   | 20\*   | 20           |
-| Indicator values | 0.1\*  | 1.0\*  | 0.9 (0.55\*) |
+| Indicator values | 0.1\*  | 1.0\*  | 0.95 (0.55\*) |
 
-: Dummy data for the bilberry example. Variable values (% cover of bilberry) is recorded for each vegetation plot, and aggregated (arithmetic mean) to the ecosystem asset (EA) level. The X~100~ value is defined for the EA level, but in this hypothetical case it is also dis-aggregated to each vegetation plot and used for normalising variable values also at the plot level. The dis-aggregated X~100~ values, and subsequent values that rely on these, are marked with an asterisk (\*). {#tbl-billbery}
+: Dummy data for the bilberry example. Variable values (% cover of bilberry) are recorded for each vegetation plot, and aggregated (arithmetic mean) to the ecosystem asset (EA) level. The X~100~ value is defined for the EA level, but in this hypothetical case it is also dis-aggregated to each vegetation plot and used for normalising variable values also at the plot level. The dis-aggregated X~100~ values, and subsequent values that rely on these, are marked with an asterisk (\*). {#tbl-billbery}
 
 The bilberry indicator exemplifies different spatial resolutions for the variable and for the reference levels (@tbl-billbery).
 The variable is recorded at the scale of vegetation plots.
@@ -200,7 +196,7 @@ The reference level however, is designed with a regional spatial scale in mind, 
 Because the normalisation includes a truncation step, normalising the variable at the plot scale (pathway 1; @fig-agg1) does not allow overshooting values in plot 2 to compensate for lower values in plot 1 when spatially aggregating the indicator values.
 When normalising at the plot scale in this case, one is essentially aggregating only the negative deviations from the upper reference level X~100~, and the aggregated indicator value becomes negatively displaced (0.55) relative to when aggregating variable values (0.9).
 Given that X~100~ is defined the way it is, this indicator should follow pathway 3 (@fig-agg1) by spatially aggregating the variable from plot scale to ecosystem asset to allow spatial compensation between plots.
-At the scale of ecosystem assets, the variable and the reference levels are at a commensurable scale, and the variable can be normalised and potentially aggregating it further.
+At the scale of ecosystem assets, the variable and the reference levels are at a commensurable scale, and the variable can be normalised and potentially aggregated further.
 :::
 
 ## Fitting data to ecosystem assets
@@ -208,41 +204,42 @@ At the scale of ecosystem assets, the variable and the reference levels are at a
 In SEEA EA, information about ecosystem condition is made spatially explicit by assigning variable or indicator values to ecosystem assets.
 This process requires some spatial manipulations of data, or scale changes [@ewert2011].
 The type of manipulation depends on the spatial resolution of the underlying data, as well as the size and configuration of the ecosystem assets.
-To elaborate on this issue we first make a distinction between two main types of data: sparse (i.e. spatially discontinuous) data and spatially exhaustive data.
+To elaborate on this issue we first make a distinction between two main types of data: spatially exhaustive data and sparse (i.e. spatially discontinuous) data..
 
-Spatially exhaustive, or wall-to-wall data, include remote sensing products, but also other types of pre-aggregated data, where sparse data are assigned to areal units.
+*Spatially exhaustive*, or wall-to-wall data, include remote sensing products, but also other types of pre-aggregated data, where sparse data are assigned to areal units.
 This last type of data is very common.
 A lot of demographic information for example is made available at the scale of administrative units, rather than at the level of individuals (which would be very ineffective and also problematic in terms of protecting sensitive information).
-Similar pre-aggregation is, however, ubiquitous and true for most complete datasets.
-Consider as an example data from LiDAR (Light Detection And Ranging).
-The raw data is a point cloud, yet the most commonly available datasets are rasters, such as surface or canopy models; wall-to-wall generalisations of the point cloud.
-Also data such as satellite images ,or maps derived from such, have some inherent pre-aggregation where values are averaged for each raster cell.
-Often there is little we can do, as indicator developers, to affect this pre-aggregation step, but it is important to be aware of it in light of the ecological fallacy (**Box 1**).
-This issue will for example affect our ability to detect true maximum or minimum values (used in *worst case* aggregation, for example in the WFD) for the phenomena our variable is describing, since these extremes are already smoothed out in the pre-aggregation step [@vanbeurden1999].
+Similar pre-aggregation is rather common and present in most complete datasets.
+Consider, as an example, data from LiDAR (Light Detection And Ranging).
+The raw data is a point cloud, yet the most commonly available datasets are rasters, such as surface or canopy models, i.e. wall-to-wall generalisations of the point cloud.
+Also data such as satellite images, or maps derived from such, have some inherent pre-aggregation where values are averaged for each raster cell.
+Often there is little indicator developers can do to affect this pre-aggregation step, but it is important to be aware of it in light of the ecological fallacy (**Box 1**).
+This issue will, for example, hamper the detection of true maximum or minimum values (used in *worst rule* (i.e. one out al out) aggregation, for example in the WFD) for the phenomena described by the variable, since these extremes are already smoothed out in the pre-aggregation step [@vanbeurden1999].
 This will clearly affect the suitability of such data for identifying areas of high risk (very degraded areas, for example).
-The problem is the same when we deliberately aggregate data later in the indicator development process, and we always need to ensure that the spatial aggregation function we use does not have any unintentional effect on the type of inference that we can draw from the metric.
+Similar problems can also occur in subsequent aggregation steps of the indicator calculation workflow, and it is important to ensure that the spatial aggregation function used does not have any unintentional effects on the meaning of the metric.
 
-For sparse data we are considering data where variable values are assigned to singular points or small areas.
+*Sparse data* refers to datasets where variable values are assigned to singular points or isolated small areas.
 In these cases, there will be a lot of area inside each ecosystem asset for which we have no direct information, and some ecosystem assets may have no data at all.
 To assign variable value to all areas (as is required in the SEEA EA framework), we need to do some statistical inference.
-Both design-based and model-based approaches are valid under SEEA EA. However, transparency, validity and simplicity are all very desirable properties from ECAs, which favours a design-based approach that makes no modeling assumptions [@brus2021].
-We will therefore consider design-based approaches here.
-Model-based approaches (e.g. interpolation) also generally means that the variables become simpler to aggregate spatially since the spatial structure of the variables will already be accounted for via the prediction process.
+Both design-based and model-based approaches are valid under SEEA EA. 
+Model-based approaches (e.g. interpolation) generally make variables easier to aggregate spatially since the spatial structure of the variables will already be accounted for via the prediction process.
 For example, if using kriging to create local predictions for a variable across an ecosystem asset, then the variable is considered random, and the sampling locations may be considered as fixed.
 Thus a simple systematic sampling of the field of values across the ecosystem asset will be valid, and give representative grounds for statistical inference [@brus2021].
+However, transparency, validity and simplicity are all very desirable properties from ECAs, which favours a design-based approach that makes no modeling assumptions [@brus2021].
+From here on, we will focus on design-based approaches.
 
 For design-based approaches, one can assign values to areas via simple aggregation functions used on data values that fall within a given ecosystem asset.
-Many aggregation functions are available, such as sum, worst-rule, different percentiles, arithmetic, geometric or harmonic means[^2] [@unitednations2024 §5.54].
-In addition, non-paramteric bootstrapping [@kolstad_area_2025] and bayesian updating [@kolstad_making_2024] can be used to possibly obtain better descriptions of the variation or the uncertainty in the sample.
-If the inclusion probabilities are known, or they can be estimated, then the Horvitz-Thomson estimator for the sum or the mean (and variance) of a spatial sample is appropriate and useful, especially when the data originated from a stratified sample.
-For balanced samples, or samples from a simple random sampling process, we can apply these functions directly, but depending on the random process used to select the sampling points we may need to account for the spatial structure (spatial autocorrelation) of the data as well, when doing this aggregation.
-This can be addressed in several ways, such as model-assisted approaches [@brus2021], e.g. using regression models @brus2000. One can also add an intermediate aggregation step via homogeneous areas (domains), ecosystem assets or some smaller basal spatial units, to control for this spatial non-independence, and thus reduce the sampling bias and variance.
+Many aggregation functions are available, such as sum, worst-rule, different percentiles, arithmetic, geometric, or harmonic means[^2] [@unitednations2024 §5.54].
+In addition, non-paramteric bootstrapping [@kolstad_area_2025] and Bayesian updating [@kolstad_making_2024] can be used to possibly obtain better descriptions of the variation or the uncertainty in the sample.
+If the inclusion probabilities are known, or they can be estimated, then the Horvitz-Thomson estimator for the sum or the mean (and variance) of a spatial sample is appropriate and useful, especially when the data originated from a stratified sample (ADD REF).
+Depending on the random process used to select the sampling points we may need to account for the spatial structure (spatial autocorrelation) of the data when doing this aggregation.
+This can be addressed in several ways, such as model-assisted approaches [@brus2021], e.g. using regression models [@brus2000]. One can also add an intermediate aggregation step via homogeneous areas (domains), ecosystem assets or some smaller basal spatial units, to control for this spatial non-independence, and thus reduce the sampling bias and variance.
 
 [^2]: When using means across areas, area weighting is required when following SEEA EA.
 
 In our experience, the choice of which area units to use when doing this step-wise aggregation is often not reflected much upon.
 In some cases the areal units are even decided politically, for example to administrative units, with little ecological justification for this choice.
-However, this decision clearly affects the results of the spatial aggregation via a well-described (but often forgotten?) statistical problem referred to at the modifiable area unit problem (MAUP; **Box 1**).
+However, this decision clearly affects the results of the spatial aggregation via a well-described (but often forgotten?) statistical problem referred to as the modifiable area unit problem (MAUP; **Box 1**).
 The MAUP can lead to inconsistencies between repeated or nested ECAs, leading to confusion and mistrust (@sec-comp).
 This is unfortunate, as it is important for decision makers to see that the information they are basing their decision on is robust and insensitive to aggregation methods [@vanbeurden1999].
 One option to reduce this discrepancy and arbitrariness is to use ecologically motivated areal units in the step-wise aggregation such as homogeneous ecosystem areas [@vallecillo2022] or homogeneous impact areas [@kolstad_making_2024].
@@ -254,38 +251,40 @@ One option to reduce this discrepancy and arbitrariness is to use ecologically m
 
 It is common in the ECA community of practice to use the term aggregation about the process of aggregating normalised indicators into indices (i.e. thematic or vertical aggregation; @langhans2014), but in this paper we are primarily discussing spatial (i.e. horizontal) aggregation.\
 
+**Temporal aggregation**
+
+… Should we add some sentences on temporal aggregation, i.e. the operations involved in representing data with a temporal resolution that is finer (shorter) than the accounting frequency?\
+
 **Modifiable area unit problem**
 
 The modifiable area unit problem (MAUP) describes the sensitivity of spatially aggregated information to the choice of spatial units used for data collection or aggregation [@openshaw1984, @wong2009].
 These units can be arbitrary (*modifiable*), yet different sizes and configuration of units can have large effects on the outcome of aggregation.
-Administrative units are often used as the ecosystem assets in SEEA EAs, yet they are in an ecological sense almost always arbitrary, and can also be subject to change over time.
+Administrative units are often used as the ecosystem assets in SEEA EA, yet they are in an ecological sense almost always arbitrary, and can also be subject to change over time.
 The original spatial units that data are collected at may be a pragmatic choice in much the same way.
 In addition, data may not be available in the original spatial grain, but may only be downloadable in pre aggregated form [@vanbeurden1999].
-All these cases lead to some form of aggregation error[@rastetter1992] where the aggregated information has a non-linear relationship with the true variable value.
+All these cases lead to some form of *aggregation error* [@rastetter1992] where the aggregated information has a non-linear relationship with the true variable value.
 However, the issue of MAUP in SEEA EA deserves an in-depth analyses that we cannot provide here.\
 
 **Ecological fallacy**
 
-The ecological fallacy [@robinson2009] explains the common misinterpretation of correlations between groups (*i.e.* aggregated information) and some phenomena.
-Simply said, the mean of a group (or an area) cannot accurately describe the qualities of individuals in that group(or pin-points inside that area), yet it is common for people to interpret it that way.
+The ecological fallacy [@robinson2009] is the error of assuming that relationships or patterns observed for groups (at the aggregate level) must also hold true for the individuals within those groups. In EA, aggregated data will mask differences within regions and lead some people to interpret this as regions being more homogenous then they really are.
 :::
 
-# Why do we normalise variables? {#sec-norm}
+# Reasons for normalising variables? {#sec-norm}
 
 Normalisation of ecosystem condition indicators, as defined in @fig-term, serves at least three purposes.
 Firstly, it gives a normative interpretation of a variable, defining a good and a bad state, and simultaneously a directionality to say when something is getting better or worse over time [@czucz_selection_2021].
-SEEA EA encourages normalisation (which they refer to as rescaling), but other environmental assessment or natural resource accounting frameworks, refrains from these kinds of value judgments, or leaves more of this task up to the end users.
-<!--# ref? Not sure this is true, and whether to drop the last part of this sentence or not  --> Secondly, normalisation sets a limit to how much a high variable value in one place can compensate for a low value somewhere else, and vice versa [@pedersen2016].
-This is because truncation effectively means that when we spatially aggregate an indicator, we are always aggregating the negative deviations from the upper reference level X~100~, and ignoring any positive deviations which would otherwise compensate for the negative ones (see **Example 2**).
+Secondly, normalisation sets a limit to how much a high variable value in one place can compensate for a low value somewhere else, and vice versa [@pedersen2016].
+This is because truncation effectively means that when spatially aggregating an indicator, one is always aggregating the negative deviations from the upper reference level X~100~, and ignoring any positive deviations which would otherwise compensate for the negative ones (see **Example 2**).
 Transformation can sometimes also have this effect, e.g. sigmoid transformations.
 One reason to want to aggregate the negative deviations only, is because the X~100~ is set (or should be set) so that values above this limit (assuming X~100~ \> X~0~) do not represent any further increase in ecosystem condition (for an exception, see **Example 3**).
 Therefore, this way of aggregation summarises the estimated ecosystem condition over an area, and not the variable itself.
 In other words, normalising variables facilitate the spatial aggregation of our ecosystem condition estimates (i.e. the indicator values).
 The flip-side of this is that spatially aggregating variable values does not directly summarise information about ecosystem condition for that area.
 <!--# ref? Is this list of three exhaustive? --> Thirdly, we normalise in order to standardise the indicator on the same unitless scale so that we can perform thematic (i.e. vertical) aggregation [@jakobsson2021; @unitednations2024 §5.81].
-This is commonly referred to as *the* reason for normalising variables, but as we have shown, it is but one of three main reasons, and also perhaps the least confusing part for many.
+This is commonly referred to as *the* reason for normalising variables, not least because it is perhaps the least confusing one for many; nonetheless, as we have shown, it is the only reason.
 
-<!--# Try add using !expr to get hat and bar sympols into caption:  -->
+<!--# Try add using !expr to get hat and bar symbols into caption:  -->
 
 ```{r fig-agg1}
 #| echo: false
@@ -304,12 +303,12 @@ They showed that when we take the average of two variables, each of which have a
 @rastetter1992 referred to this as aggregation error and used it to describe some of the dangers associated with upscaling in the sense of using precise fine-scale information to explain or predict large scale phenomena.
 However, in our case, the difference between variables and indicators is an intentional one, and we therefore choose to refer to what is essentially the same mathematical effect with the less derogatory term aggregation displacement.
 
-In the statistical standard for EAs and the recommended guidelines for ecosystem accounts [@unitednations2024; -@unitednations2022], there is no mention of aggregation displacement, and there seems to be little awareness in general of the ramification of choosing different spatial aggregation pathways for variables.
-We now describe two ways that aggregation displacement affects ECAs: by causing an increasing divergence in the type of information held in ecosystem condition variables versus indicators (@sec-discrep), and secondly, how it can cause confusion about the effects of choosing different aggregation pathways during indicator development (@sec-develop).
+In the statistical standard and recommended guidelines for ecosystem accounts [@unitednations2024; -@unitednations2022], there is no mention of aggregation displacement, and there seems to be little awareness in general of the ramification of choosing different spatial aggregation pathways for variables.
+We now describe two ways that aggregation displacement affects ECAs: firstly, by causing an increasing divergence in the type of information held in ecosystem condition variables versus indicators (@sec-discrep), and secondly, how it can cause confusion about the effects of choosing different aggregation pathways during indicator development (@sec-develop).
 
 ## Discrepancies between variables and indicators {#sec-discrep}
 
-In ecosystem condition accounting the aggregation of both variables and indicators is common practice and raises the issue of aggregation displacement (@fig-agg1) when variables have nonlinear relationships to the normalised indicators [@rastetter1992], which they typically do.
+In ECA the aggregation of both variables and indicators is common practice and raises the issue of aggregation displacement (@fig-agg1) when variables have nonlinear relationships to the normalised indicators [@rastetter1992], which they typically do.
 This means that the spatial aggregation of metrics leads to a divergence in the type of information held in variables and in their associated indicators, to a point where they become qualitatively very different (Example 2).
 
 Indicators and variables are sometimes presented side-by-side in ecosystem condition assessments or accounts.
@@ -320,7 +319,7 @@ The spatially aggregated variable on the other hand, may reflect something like 
 
 Aggregated variables and the associated aggregated indicators cannot act as alternative evidence or interpretations for the state of nature.
 While this may initially seem like a democratic and transparent approach to reporting, this practice places a significant burden on both the end user and the indicator developer.
-Miss-use can ensue, for example by taking the variable value and assigning it the same interpretation as the indicator value.
+Misuse can ensue, for example by taking the variable value and assigning it the same interpretation as the indicator value.
 At the very least, the developer must clarify to the user how the two metrics may have diverged during spatial aggregation and normalisation, complicating the comparison of their respective information.
 
 \clearpage
@@ -347,7 +346,7 @@ When species-based indicators are aggregated to the EAA level, it is common for 
 However, for the EAA seen overall, the population size is actually equal to the expected population size in the reference condition.
 Instead, the spatially aggregated indicator value describes the ecosystem condition for the different *areas* in terms of wolf under-abundance.
 Then we see that the first ecosystem asset has more wolves than we would expect under the reference condition, whereas the other two have less.
-Because variable values above X~100~ are truncated, the high wolf numbers in ecosystem asset one does not compensate for the low indicator value in assets two and three, and hence the mean indicator value is less then the sum of the variable values divided by the sum of the X~100~values.
+Because variable values above X~100~ are truncated, the high wolf numbers in ecosystem asset one does not compensate for the low indicator value in assets two and three, and hence the mean indicator value is less than the sum of the variable values divided by the sum of the X~100~values.
 But the high wolf numbers in asset 1 *does compensate* when looking at the aggregated variable value.
 :::
 
@@ -357,19 +356,17 @@ But the high wolf numbers in asset 1 *does compensate* when looking at the aggre
     Wolf numbers could in this example be converted to wolf density.
     :::
 
-Generally, because of the normalisation process, indicators are more aligned with the purpose of ECA with describing ecosystem condition in normative terms.
-Although variable accounts are allowed under the SEEA EA framework, and is indeed a central feature, we believe they should be seen as interim accounts for metrics that cannot or have not yet been normalised.
-We would therefore argue that when an indicator has been developed, the original variable is not presented.
-And when only variable estimates are given, extra care is given to describing the spatial aggregation pathway, since unfavourable local variable values (in terms of ecosystem condition) could have become smoothed out during aggregation, hiding potential environmental problems .
-Furthermore, Eurostat [@eurostat2022] encourages reporting of variable values.
+Generally, because of the normalisation process, indicators are more aligned with the purpose of ECA with describing ecosystem condition in normative terms, than variables.
+Although variable accounts are allowed under the SEEA EA framework, and are indeed a central feature, we believe they should be seen as interim accounts for metrics that cannot be, or have not yet been, normalised.
+We would therefore argue for not presenting the original variable once an indicator has been developed.
+And when only variable estimates are given, extra care is given to describing the spatial aggregation pathway, since unfavourable local variable values (in terms of ecosystem condition) could have become smoothed out during aggregation, hiding potential environmental problems.
 Sometimes, however, variable values cannot be aggregated spatially in any meaningful way (see **Example 3**).
 
 ## Aggregation displacement in indicator development {#sec-develop}
 
 As we have seen, aggregation displacement causes a divergence in the type of information made available through the spatial aggregation of variables versus indicators.
 In addition, unavoidable aggregation displacement (for good and bad) will also affect the indicator values and the inferences that can be drawn from these.
-If not careful, aggregation displacement may also cause errors to sneak into the indicator logic.
-A major determinant of the resulting aggregation displacement from the spatial aggregation of ecosystem condition indicators (@fig-agg1), is the choice about the order of the different steps in the normalisation and aggregation process, i.e. the aggregation pathway (@fig-pathways).
+A major determinant of the resulting aggregation displacement from the spatial aggregation of ecosystem condition indicators (@fig-agg1) is the choice about the order of the different steps in the normalisation and aggregation process, i.e. the aggregation pathway (@fig-pathways).
 If normalisation occurs early in the aggregation process, the amount of compensation, or off-setting, is limited (**Example 2**).
 However, sometimes complete or partial compensation is justified (**Example 1** and **3**).
 
@@ -423,16 +420,16 @@ When WFD data is put into use in other contexts, however, aggregation becomes im
 \
 Because of how X~100~ is defined based on the median value across reference lakes, overshooting values (\> X~100~) should be preserved in the spatial aggregation.
 Otherwise we get a negative displacement, making it practically impossible to reach an indicator value of 1.
-This means that neither EQR values, nor nEQR values, can be uncritically aggregated spatially to be used in a SEEA EA compliant in ECA.
+This means that neither EQR values nor nEQR values can be uncritically aggregated spatially to be used in a SEEA EA compliant in ECA.
 One solution, to enable the use of WFD indicators in ECAs, would be to change to pathway 6, with (1) scaling, (2) transforming, (3) aggregating and (4) truncating the values.
 In our hypothetical example (@tbl-pti) this gives an aggregated value of 0.85, whereas the mean value for the nEQRs would be 0.75 (i.e. negatively displaced).
 :::
 
 # Agreement across nested ECAs {#sec-comp}
 
-We believe it is a very desirable property that variable and indicator values are comparable across repeated ECAs and harmonised across assessment scales so that accounts from sub-areas should be able to recreate the account of the larger area.
-This can, however, fail to happen when ECAs use different aggregation pathways for the same indicator.
-Cases when two accounts or assessments use what is considered the same metric, but find different values for the same areas, is cause for both confusion, and could result in reduced general credibility for ECAs.
+We believe it is a very desirable property that variable and indicator values are comparable across repeated ECAs and harmonised across assessment scales so that accounts from sub-areas can be used to recreate the account of the larger area.
+This can, however, be difficult or even impossible when ECAs use different aggregation pathways for the same indicator.
+Cases when two accounts or assessments use what is considered the same metric, but find different values for the same areas, cause confusion and can potentially result in reduced general credibility for ECAs.
 
 We believe one solution to this is to acknowledge that the aggregation pathway can affect the indicators (and indices) so much, sometimes as much as variation in the variable itself, that the use of different pathways imply that metrics are named and treated uniquely, for example using different common names, but perhaps better still, different version numbers or indicator IDs.
 For each unique indicator the precise aggregation pathway should be specified as part of the indicator metadata.
@@ -440,18 +437,18 @@ This would show ECA users if two accounts are using different metrics that canno
 
 SEEA EA uses the term aggregation commutativity for the property that the order of vertical and horizontal aggregation is irrelevant to the end result.
 This is indeed a desirable property, although not always possible.
-**Example 4** shows a case where the spatial aggregation of an indicator uses area weighs that are different from the total extent of the EA (which is what is recommended by SEEA EA).
-Such alternative weights can be appropriate when the indicator only covers part of the ecosystem covered in the account, for example if it covers only one of many habitat types.
-In these cases, each indicator in an index might require different weights when spatially aggregated, but this is of coarse not possible after the indicators are combined into a single index.
+**Example 4** shows a case where the spatial aggregation of an indicator uses area weights that are different from the total extent of the EA (which is what is recommended by SEEA EA).
+Such alternative weights can be appropriate when the indicator only covers part of an ecosystem, for example if it covers only one of many habitat types.
+In these cases, each indicator in an index might require different weights when spatially aggregated, but this is of course not possible after the indicators are combined into a single index.
 
-A similar aggregation commutativity can be envisioned for step-wise aggregation of a single indicator, where it does not matter if the original data is aggregated directly from the original measurement scale to the EAA level, or via some intermittent scale, such as ecosystem assets or larger regions.
+A similar aggregation commutativity can be envisioned for step-wise aggregation of a single indicator, where it does not matter if the original data is aggregated directly from the original measurement scale to the Ecosystem Accounting Area (EAA) level, or via some intermittent scale, such as ecosystem assets or larger regions.
 This is possible when aggregating metrics using area weighting, and when one is aware of the need for post-stratification when using stratified data sampling.
-However, **Example 4** demonstrates two factors that lead to this indicator-level commutativity is not being fulfilled in this case.
+However, **Example 4** demonstrates two factors entailing that indicator-level commutativity is not being fulfilled in this case.
 
-First, some indicators are possible normalise at the measurement scale, i.e. the finest resolution of the raw data.
-But others may need to be (pre-) aggregated, for example if the variable is designed to depict a density or a proportion that retains to a spatial unit.
+Firstly, some indicators are possible to normalise at the measurement scale, i.e. the finest resolution of the raw data.
+But others may need to be (pre-) aggregated, for example if the variable is designed to depict a density or a proportion that refers to a spatial unit.
 In Example 4, there is no obvious definition of the ecosystem assets, and so one must first define those before calculating the variable values for each of them.
-It turn out that in this case the indicator value at the EAA level is not insensitive to the spatial delineation of the EAs.
+It turns out that in this case the indicator value at the EAA level is sensitive to the spatial delineation of the EAs.
 
 Secondly, SEEA EA mentions several arithmetic or parametric aggregation functions, such as different means, median, min or max values.
 It does not mention the possibility of bootstrap resampling [@jakobsson2021; @kolstad_making_2024].
@@ -461,9 +458,9 @@ The shape of the aggregated joint distributions depend on the spatial size and c
 
 ::: callout-note
 **Example 4 -- Glacier area**\
-*Variable*: Extent of glacier area *anno* 2018-2019 (@fig-mapsGlaciers; A).
+*Variable*: Average extent of glacier area in the years 2018-2019 (@fig-mapsGlaciers; A).
 
-*Reference levels*: X~100~ is defined as the extent of glacier area *anno* 1947-1985.
+*Reference levels*: X~100~ is defined as the average extent of glacier area in the period 1947-1985.
 X~0~ is an absence of glaciers, and X~60~ is a 90% loss of glaciers.
 
 This indicator [@kolstad_area_2025] uses historical data as the reference levels against which to normalise the variable.
@@ -473,19 +470,19 @@ There is then some spatial aggregation done to get the summed glacier area for e
 Of the 70 EAs, 29 had glaciers in the historical glacier map.
 The remaining EAs did not get assigned indicator values.
 
-The point estimates for the variable and the reference levels for each EA was then turned into probability distributions by sampling from a normal distribution with a standard deviation equal to 3% of the mean (the uncertainty reported for the maps).
+The point estimates for the variable and the reference levels for each EA were then turned into probability distributions by sampling from a normal distribution with a standard deviation equal to 3% of the mean (the uncertainty reported for the maps).
 To further aggregate the data to geographical regions (@fig-mapsGlaciers; C), these distributions were resampled with replacement and with an *n* corresponding to the extent of glaciers in the historical map, i.e. using historical glacier extent as the area weights.
 The same bootstrapping procedure was done for aggregation to the country (EAA) level.
 
 In SEEA EA it says that "\[...\] the values recorded in an ecosystem condition variable account should be calculated as the area-weighted arithmetic mean of ecosystem assets belonging to the particular ecosystem type within the EAA" [@unitednations2024, p. 104].
-However, in this case the weighs were not the total area (i.e. the alpine area, since that is the ecosystem that this indicator is designed for).
+However, in this case the weights were not the total area (i.e. the alpine area, since that is the ecosystem that this indicator is designed for).
 Instead the weights were defined by the extent of glaciers in the historic map.
 This implied that EAs with no glaciers in the historic map were coded as *NA* and did not contribute to the EAA estimate, with the argument that the indicator is not valid or relevant for those areas.
-It also meant that areas inside the EA with no initial glacier cover was seen as similarly non-relevant to the indicator.
+It also meant that areas inside the EA with no initial glacier cover were seen as similarly non-relevant to the indicator.
 Alternatively, using alpine extent as the weight during the spatial aggregation caused the indicator values to become considerably lower (@fig-ridge).
-This was partly due to cases where EAs with large alpine extent, but marginal glacier extent in the historic map, had lost all its glaciers in recent time.
-These EA would then get a very low indicator value and also weight very heavy towards the EAA estimate, even though the actual change in absolute glacier extent for that EA was very little.
-It was therefore argued that the area weight should be defined based on the area within the alpine ecosystem for which the indicator was considered relevant, and not defined base on the total EA extent.
+This was partly due to cases where EAs with large alpine extent, but marginal glacier extent in the historic map, had lost all their glaciers in recent times.
+These EAs would then get a very low indicator value and also weigh very heavily in the EAA estimate, even though the actual change in absolute glacier extent for that EA was very little.
+It was therefore argued that the area weight should be defined based on the area within the alpine ecosystem for which the indicator was considered relevant, and not defined based on the total EA extent.
 
 The spatial delineation of EAs can affect the indicator estimate at the EAA level.
 In this case the EAA estimates were not identical, but qualitatively similar (@fig-ridge).
@@ -510,7 +507,7 @@ knitr::include_graphics("../img/ridge.png")
 
 We introduce the term aggregation pathway to describe the order of the steps used to go from a variable at the measurement scale, to a spatially aggregated metric, usually an indicator, that describes the ecosystem condition for a larger area.
 In @fig-pathways we show some aggregation pathways that we have come across, and some that we see as potential new pathways.
-The examples are non-exhaustive, and serve mainly as illustration.
+The examples are non-exhaustive, and serve mainly as illustrations.
 We go on to describe how the aggregation pathways can formally, and succinctly, be described using the names of these operations.
 The choice about which pathway to use is not trivial, and we want to highlight some of the issues that could arise from having an *ad hoc* approach to these considerations.
 
@@ -529,11 +526,11 @@ This can for example be the case when variables are aggregated to the scale corr
 Pathway 4 illustrates the aggregation of a variable, with no normalisation.
 This is the pathway commonly used for variable accounts in the SEE EA. For this, and all other aggregation pathways, the picture can be made more complicated by adding additional aggregation levels (i.e. a step-wise aggregation, @sec-comp)
 
-Pathway 5 is a common pathway in the WFD, which does not include spatial aggregation of indicator values.
+Pathway 5 is a common pathway in the WFD, which does not practice spatial aggregation of indicator values.
 Instead one reports the number of water bodies in each condition class (spatial statistics).
-Pathway 6 is a suggested pathway for handling WFD indicator in ECAs (see **Example 3**), where truncation is postponed until after the spatial aggregation for in that way to allow overshooting values to compensate for low indicator values elsewhere (what we refer to as compensation).
+Pathway 6 is a suggested pathway for handling WFD indicator in ECAs (see **Example 3**), where truncation is postponed until after the spatial aggregation in order to allow overshooting values to compensate for low indicator values elsewhere (what we refer to as compensation).
 
-Pathway 7 describe an alternative to pathway 1 for a model-assisted aggregation pathway, where the original sample is the result of a defined sampling strategy, but where a model is used to project (extrapolate or interpolate, depending on the case) values to other spatial points or locations that were not sampled.
+Pathway 7 describes an alternative to pathway 1 for a model-assisted aggregation pathway, where the original sample is the result of a defined sampling strategy, but where a model is used to project (extrapolate or interpolate, depending on the case) values to other spatial points or locations that were not sampled.
 The resulting map (field of values) is then normalised, (re)sampled (which could imply taking all the discrete population units (e.g. all rivers), and finally aggregated.
 
 Pathways 8 and 9 describe alternative ways to create indices at different spatial scales, either by spatially aggregating the indices (pathway 8), or by aggregating the indicators separately and recalculating the indices at different spatial scales (pathway 9).
@@ -548,7 +545,7 @@ However, if the indicators that make up the indices use different area weights a
 knitr::include_graphics("../img/aggregationPathways.png")
 ```
 
-# Recommendation {#sec-rec}
+# Recommendations {#sec-rec}
 
 <!--# a possible fifth recommendation is to not present aggregated variables and indicators side-by-side as alternative to choose from -->
 
@@ -557,7 +554,7 @@ Based on the above discussion and examples, we here summarise five recommendatio
 ### 1. Report the aggregation pathway, using standardised terminology {.unnumbered}
 
 ECAs should be accompanied by detailed indicator documentation where a precise description of the steps in the aggregation process is presented.
-Verbose descriptions can be supplemented or replaced by a standardised short-hand notation that we shall present now.
+Verbose descriptions can be supplemented or replaced by a standardised short-hand notation that we present in the following:
 We suggest using the terms as described in @fig-term and elsewhere in the paper: scale, truncate (abbreviated to *trunc.*), transform (*trans.*), spatial aggregation (*sp. agg.*), thematic aggregation (*th. agg.*) and spatial statistics (*sp. stat.*).
 These terms can be abbreviated as shown in the parentheses, and placed together into a single string, where operations performed simultaneously are enclosed in square brackets.
 For example, pathway 1 in @fig-pathways can be annotated as $scale - trunc. - trans. - sp. agg.$.
@@ -565,7 +562,7 @@ If the three normalisation steps are performed simultaneously this can be writte
 If there are more aggregation steps, then the spatial level at each step should be included in the description, e.g. for pathway 3: $sp. agg. (municipalities) - scale - sp. agg. (country)$.
 "Municipality" and "country" could here be included as footnotes.
 Note also that in the last example, normalisation only involved a scaling step.
-The description of indicator pathways can be made even easier by referencing specific aggregation pathways by number, as we have done in this paper using @fig-pathways in this paper.Methods used to change either the cover or the extent of the indicator data (see @sec-term) can also be included in the shorthand notation scheme.
+The description of indicator pathways can be made even easier by referencing specific aggregation pathways by number, as we have done in this paper using @fig-pathways in this paper. Methods used to change either the cover or the extent of the indicator data (see @sec-term) can also be included in the shorthand notation scheme.
 The three operations we conceive as possible options are extrapolation (extr.), interpolation (inter.), and (sub)sampling.
 We use the term spatial projection (projection for short) to encompass both extra- and interpolation.
 Thus, pathway 7 in Fig.
@@ -573,12 +570,12 @@ Thus, pathway 7 in Fig.
 The type of model used for the spatial projection can be added as a footnote.
 
 Besides making the indicator workflow itself more transparent and reproducible, we believe this recommendation would help raise the general awareness about aggregation displacement in EAs, both among users and developers.
-It will make the interpretation of ECAs less prone to misunderstanding and miss-use, as well as making troubleshooting easier, for example when trying to identify the reason why two ECAs produce dissimilar indicator values from the same underlying data.
+It will make the interpretation of ECAs less prone to misunderstanding and misuse, as well as making troubleshooting easier, for example when trying to identify the reason why two ECAs produce dissimilar indicator values from the same underlying data.
 
 ### 2. Normalise variables early, but at the scale where the reference levels are relevant {.unnumbered}
 
 Normalising variables early in the aggregation pathway means that you are aggregating normative measures of condition, which is generally what you want in ECAs (@sec-norm).
-But same as for variables and indicators, reference levels also have a spatial resolution, and they should only be used to normalise variables when the variable is at a scale which is relevant to the way the reference levels are defined, i.e. they are at a commensurable scale (**Example 1**).
+But just like variables and indicators, reference levels also have a spatial resolution, and they should only be used to normalise variables that are at a scale which is relevant to the way the reference levels are defined, i.e. they are at a commensurable scale (**Example 1**).
 
 ### 3. Use a similar aggregation approach for all indicators in the same assessment {.unnumbered}
 
@@ -590,7 +587,7 @@ This can be achieved by for example always scaling early (see recommendation num
 
 Indicators (and variables) often exist in multiple versions, varying slightly in the raw data or in the methods used to produce the data or the metrics.
 Yet different versions are often referred to by the same common name.
-This causes confusion about which indicator version is being used, and thus making it difficult to make out which aggregation pathway that has been used.
+This causes confusion about which indicator version is being used, and thus making it difficult to make out which aggregation pathway has been used.
 We recommend making use of stable and unique indicator IDs.
 This has for example already been implemented in ecRxiv, a GitHub-based publishing platform for ecosystem condition indicators [@Kolstad_ecRxiv].
 On ecRxiv, indicator documentation follows a structured approach to both reporting and peer review (including code review).
@@ -600,16 +597,16 @@ ecRxiv also includes standardised metadata reporting schemes with fields for eco
 ### 5. Don't aggregate indices, unless you know all aggregation operations are commutative
 
 When spatially aggregating indices it is no longer possible to use different area weights to each single indicator.
-If all indicators making up n index are spatially aggregated using the same weights, typically the extent of the spatial units, then the aggregation operations will be commutative and it will not matter if you aggregate vertically then horisontally , or the other way around (\@fig-pathways; Pathway 8 and 9, respectively).
+If all indicators making up an index are spatially aggregated using the same weights, typically the extent of the spatial units, then the aggregation operations will be commutative and it will not matter if you aggregate vertically then horizontally, or the other way around (@fig-pathways; Pathway 8 and 9, respectively).
 However, indicators are not always valid for the entire ecosystem type that the account is made over.
-They can for example retain to only certain habitat or nature types within the ecosystem type, in which case one might want to use different weights when spatially aggregating the indicator that reflect the extent of only the relevant habitat or nature types, and not of the entire ecosystem (see **Example 4**).
+They can, for example, retain to only certain habitat or nature types within the ecosystem type, in which case one might want to use different weights when spatially aggregating the indicator that reflect the extent of only the relevant habitat or nature types, and not of the entire ecosystem (see **Example 4**).
 But when combined with other indicators into a common index, any subsequent aggregation of that index will give equal spatial weight to all indicators (see next paragraph for an exception to this).
-We therefore recommend caution, and to default to the solution of instead spatially aggregating indicators separately, and then re-calculating indices when needed (\@fig-pathways; Pathway 9).
-This will ensure that nested accounts will be comparable, i.e. that they will present the same index values independent of which spatial units that the indices first are calculated for.
+We therefore recommend caution, and to default to the solution of instead spatially aggregating indicators separately, and then re-calculating indices when needed (@fig-pathways; Pathway 9).
+This will ensure that nested accounts will be comparable, i.e. that they will present the same index values independent of which spatial units the indices first are calculated for.
 
-An alternative solution to ensure agreement across nested accounts is to use weights also when performing the vertical or thematic aggregation of indicators into indicators, where indicators are weighted respective of the area that they are valid over.
-With this approach one can down-weigh indicators that only cover only smaller areas (specific nature types etc.), or which have incomplete spatial coverage.
-When this weighting is already performed at the vertical aggregation stage, any subsequent horisontal aggregation does not need to account for the unique indicator weights again.
+An alternative solution to ensure agreement across nested accounts is to use weights also when performing the vertical or thematic aggregation of indicators into indicators, where indicators are weighted by the area that they are valid over.
+With this approach one can down-weigh indicators that only cover smaller areas (specific nature types etc.), or which have incomplete spatial coverage.
+When this weighting is already performed at the vertical aggregation stage, any subsequent horizontal aggregation does not need to account for the unique indicator weights again.
 However, weighting indicators in vertical aggregation opens a whole other can of worms, and therefore we do not offer this as a generic recommendation.
 
 # Conclusion
