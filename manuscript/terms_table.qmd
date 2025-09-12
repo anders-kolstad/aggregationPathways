@@ -1,0 +1,61 @@
+---
+title: "Table"
+format: pdf
+bibliography: bibliography.bib
+
+---
+
+
+```{r setup}
+#| include: false
+library(knitr)
+library(tidyverse)
+library(flextable)
+library(ftExtra)
+
+```
+
+```{r tbl-terms}
+#| echo: false
+terms <- tibble(
+  X = as.character(NULL),
+  Y = as.character(NULL)
+) |>
+  add_row(
+    X = "Variables, indicators and metrics",
+    Y = "We use the SEEA EA definitions of the terms variables, indicators (normalised variables) and metrics (referring to either a variable or an indicator) [@unitednations2024]. Variables are typically either in percentages or fractions, or as raw biophysical units, such as biomass or density. Indicators, on the other hand, are always on a unitless scale between 0 and 1, where 0 represents very poor (or the worst possible) condition, and 1 represents very good (or the best possible) condition. Sometimes indicators are calculated directly [e.g. @åström], but usually indicators are made by normalising variables based on two or more reference levels [@unitednations2024 §5.60]."
+  ) |>
+
+    add_row(
+    X = "Reference condition (RC)",
+    Y = "Reference condition is the state or condition of the ecosystem that we want to compare the current state against. It can be a purely theoretical construct or a real historical state. It does not need to be defined with any real data."
+  ) |>
+     add_row(
+    X = " Reference levels (RL)",
+    Y = "Reference levels (also called reference values) are variable values that act as anchoring points to specific values on the indicator scale, and are used to convert variables into indicators. This definition is different from that in SEEA EA, but at least conceptually it is the same. There can be from two to many RLs per indicator and they are distinguished with a special nomeclature X~n~ where _n_ is the corresponding indicator value times 100. For example, X~0~ and X~100~ refer to variable values coded as 0 or 1 on the indicator scale, respectively (sometimes called the lower and upper RLs). The X~60~ can hold a special meaning if, like in the WFD and in some applications of SEEA EA, the value 0.6 on the indicator scale represents the boundary or threshold between good and reduced condition. Defining X~60~, or any other RL other than X~0~and X~100~, is one way to quantitatively describe a non-linear relationship between the variable and ecosystem condition (referred to as _Transformation_)."
+  ) |>
+    add_row(
+    X = "Spatial aggregation",
+    Y = "Spatial (sometimes called horizontal) aggregation is the process of synthesising (e.g. averaging) data from different sub-areas and taking this new value as the value for all sub-areas. In related field of study this operation may be described as increasing the support or reducing the grain [@bierkens2002]. The term _upscaling_ is sometimes used synonymously to our definition of spatial aggregation, but it also has a wider tied to the ambiguous use of the terms scale to mean either grain or extent. It's common to lump spatial aggregation together with some types of extra- or interpolation operation, such as averaging point data and attributing this value to entire polygons [@gruijter1990], or spatial estimation methods (e.g. geostatistics) and subsequent spatial sampling [@brus1997]. However, for the detailed deliberation in this study the distinction between these is important to note."
+  ) |>
+    add_row(
+    X = "Temporal aggregation",
+    Y = "Refers to operations involved in combining data from different time points or periods to represenet a single temporal period (e.g. an accounting period or a growing season)."
+  ) |>
+    add_row(
+    X = "Thematic agrgegation",
+    Y = "Also called vertical aggregation. In the case of ECA, this refers to an aggregation of two or more indicators into a composite index or indices."
+  ) |>
+    add_row(
+    X = "",
+    Y = ""
+  ) |>
+ 
+  rename(Term = X, "Definition and deliberation" = Y)
+
+  
+
+flextable(terms, cwidth = c(1, 5)) |>
+  #autofit() |>
+  ftExtra::colformat_md()
+```

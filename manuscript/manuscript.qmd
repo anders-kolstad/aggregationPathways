@@ -65,7 +65,10 @@ callout-icon: false
 library(tidyverse)
 library(knitr)
 library(kableExtra)
+library(flextable)
+library(ftExtra)
 ```
+
 
 # Introduction
 
@@ -160,7 +163,7 @@ Spatial aggregation can have several consequences that may or may not be desirab
 This smoothing out makes the data and its inherent information less suitable for some use cases, such as depicting spatial variation that can be used to support local land-use planning, for aiding a debate about spatial conflicts or identification of high risk areas [@vanbeurden1999].
 
 |   | Example | Main illustrating point |
-|-------------|---------------------|--------------------------------------|
+|------------|------------|------------------------------------------------|
 | 1 | Bilberry | Commensurable spatial scales for variable and reference levels (@sec-match) |
 | 2 | Wolves | Spatial compensation and discrepancy between variable and indicator (@sec-discrep) |
 | 3 | PTI | Compensation and the order of operations (@sec-pathways) |
