@@ -36,7 +36,7 @@ terms <- tibble(
   ) |>
     add_row(
     X = "Spatial aggregation",
-    Y = "Spatial (sometimes called horizontal) aggregation is the process of synthesising (e.g. averaging) data from different sub-areas and taking this new value as the value for all sub-areas. In related field of study this operation may be described as increasing the support or reducing the grain [@bierkens2002]. The term _upscaling_ is sometimes used synonymously to our definition of spatial aggregation, but it also has a wider tied to the ambiguous use of the terms scale to mean either grain or extent. It's common to lump spatial aggregation together with some types of extra- or interpolation operation, such as averaging point data and attributing this value to entire polygons [@gruijter1990], or spatial estimation methods (e.g. geostatistics) and subsequent spatial sampling [@brus1997]. However, for the detailed deliberation in this study the distinction between these is important to note."
+    Y = "Spatial (sometimes called horizontal) aggregation is the process of synthesising (e.g. averaging) data from different sub-areas and taking this new value as the value for all sub-areas. In related fields of study this operation may be described as _increasing the support_ or _reducing the grain_ [@bierkens2002]. The term _upscaling_ is sometimes used synonymously to our definition of spatial aggregation, but it also has a wider definition tied to the ambiguous use of the terms scale to mean either grain or extent. It's common to lump spatial aggregation together with some types of extra- or interpolation operation, such as averaging point data and attributing this value to entire polygons [@gruijter1990], or spatial estimation methods (e.g. geostatistics) and subsequent spatial sampling [@brus1997]. However, for the detailed deliberation in this study the distinction between these is important to note."
   ) |>
     add_row(
     X = "Temporal aggregation",
@@ -45,6 +45,41 @@ terms <- tibble(
     add_row(
     X = "Thematic agrgegation",
     Y = "Also called vertical aggregation. In the case of ECA, this refers to an aggregation of two or more indicators into a composite index or indices."
+  ) |>
+    add_row(
+    X = "Normalisation",
+    Y = "This is the mathematical process of turning a condition variable into an indicator _sensu_ SEEA EA. It consists of three distinct steps: scaling, truncation, and transformation.
+     **Scaling** a variable means to recode a variable to a unitless unbound scale based on two reference levels, a lower (X~0~) and an upper (X~100~), that define the variable values to be coded as zero and one on the indicator scale, respectively.
+    **Truncation** means to recode scaled variable above 1 to become 1, and values below 0 to become 0.**Transformation** means to adjust the indicator scale to reflect potentially nonlinear relationships between the variable and ecosystem condition. This is commonly done by anchoring specific variable values to predefined class boundaries (sensu WFD) which we call reference levels [@czúcz; @jakobsson_setting_2020], but may also be done without explicit reference levels, for example by using a sigmoid or exponential transformation [@mienna2024].
+    Normalisation is frequently referred to as **rescaling** in the SEEA EA literature, but we avoid  this terms because of the need to provide better differentiation between the three steps of the normalisation process, where scaling is one of them."
+  ) |>
+    add_row(
+    X = "Categorisation",
+    Y = "Means to divide the indicator scale into discrete fractions, either based on reference levels, or some other rule (e.g. equal range for each class)."
+  ) |>
+     add_row(
+    X = "Inter- and extrapolation",
+    Y = "Interpolation means to _fill in the gaps_, or to increase the density of the data. Extrapolation means to expand the spatial extent of the data or beyond the current data range. There is often no clear boundary between these two operations when applied in ECA as an area may for example be within the geographical range of the current data, but outside the environmental range. Many different methods are employed to do inter- or extrapolation within ECAs, such as statistical models (e.g. regression models) or geostatistical model (e.g. kriging). These methods are more or less sophisticaled ways to essentially _spread_ or learn from the available data to give values to areas where there is no data. This is distinct from the process and purpose of spatial aggregation, which seeks to simplify data."
+  ) |>
+      add_row(
+    X = "The ecological fallacy",
+    Y = "The ecological fallacy [@robinson2009] is the error of assuming that relationships or patterns observed for groups (at the aggregate level) must also hold true for the individuals within those groups. In EA, aggregated data will mask differences within regions and lead some people to interpret this as regions being more homogenous then they really are."
+  ) |>
+  add_row(
+    X = "The Modifiable Area Unit Problem (MAUP)",
+    Y = "MAUP describes the sensitivity of spatially aggregated information to the choice of spatial units used for data collection or aggregation [@openshaw1984, @wong2009]. These units can be arbitrary (*modifiable*), and different sizes and configuration of units can have large effects on the outcome of aggregation."
+  ) |>
+ add_row(
+    X = "Spatial compensation",
+    Y = "In this context, spatial compensation refers specifically to the ability of variable values above X~100~ in some areas to compensate for values below X~100~ elsewhere (assuming here that X~0~ < X~100~). Whether or not to allow spatial compensation in spatial aggregation has a large impact on the value and interprettaion of indicator values."
+  ) |>
+     add_row(
+    X = "Aggregation dissplacement",
+    Y = ""
+  ) |>
+     add_row(
+    X = "Ecosystem assets and ecosystem accounting areas",
+    Y = ""
   ) |>
     add_row(
     X = "",
@@ -56,6 +91,6 @@ terms <- tibble(
   
 
 flextable(terms, cwidth = c(1, 5)) |>
-  #autofit() |>
-  ftExtra::colformat_md()
+  ftExtra::colformat_md() |>
+  valign(j = 1, valign = "top", part = "all")
 ```
