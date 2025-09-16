@@ -1,12 +1,4 @@
----
-title: "Table"
-format: pdf
-bibliography: bibliography.bib
-
----
-
-
-```{r setup}
+```{r setup2}
 #| include: false
 library(knitr)
 library(tidyverse)
@@ -17,6 +9,7 @@ library(ftExtra)
 
 ```{r tbl-terms}
 #| echo: false
+#| tbl-cap: "Key terms and concepts as they are used in this paper."
 terms <- tibble(
   X = as.character(NULL),
   Y = as.character(NULL)
@@ -81,10 +74,15 @@ terms <- tibble(
     Y = "In this context, spatial compensation refers specifically to the ability of variable values above X~100~ in some areas to compensate for values below X~100~ elsewhere (assuming here that X~0~ < X~100~). Whether or not to allow spatial compensation in spatial aggregation has a large impact on the value and interprettaion of indicator values."
   ) |>
 
-  rename(Term = X, "Definition and deliberation" = Y)
+  rename("Term or concept" = X, "Definition and deliberation" = Y)
 
 
-flextable(terms, cwidth = c(1, 5)) |>
-  ftExtra::colformat_md() |>
-  valign(j = 1, valign = "top", part = "all")
+
+flextable(terms) |>
+  width(j = 1, width = 1) |>     # Relative width
+  width(j = 2, width = 5) |>     # Relative width  
+  valign(j = 1:2, valign = "top", part = "all") |>
+  ftExtra::colformat_md(j = 2)
+
 ```
+

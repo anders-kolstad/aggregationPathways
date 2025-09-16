@@ -98,6 +98,9 @@ This paper will make it easier for indicator developers to avoid some common pit
 We use four examples to illustrate some of our main points (@tbl-examples).
 In @sec-pathways we describe a new reporting terminology for spatial aggregation pathways, and finally, in @sec-rec we give five concrete recommendations aimed at indicator developers that will help ensure a sensible and informed approach to spatial scaling of ecosystem condition metrics.
 
+{{< include terms_table.qmd >}}
+
+
 ## Terminology {#sec-term}
 
 There is a jungle of terms used for similar metrics or operations across relevant theoretical frameworks for ecosystem assessments, such as the SEEA EA, WFD, MSFD, IBECA, OSPAR, PAEC, HD, CFP, and others.
