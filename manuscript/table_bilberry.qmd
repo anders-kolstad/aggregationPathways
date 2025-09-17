@@ -1,0 +1,42 @@
+
+
+```{r}
+#| include: false
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+```
+
+```{r dat}
+#| echo: false
+dat <- tibble(
+    " " = c(
+        "Variable values",
+        "$X_{100}$",
+        "Indicator values"),
+    "Plot 1" = c(
+        "2",
+        "20*",
+        "0.1*"),
+    "Plot 2" = c(
+        "36",
+        "20*",
+        "1.0*"),
+    "EA" = c(
+        "19",
+        "20",
+        "0.95 (0.55*)"))
+```
+
+
+```{r tbl-bilberry}
+#| echo: false
+#| tbl-cap: "Dummy data for the bilberry example. Variable values (% cover of bilberry) are recorded for each vegetation plot, and aggregated (arithmetic mean) to the ecosystem asset (EA) level. The X~100~ value is defined for the EA level, but in this hypothetical case it is also dis-aggregated to each vegetation plot and used for normalising variable values also at the plot level. The dis-aggregated X~100~ values, and subsequent values that rely on these, are marked with an asterisk (*)."
+
+kbl(dat,
+    format = "latex",
+    booktabs = TRUE,
+    escape = F
+    ) 
+```
+
