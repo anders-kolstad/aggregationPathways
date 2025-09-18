@@ -1,0 +1,45 @@
+---
+execute:
+  echo: false
+---
+
+```{r lib}
+#| include: false
+
+library(flextable)
+library(ftExtra)
+```
+```{r datWolf}
+
+wolfData <- tibble(
+    " " = c(
+        "Variable values",
+        "$X_{100}$",
+        "Indicator values"
+    ),
+    "EA 1" = c(20,10,1.0),
+    "EA 2" = c(5,10,0.5),
+    "EA 3" = c(0,5,0.0),
+    "EAA aggregate" = c(
+        "Sum =",
+        "Sum =",
+        "Mean ="
+    ),
+    "  " = c(25, 25, 0.5)
+)
+```
+
+
+```{r tbl-wolf}
+#| tbl-cap: 'Dummy data for the wolves example. EA = ecosystem asset (e.g. a municipality). EAA = ecosystem accounting area (e.g. country)'
+
+flextable(wolfData) |>
+  ftExtra::colformat_md(j = 1) |>
+  width(j = 1, width = 1.2) |>
+  width(j = 2:4, width = 0.45) |>
+  width(j = 6, width = 0.25) |>
+  align(j = 5, align = "right", part = "all") |>
+  fontsize(size = 9, part = "all") |>
+  merge_at(j = 5:6, part = "header")
+```
+
