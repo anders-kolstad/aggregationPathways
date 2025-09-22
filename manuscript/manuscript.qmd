@@ -155,6 +155,7 @@ Similar to variables, the reference levels used for normalising variables also h
 For example, variable values may exist for unique 10 × 10 m grid cells, but the reference levels may be created with a different spatial scale in mind, for example municipalities, or they can be uniform across the entire **ecosystem accounting area** (e.g. a natural zero).
 The bilberry example (**Example 1**) shows that, to ensure variables and reference levels are at a commensurable spatial scale, sometimes variables need to be partly spatially aggregated before they can be normalised.
 
+```{=html}
 <!-- Some indicators are possible to normalise at the measurement scale, 
 i.e. the finest resolution of the raw data.
 Others, however, need to be (pre-) aggregated, 
@@ -166,13 +167,12 @@ If you look at such a variable for a large area, then you can extract some meani
 but for increasingly smaller areas the variable become more binary, until you have either only Y or no Y present.
 At this zoom level the reference levels is unlikely to make much sense. 
 This stresses the need to define ecosystem assets that are appropriate in size. -->
- 
-
+```
 
 ::: callout-note
 **Example 1 -- Bilberry**\
 
-This example is to show what it means that the variable and the reference levels need to be at a comensurable spatial scale before doing the normalisition.  
+This example is to show what it means that the variable and the reference levels need to be at a comensurable spatial scale before doing the normalisition.
 
 *Variable*: Horizontal coverage (vertical projection) of European blueberry or bilberry (*Vaccinum myrtillus*) recorded in permanent vegetation plots.\
 
@@ -223,7 +223,8 @@ For design-based approaches, one can assign values to areas via simple aggregati
 Many aggregation functions are available, such as sum, worst-rule, different percentiles, arithmetic, geometric, or harmonic means [@unitednations2024 §5.54].
 In addition, non-paramteric bootstrapping [@kolstad_area_2025] and Bayesian updating [@kolstad_making_2024] can be used to possibly obtain better descriptions of the uncertainty in the estimates.
 If the inclusion probabilities are known, or they can be estimated, then the Horvitz-Thomson estimator for the sum or the mean (and variance) of a spatial sample is appropriate and useful, especially when the data originated from a stratified sample [@horvitz1952].
-Depending on the random process used to select the sampling points we may need to account for the spatial structure (spatial autocorrelation) of the data when doing this aggregation. This can be addressed in several ways, such as model-assisted approaches [@brus2021], e.g. using regression models [@brus2000].
+Depending on the random process used to select the sampling points we may need to account for the spatial structure (spatial autocorrelation) of the data when doing this aggregation.
+This can be addressed in several ways, such as model-assisted approaches [@brus2021], e.g. using regression models [@brus2000].
 One can also add an intermediate aggregation step via homogeneous areas (domains), ecosystem assets or some smaller basal spatial units, to control for this spatial non-independence, and thus reduce the sampling bias and variance.
 
 In our experience, the choice of which area units to use when doing this step-wise aggregation is often not reflected much upon.
@@ -249,8 +250,6 @@ In the statistical standard and recommended guidelines for ecosystem accounts [@
 Indicators and variables are sometimes presented side-by-side in ecosystem condition assessments or accounts.
 This is also recommended practice following the SEEA EA [@unitednations2024; ch. 5.3.4].
 
-
-
 <!--# Try add using !expr to get hat and bar symbols into caption:  -->
 
 ```{r fig-agg1}
@@ -260,7 +259,6 @@ This is also recommended practice following the SEEA EA [@unitednations2024; ch.
 #| out-width: 600
 knitr::include_graphics("../img/aggregation_bias.PNG")
 ```
-
 
 \clearpage
 
@@ -288,7 +286,6 @@ But the high wolf numbers in asset 1 *does compensate* when looking at the aggre
 
 <!-- It is sometimes worth going back to the variable, and see if it can be defined differently to avoid this kind of confusion. Wolf numbers could in this example be converted to wolf density. -->
 
-
 As we have seen, aggregation displacement causes a divergence in the type of information made available through the spatial aggregation of variables versus indicators.
 In addition, unavoidable aggregation displacement (for good and bad) will also affect the indicator values and the inferences that can be drawn from these.
 A major determinant of the resulting aggregation displacement from the spatial aggregation of ecosystem condition indicators (@fig-agg1) is the choice about the order of the different steps in the normalisation and aggregation process, i.e. the aggregation pathway (@fig-pathways).
@@ -296,71 +293,71 @@ If normalisation occurs early in the aggregation process, the amount of spatial 
 However, sometimes complete or partial compensation is justified (**Example 1** and **3**).
 
 ::: callout-note
-**Example 3 -- Phytoplankton trophic index (PTI)**\
+**Example 3 -- Water Framework Directive, indicator ASPT**\
 
-*Variable*: Mean score of algal species present, based on a set of indicator species scored for phosphorus requirements/tolerance.
-The variable is recorded in water bodies (lakes of 0.5 km^2^ or more).
+*Variable*: ASPT (*average score per taxon*) is the mean eutrophication tolerance score of invertebrate species present in a river water body.\
 
-*Reference levels*: X~100~ = median variable value for water bodies in reference condition.
-X~0~, X~20~, X~40~, X~60~ and X~80~ = intercalibrated threshold values, based on dose–response curves.\
+*Reference levels*: X~100~ = median variable value recorded in reference water bodies.
+X~80~ = lower boundary of variable values in reference water bodies.
+X~0~ = natural zero (no species present).
+X~20~, X~40~, and X~60~ = intercalibrated threshold values, based on dose–response curves.\
 
-```{r read}
-#| include: false
-#| cache: false
-dat <- readxl::read_xlsx(here::here("data/PTI_data.xlsx")) |>
-  mutate(X = X |> str_replace_all("%", "\\\\%"))
-cn <- colnames(dat) |>
-    str_replace_all("2", "") |>
-    str_replace_all("X", "") |>
-    str_replace_all("RL", "X\\\\textsubscript{100}")
-```
-
-```{r tbl-pti}
-#| echo: false
-#| tbl-cap: "Dummy data for the PTI example. value = value for a hypothetical variable. agg. = spatial aggregation (arithmetic mean); trunc. truncation; stat. = spatial statistics. The transformation step is left out for simplicity. Pathways refer to figure 3."
-#| cache: false
-kbl(dat, format = "latex",
-    booktabs = TRUE,
-    col.names = cn,
-    escape = F
-    ) |>
-  kable_styling() %>%
-  add_header_above(c(
-    " " = 3, 
-    "Pathway 5" = 4,
-     "Pathway 6" = 3)) |>
-  collapse_rows(
-    columns = c(9,10),
-    latex_hline = "major"
-  )
-```
-
-The Water Framework Directive (WFD) indicators uses aggregation pathway 5 (@fig-pathways), with truncation, scaling, and transformation, in that order (see worked example in @tbl-pti).
-The value obtained after the first two steps is called an EQR (ecological quality ratio), and the value obtained after the third step nEQR (normalised EQR).
+The Water Framework Directive (WFD) indicators use aggregation pathway 5 (@fig-pathways), 
+with truncation, scaling, and transformation, in that order.
+The value obtained after the first two steps is called an EQR (ecological quality ratio), 
+and the value obtained after the third step is called nEQR 
+(normalised EQR, and true indicator values *sensu* SEEA EA).
 Spatial aggregation, the way that we use the term here, is not done for the WFD.
-Instead, the proportion of water bodies in each condition class is the aggregated reporting metric.
-Therefore aggregation displacement is not an issue.
-When WFD data is put into use in other contexts, however, aggregation becomes important.
+Instead, the aggregated reporting metric is the proportion of water bodies in each of the five condition classes 
+("bad", "poor", "moderate", "good", "high"), 
+separated by the non-terminal reference levels. \
 
-\
-Because of how X~100~ is defined based on the median value across reference lakes, overshooting values (\> X~100~) should be preserved in the spatial aggregation.
-Otherwise we get a negative displacement, making it practically impossible to reach an indicator value of 1.
-This means that neither EQR values nor nEQR values can be uncritically aggregated spatially to be used in a SEEA EA compliant in ECA.
-One solution, to enable the use of WFD indicators in ECAs, would be to change to pathway 6, with (1) scaling, (2) transforming, (3) aggregating and (4) truncating the values.
-In our hypothetical example (@tbl-pti) this gives an aggregated value of 0.85, whereas the mean value for the nEQRs would be 0.75 (i.e. negatively displaced).
+When WFD data is put into use in other contexts, however, aggregation becomes important, 
+and it is crucial that aggregation is done after the (scaling and) transformation step, 
+because the transformation (using a stepwise-linear function) adds ecological meaning to the data.
+As the example in @fig-aspt shows, 
+the ecologically meaningful interpretation is that the EAA has "poor" condition at time 1, improving to "moderate" condition at time 2.
+When aggregation is erroneously done before transformation, however, 
+the same measurements suggest that condition is "bad" and deteriorating.
+This illustrates that an ecosystem condition indicator account cannot be derived directly from an ecosystem condition variable account in conjunction with reference levels, 
+as suggested by SEEA EA (@unitednations2024: 5.76 and table 5.3).
+The reason in the case of ASPT is that the transformation function is non-linear,
+and aggregation displacement therefore occurs in the spatial aggregation of variables and indicators.
+Reference levels are the same throughout the entire EAA, and variation in reference levels is thus not part of the problem here. \
+
+![Different aggregation pathways can result in different indicator values, exemplified by the ASPT indicator from the WFD. Two ecosystem assets (Rivers A and B) are measured at two points in time. Regular font numbers are EQR values; boldface numbers are nEQR values (indicator values *sensu* SEEA EA). When EQR values are first aggregated and then transformed ("transf."), ASPT incorrectly indicates a deteriorating and "bad" condition. When EQR values are first transformed and then aggregated, ASPT correctly indicates an improvement from "poor" to "moderate" condition. ](images/ASPT.jpg){#fig-aspt}
+
+
+Another issue that can be illustrated with ASPT (or other WFD indicators) is the effect of truncation.
+Aggregation pathway 5 uses truncation as the first step. 
+When WFD data is used in ecosystem condition accounting, however, 
+truncation needs to be the final step, 
+applied only after aggregation. 
+This is because X~100~ is defined as the median of variable values measured in reference water bodies. 
+In other words, half of the values measured in reference water bodies is expected to be above X~100~. 
+When truncation is done as the first step, 
+the average indicator value of reference water bodies will be around 0.95, 
+i.e. it would be prevented from actually reaching 1.0. 
+Overshooting values therefore need to be preserved until after aggregation (spatial compensation),
+and only after aggregation should overshooting values be truncated to 1.0. \
+
+Likewise, in the case where model-based extrapolation of a WFD indicator is used, 
+it is important to postpone truncation until after the modelling and extrapolation. 
+Otherwise the distribution of the extrapolated values may be severely distorted, 
+at least if many of the original measurements are in or close to the X~100~ value. 
 :::
 
-
+```{=html}
 <!-- SEEA EA uses the term aggregation commutativity for the property that the order of vertical and horizontal aggregation is irrelevant to the end result.
 A similar aggregation commutativity can be envisioned for step-wise aggregation of a single indicator, where it does not matter if the original data is aggregated directly from the original measurement scale to the Ecosystem Accounting Area (EAA) level, or via some intermittent scale, such as ecosystem assets or larger regions.
 This is possible when aggregating metrics using area weighting, and when one is aware of the need for post-stratification when using stratified sampling. -->
+```
 
-
-
+```{=html}
 <!-- Secondly, SEEA EA mentions several arithmetic or parametric aggregation functions, such as different means, median, min or max values.
 It does not mention the possibility of bootstrap resampling [@jakobsson2021; @kolstad_making_2024].
 This method allows for using probability distributions to represent indicator values and uncertainties, and to use weighted resampling to create new joint probability distributions for the spatially aggregated indicator. -->
-
+```
 
 # Aggregation pathways {#sec-pathways}
 
@@ -396,15 +393,13 @@ However, if the indicators that make up the indices use different area weights a
 
 ```{r fig-pathways}
 #| fig-cap: |
-#|   Flowchart showing pathways for the spatial aggregation of variables in ecosystem condition accounting. Normalisation refers to the steps that make a variable conform to the definition of an indicator in SEEA EA, which may include some, but not necesarily all the steps scale, truncate and transform.
+#|   Flowchart showing pathways for the spatial aggregation of variables in ecosystem condition accounting. Normalisation refers to the steps that make a variable conform to the definition of an indicator in SEEA EA, which may include some, but not necessarily all, of the steps scale, truncate and transform.
 #| out-width: 400
 #| echo: false
 knitr::include_graphics("../img/aggregationPathways.png")
 ```
 
 # Recommendations {#sec-rec}
-
-
 
 Based on the above discussion and examples, we here summarise five recommendations for developers of ecosystem condition indicators and assessments for avoiding some of the pitfalls from having a too casual approach to the choice of aggregation pathways.
 
@@ -469,8 +464,7 @@ However, weighting indicators in vertical aggregation opens a whole other can of
 
 ### 6. Don't present variables and their respective indicators as alternative evidences to choose from
 
-Aggregation displacement causes a divergence in the type of information held in ecosystem condition variables versus indicators, 
-and spatially aggregated indicators should not be interpreted as normalised versions of aggregated variables.
+Aggregation displacement causes a divergence in the type of information held in ecosystem condition variables versus indicators, and spatially aggregated indicators should not be interpreted as normalised versions of aggregated variables.
 Therefore, aggregated variables and the associated aggregated indicators cannot act as alternative evidence or interpretations for the state of nature.
 While this may initially seem like a democratic and transparent approach to reporting, this practice places a significant burden on both the end user and the indicator developer.
 Misuse can ensue, for example by taking the variable value and assigning it the same interpretation as the indicator value.
