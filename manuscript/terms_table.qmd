@@ -30,7 +30,7 @@ terms <- tibble(
     X = "Normalisation",
     Y = "This is the mathematical process of turning a condition variable into an indicator _sensu_ SEEA EA. It consists of three distinct steps: scaling, truncation, and transformation (see also @fig-term).
      **Scaling** a variable means to recode a variable to a unitless unbound scale based on two reference levels, a lower (X~0~) and an upper (X~100~), that define the variable values to be coded as zero and one on the indicator scale, respectively.
-    **Truncation** means to recode scaled variable above 1 to become 1, and values below 0 to become 0.**Transformation** means to adjust the indicator scale to reflect potentially nonlinear relationships between the variable and ecosystem condition. This is commonly done by anchoring specific variable values to predefined class boundaries (sensu WFD) which we call reference levels [@czúcz; @jakobsson_setting_2020], but may also be done without explicit reference levels, for example by using a sigmoid or exponential transformation [@mienna2024].
+    **Truncation** means to recode scaled variable above 1 to become 1, and values below 0 to become 0.**Transformation** means to adjust the indicator scale to reflect potentially nonlinear relationships between the variable and ecosystem condition. This is commonly done by anchoring specific variable values to predefined class boundaries [sensu WFD; @directiv2000] which we call reference levels [@czúcz; @jakobsson_setting_2020], but may also be done without explicit reference levels, for example by using a sigmoid or exponential transformation [@mienna2024].
     Normalisation is frequently referred to as **rescaling** in the SEEA EA literature, but we avoid  this terms because of the need to provide better differentiation between the three steps of the normalisation process, where scaling is one of them. Also, in a parallel terminology, normalisation can be considered modeling, and spatial aggregation before and after normalisation can be referred to as pre or post processing, respectively [@vanbeurden1999]."
   ) |>
   add_row(
@@ -51,7 +51,7 @@ terms <- tibble(
   ) |>
   add_row(
     X = "Thematic aggregation",
-    Y = "Also called vertical aggregation. In the case of ECA, this refers to an aggregation of two or more indicators into a composite index (_plural_: indices)."
+    Y = "Also called vertical aggregation. In the case of ECA, this refers to an aggregation of two or more indicators into a composite **index** (_plural_: **indices**)."
   ) |>
   add_row(
     X = "Spatial prediction",
@@ -87,10 +87,11 @@ terms <- tibble(
 
 
 flextable(terms) |>
-  width(j = 1, width = 1) |>     # Relative width
-  width(j = 2, width = 5) |>     # Relative width  
+  width(j = 1, width = 1) |>     
+  width(j = 2, width = 5) |>     
   valign(j = 1:2, valign = "top", part = "all") |>
-  ftExtra::colformat_md(j = 2)
+  ftExtra::colformat_md(j = 2) |>
+  fontsize(size = 9, part = "all")
+
 
 ```
-

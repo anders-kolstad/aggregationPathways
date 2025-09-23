@@ -306,7 +306,7 @@ The Water Framework Directive (WFD) indicators use aggregation pathway 5 (@fig-p
 with truncation, scaling, and transformation, in that order.
 The value obtained after the first two steps is called an EQR (ecological quality ratio), 
 and the value obtained after the third step is called nEQR 
-(normalised EQR, and true indicator values *sensu* SEEA EA).
+[normalised EQR, and true indicator values *sensu* SEEA EA; @van_de_bund_ecological_2007].
 Spatial aggregation, the way that we use the term here, is not done for the WFD.
 Instead, the aggregated reporting metric is the proportion of water bodies in each of the five condition classes 
 ("bad", "poor", "moderate", "good", "high"), 
