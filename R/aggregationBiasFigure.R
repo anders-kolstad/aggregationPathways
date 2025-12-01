@@ -52,7 +52,7 @@ dat_x <- dat |>
 
 # ggtext and element markdown doesnt work for some mathematical signs, like bar.
 ## PLOT 1 -------------
-dat_x |>
+fig1 <- dat_x |>
   ggplot(aes(
     x = var,
     y = ind,
@@ -138,9 +138,9 @@ dat_x |>
 
 
 X60 <- 150
-X100 <- 160
-V2 <- 170
-Vbar <- ((V2-V1)/2)+V1
+#X100 <- 160 # as before
+V2x <- 170
+Vbarx <- ((V2x-V1)/2)+V1 
 
 dat2 <- var |>
   tibble() |>
@@ -159,7 +159,7 @@ fV2x <- dat2 |>
   filter(var == V2) |>
   pull(ind)
 fVhattx <- dat2 |>
-  filter(var == Vbar) |>
+  filter(var == Vbarx) |>
   pull(ind)
 fVbarx <- ((fV2x-fV1x)/2)+fV1x
 
@@ -169,7 +169,7 @@ dat3 <- dat2 |>
   add_row(ind = 0, var = X0) |>
   add_row(ind = 1, var = 200)
 
-dat3 |>
+(fig2 <- dat3 |>
   ggplot(aes(
     x = var,
     y = ind,
@@ -189,7 +189,7 @@ dat3 |>
   ylab("") +
   xlab("") +
   scale_x_continuous( # expand = expansion(mult = 0.2),
-    breaks = c(X0, V1, Vbar, X60, X100, V2),
+    breaks = c(X0, V1, Vbarx, X60, X100, V2x),
     labels = c(
       expression(X[0]),
       expression(V[1]),
@@ -218,25 +218,25 @@ dat3 |>
   geom_segment(aes(x = V1, y = fV1x, xend = V1, yend = 0),
                color = lc, linewidth = 2, linetype = lt
   ) +
-  geom_segment(aes(x = 50, y = fV2x, xend = V2, yend = fV2x),
+  geom_segment(aes(x = 50, y = fV2x, xend = V2x, yend = fV2x),
                color = lc, linewidth = 2, linetype = lt
   ) +
-  geom_segment(aes(x = V2, y = fV2x, xend = V2, yend = 0),
+  geom_segment(aes(x = V2x, y = fV2x, xend = V2x, yend = 0),
                color = lc, linewidth = 2, linetype = lt
   ) +
-  geom_segment(aes(x = V1, y = fV1x, xend = V2, yend = 1),
+  geom_segment(aes(x = V1, y = fV1x, xend = V2x, yend = 1),
                color = lc, linewidth = 2, linetype = 1
   ) +
-  geom_segment(aes(x = 50, y = fVbarx, xend = Vbar, yend = fVbarx),
+  geom_segment(aes(x = 50, y = fVbarx, xend = Vbarx, yend = fVbarx),
                color = lc, linewidth = 2, linetype = lt
   ) + 
-  geom_segment(aes(x = Vbar, y = fVbarx, xend = Vbar, yend = 0),
+  geom_segment(aes(x = Vbarx, y = fVbarx, xend = Vbarx, yend = 0),
                color = lc, linewidth = 2, linetype = lt
   ) + 
-  geom_segment(aes(x = 50, y = fVhattx, xend = Vbar, yend = fVhattx),
+  geom_segment(aes(x = 50, y = fVhattx, xend = Vbarx, yend = fVhattx),
                color = lc, linewidth = 2, linetype = lt
   ) +
-  geom_segment(aes(x = Vbar, y = fVhattx, xend = Vbar, yend = fVbarx),
+  geom_segment(aes(x = Vbarx, y = fVhattx, xend = Vbarx, yend = fVbarx),
                color = lc, linewidth = 2, linetype = lt
   ) +
   geom_segment(aes(x = 60, y = fVbarx, xend = 60, yend = fVhattx),
@@ -247,7 +247,14 @@ dat3 |>
             label = "aggregation\nerror",
             color = "black",
             size = 6
-  )
+  ))
 
 
 #ggsave("img/aggregation_bias_x60.PNG")
+
+library(ggpubr)
+ggarrange(fig1, fig2, labels = c("A)", "B)"), font.label = list(size = 30))
+#ggsave("img/aggregation_bias.PNG",
+#       width = 25,
+#       height = 10
+#)

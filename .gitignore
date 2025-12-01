@@ -34,3 +34,11 @@ po/*~
 # RStudio Connect folder
 rsconnect/
 when-to-scale.Rproj
+presentations/understanding the problem.html
+R/scratch/
+dontPush/
+_*
+
+manuscript/table_billberry.pdf
+manuscript/terms_table.pdf
+R/terms_table.pdf

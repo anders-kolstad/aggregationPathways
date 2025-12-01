@@ -1,0 +1,97 @@
+```{r setup2}
+#| include: false
+library(knitr)
+library(tidyverse)
+library(flextable)
+library(ftExtra)
+
+```
+
+```{r tbl-terms}
+#| echo: false
+#| tbl-cap: "Key terms and concepts as they are used in this paper."
+terms <- tibble(
+  X = as.character(NULL),
+  Y = as.character(NULL)
+) |>
+  add_row(
+    X = "Variables, indicators and metrics",
+    Y = "We use the SEEA EA definitions of the terms variables, indicators (normalised variables) and metrics (referring to either a variable or an indicator) [@unitednations2024]. Variables are typically either in percentages or fractions, or as raw biophysical units, such as biomass or density. Indicators, on the other hand, are always on a unitless scale between 0 and 1, where 0 represents very poor (or the worst possible) condition, and 1 represents very good (or the best possible) condition. Sometimes indicators are calculated directly [e.g. @åström], but usually indicators are made by normalising variables based on two or more reference levels [@unitednations2024 §5.60]."
+  ) |>
+  add_row(
+    X = "Reference condition (RC)",
+    Y = "Reference condition is the state or condition of the ecosystem that we want to compare the current state against. It can be a purely theoretical construct or a real historical state. It does not need to be defined with any real data."
+  ) |>
+  add_row(
+    X = " Reference levels (RL)",
+    Y = "Reference levels (also called reference values) are variable values that act as anchoring points to specific values on the indicator scale, and are used to convert variables into indicators. This definition is different from that in SEEA EA, but at least conceptually it is the same. There can be from two to many RLs per indicator and they are distinguished with a special nomeclature X~n~ where _n_ is the corresponding indicator value times 100. For example, X~0~ and X~100~ refer to variable values coded as 0 or 1 on the indicator scale, respectively (sometimes called the lower and upper RLs). The X~60~ can hold a special meaning if, like in the WFD and in some applications of SEEA EA, the value 0.6 on the indicator scale represents the boundary or threshold between good and reduced condition. Defining X~60~, or any RL other than X~0~ and X~100~, is one way to quantitatively describe a non-linear relationship between the variable and ecosystem condition (referred to as _Transformation_)."
+  ) |>
+  add_row(
+    X = "Normalisation",
+    Y = "This is the mathematical process of turning a condition variable into an indicator _sensu_ SEEA EA. It consists of three distinct steps: scaling, truncation, and transformation (see also @fig-term).
+     **Scaling** a variable means to recode a variable to a unitless unbound scale based on two reference levels, a lower (X~0~) and an upper (X~100~), that define the variable values to be coded as zero and one on the indicator scale, respectively.
+    **Truncation** means to recode scaled variable above 1 to become 1, and values below 0 to become 0.**Transformation** means to adjust the indicator scale to reflect potentially nonlinear relationships between the variable and ecosystem condition. This is commonly done by anchoring specific variable values to predefined class boundaries [sensu WFD; @directiv2000] which we call reference levels [@czúcz; @jakobsson_setting_2020], but may also be done without explicit reference levels, for example by using a sigmoid or exponential transformation [@mienna2024].
+    Normalisation is frequently referred to as **rescaling** in the SEEA EA literature, but we avoid  this terms because of the need to provide better differentiation between the three steps of the normalisation process, where scaling is one of them. Also, in a parallel terminology, normalisation can be considered modeling, and spatial aggregation before and after normalisation can be referred to as pre or post processing, respectively [@vanbeurden1999]."
+  ) |>
+  add_row(
+    X = "Categorisation",
+    Y = "Means to divide the indicator scale into discrete fractions, either based on reference levels, or some other rule (e.g. equal range for each class)."
+  ) |>
+  add_row(
+    X = "Aggregation displacement",
+    Y = "Referring to the systematic shift that occurs to the relative values of variables and their corresponding indicators when they are spatially aggregated. When we take the average of two variables, each of which have attribute values (i.e. indicator values) associated with them via some non-linear function (e.g. truncation or transformation), then the attribute of the average variable value differs from the average of the attributes of the original variable. @rastetter1992 referred to this as aggregation error and used it to describe some of the dangers associated with upscaling in the sense of using precise fine-scale information to explain or predict large scale phenomena. However, in ECAs, the difference between variables and indicators is an intentional one, and we therefore choose to refer to what is essentially the same mathematical phenomenon with the less derogatory term aggregation displacement."
+  ) |>
+  add_row(
+    X = "Spatial aggregation",
+    Y = "Spatial (sometimes called horizontal) aggregation is the process of summarising data from different sub-areas and taking this new value as the value for all constituent sub-areas. In means going from fine-resolution data to less fine or coarse resolution data. In related fields of study this operation may be described as _increasing the support_ or _reducing the grain_ [@bierkens2002]. Aggregation can be partial, resulting in two or more spatial areas with unique values, or total, if it results in just a single number summarising all the data. Different summary functions can be used, including the area-weighted arithmetic mean, which is required under when aggregation indicator values in SEEA EA. The term _upscaling_ is sometimes used synonymously to our definition of spatial aggregation, but it also has a wider definition tied to the ambiguous use of the terms scale to mean either grain or extent. It's common to lump spatial aggregation together with some types of extra- or interpolation operation, such as averaging point data and attributing this value to entire polygons [@gruijter1990], or spatial estimation methods (e.g. geostatistics) and subsequent spatial sampling [@brus1997]. However, for the detailed deliberation in this study it is important to note the distinction between these."
+  ) |>
+  add_row(
+    X = "Temporal aggregation",
+    Y = "Refers to operations involved in combining data from different time points or periods to represent a single temporal period (e.g. an accounting period or a growing season)."
+  ) |>
+  add_row(
+    X = "Thematic aggregation",
+    Y = "Also called vertical aggregation. In the case of ECA, this refers to an aggregation of two or more indicators into a composite **index** (_plural_: **indices**)."
+  ) |>
+  add_row(
+    X = "Spatial prediction",
+    Y = "It refers to any estimation of the value of a variable at an unobserved location, and therefore include both inter- and extraolation. **Interpolation** means to _fill in the gaps_, or to increase the density of the data. **Extrapolation** means to expand the spatial extent of the data or beyond the current data range. There is often no clear boundary between these two operations when applied in ECA as an area may for example be within the geographical range of the current data, but outside the environmental range. Many different methods are employed for spatial predictions within ECAs, such as statistical models (e.g. regression models) or geostatistical models (e.g. kriging). These methods are more or less sophisticaled ways to essentially _spread_ or learn from the available data to give values to areas where there is no data. This is distinct from the process and purpose of spatial aggregation, which seeks to simplify data."
+  ) |>
+  add_row(
+    X = "Design-based and model based prediction",
+    Y = "These are two fundamentally different ways of doing and thinking about spatialand statistical prediction. Design-based approaches relies on classical sampling theory and uses what is know about the sampling design to make spatial inferences. It is generally applied in more simple ways, such as with look-up tables, but model-assisted estimation using statistical models is also possible. Design-based approaches  produce things like the sample mean and sample variance and assumes the sampled values are correct (fixed), and uncertainty arises due to where we chose to sample (the locations are random). Model-based prediction uses geostatistical models, such as kriging and produces estimates such as the model mean or model variance. In this framework, the locations are considered fixed and the uncertainty arises due in the statistical model. Readers are referred to @brus2021 for more details."
+  ) |>
+  add_row(
+    X = "Ecosystem assets and ecosystem accounting areas",
+    Y = "Ecosystem assets in SEEA EA are the smallest spatial units for which information is shought, made up of contiguous spaces of a specific ecosystem type. The ecosystem accounting area is the _'geographical territory for which an ecosystem account is compiled'_ [@unitednations2024]"
+  ) |>
+  add_row(
+    X = "The ecological fallacy",
+    Y = "The ecological fallacy [@robinson2009] is the error of assuming that relationships or patterns observed for groups (at the aggregate level) must also hold true for the individuals within those groups. In EA, aggregated data will mask differences within regions and lead some people to interpret this as regions being more homogenous then they really are."
+  ) |>
+  add_row(
+    X = "The Modifiable Area Unit Problem (MAUP)",
+    Y = "MAUP describes the sensitivity of spatially aggregated information to the choice of spatial units used for data collection or aggregation [@openshaw1984, @wong2009]. These units can be arbitrary (*modifiable*), and different sizes and configuration of units can have large effects on the outcome of aggregation."
+  ) |>
+  add_row(
+    X = "Spatial compensation",
+    Y = "In this context, spatial compensation refers specifically to the ability of variable values above X~100~ in some areas to compensate for values below X~100~ elsewhere (assuming here that X~0~ < X~100~). Whether or not to allow spatial compensation in spatial aggregation has a large impact on the value and interprettaion of indicator values."
+  ) |>
+  add_row(
+    X = "Post-stratfication",
+    Y = "A statistical technique used to correct for a biased sample by forcing the sample to match the main population in some key characteristcis. In ECAs it is common to have data that lack a clear probability based sampling design, and therefore end up with more samples from certain strata (e.g. some geographic region or within some shared environmental condition). Post-stratification seeks to remove this unevenness in the _post_-processing, e.g. by doing a step-wise spatial aggregation via the same strata."
+  )|>
+  
+  rename("Term or concept" = X, "Definition and deliberation" = Y)
+
+
+
+flextable(terms) |>
+  width(j = 1, width = 1) |>     
+  width(j = 2, width = 5) |>     
+  valign(j = 1:2, valign = "top", part = "all") |>
+  ftExtra::colformat_md(j = 2) |>
+  fontsize(size = 9, part = "all")
+
+
+```
