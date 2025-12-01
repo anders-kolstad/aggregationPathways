@@ -1,5 +1,5 @@
 ---
-title: On the spatial aggregation of ecosystem condition indicators
+title: On the spatial aggregation of condition metrics for ecosystem accounting
 author:
   - name: Anders Lorentzen Kolstad
     email: anders.kolstad@nina.no
@@ -230,7 +230,7 @@ One can also add an intermediate aggregation step via homogeneous areas (domains
 In our experience, the choice of which area units to use when doing this step-wise aggregation is often not reflected much upon.
 In some cases the areal units are even decided politically, for example to administrative units, with little ecological justification for this choice.
 However, this decision clearly affects the results of the spatial aggregation via a well-described (but often forgotten?) statistical problem referred to as the **modifiable area unit problem (MAUP)**.
-The MAUP can lead to inconsistencies between repeated or nested ECAs, leading to confusion and mistrust (@sec-comp).
+The MAUP can lead to inconsistencies between repeated or nested ECAs, leading to confusion and mistrust.
 This is unfortunate, as it is important for decision makers to see that the information they are basing their decision on is robust and insensitive to aggregation methods [@vanbeurden1999].
 One option to reduce this discrepancy and arbitrariness is to use ecologically motivated areal units in the step-wise aggregation such as homogeneous ecosystem areas [@vallecillo2022] or homogeneous impact areas [@kolstad_making_2024].
 
@@ -378,7 +378,7 @@ Pathway 3 is similar to pathway 2, but here there are two aggregation steps: one
 This can for example be the case when variables are aggregated to the scale corresponding to the reference levels before they can be normalised (**Example 1**).
 
 Pathway 4 illustrates the aggregation of a variable, with no normalisation.
-This is the pathway commonly used for variable accounts in the SEE EA. For this, and all other aggregation pathways, the picture can be made more complicated by adding additional aggregation levels (i.e. a step-wise aggregation, @sec-comp)
+This is the pathway commonly used for variable accounts in the SEE EA. For this, and all other aggregation pathways, the picture can be made more complicated by adding additional aggregation levels (i.e. a step-wise aggregation).
 
 Pathway 5 is a common pathway in the WFD, which does not practice spatial aggregation of indicator values.
 Instead one reports the number of water bodies in each condition class (spatial statistics).
@@ -389,7 +389,7 @@ The resulting map (field of values) is then normalised, (re)sampled (which could
 
 Pathways 8 and 9 describe alternative ways to create indices at different spatial scales, either by spatially aggregating the indices (pathway 8), or by aggregating the indicators separately and recalculating the indices at different spatial scales (pathway 9).
 If perfectly commutative then the two approaches will yield the same result.
-However, if the indicators that make up the indices use different area weights as part of their spatial aggregation (**Example 4**), then pathway 9 is the only one that gives the same index values across nested accounts (@sec-comp).
+However, if the indicators that make up the indices use different area weights as part of their spatial aggregation (**Example 4**), then pathway 9 is the only one that gives the same index values across nested accounts.
 
 ```{r fig-pathways}
 #| fig-cap: |
@@ -414,11 +414,10 @@ If there are more aggregation steps, then the spatial level at each step should 
 "Municipality" and "country" could here be included as footnotes.
 Note also that in the last example, normalisation only involved a scaling step.
 The description of indicator pathways can be made even easier by referencing specific aggregation pathways by number, as we have done in this paper using @fig-pathways in this paper.
-Methods used to change either the cover or the extent of the indicator data (see @sec-term) can also be included in the shorthand notation scheme.
+Methods used to change either the cover or the extent of the indicator data (see @tbl-terms) can also be included in the shorthand notation scheme.
 The three operations we conceive as possible options are extrapolation (extr.), interpolation (inter.), and (sub)sampling.
 We use the term spatial projection (projection for short) to encompass both extra- and interpolation.
-Thus, pathway 7 in Fig.
-3 can be written as $project - scale - sample - sp.agg. - trunc$.
+Thus, pathway 7 in @fig-pathways can be written as $project - scale - sample - sp.agg. - trunc$.
 The type of model used for the spatial projection can be added as a footnote.
 
 Besides making the indicator workflow itself more transparent and reproducible, we believe this recommendation would help raise the general awareness about aggregation displacement in EAs, both among users and developers.
@@ -433,7 +432,7 @@ But just like variables and indicators, reference levels also have a spatial res
 
 It may be premature, or not even possible, to prescribe an aggregation pathway to be used for all ECAs, or even a type of aggregation pathway to be used given the data at hand.
 However, internal consistency within assessments should be possible, and this can make it easier to communicate and interpret the information conveyed through the indicator values.
-This can be achieved by for example always scaling early (see recommendation number 2 above) and using the same aggregation levels (same spatial units) and same approach to step-wise aggregation across levels (@sec-comp), for all indicators.
+This can be achieved by for example always scaling early (see recommendation number 2 above) and using the same aggregation levels (same spatial units) and same approach to step-wise aggregation across levels, for all indicators.
 
 ### 4. Use unique indicator IDs , also for indicators that are similar, but use different aggregation pathways {.unnumbered}
 
@@ -474,6 +473,6 @@ Although variable accounts are allowed under the SEEA EA framework, and are inde
 
 # Conclusion
 
-...
+
 
 # References {.unnumbered}
