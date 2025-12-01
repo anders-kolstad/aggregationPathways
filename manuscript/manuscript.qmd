@@ -255,7 +255,7 @@ This is also recommended practice following the SEEA EA [@unitednations2024; ch.
 ```{r fig-agg1}
 #| echo: false
 #| fig-cap: |
-#|   Examples showing the difference in indicator values (y-axis) obtained from taking the mean (V bar) of two variable values (V1 and V1) that are on the original scale (i hat) or on the normalised indicator scale (i bar). Pane A: Due to truncation at X~100~, the latter results in a comparatively lower indicator value. Pane B: Example where the normalisation function includes a transformation step (see Figure 1 for definition) that anchors X~60~ to 0.6 on the indicator scale. This reverses the order of i hat and i bar compared to example in pane A. The solid coloured line represents the normalisation function f(V). V = variable value, i = indicator value. Modified from Rastsetter (1991).
+#|   Examples showing the difference in indicator values (y-axis) obtained from taking the mean of two variable values V1 and V1 ($\bar{V}$) that are on the original scale ($\hat{i}$) or on the normalised indicator scale ($\bar{i}$). Pane A: Due to truncation at X~100~, the latter results in a comparatively lower indicator value. Pane B: Example where the normalisation function includes a transformation step (see Figure 1 for definition) that anchors X~60~ to 0.6 on the indicator scale. This reverses the order of $\hat{i}$ and $\bar{i}$ compared to example in pane A. The solid coloured line represents the normalisation function f(V). V = variable value, i = indicator value. Modified from Rastsetter (1991).
 #| out-width: 600
 knitr::include_graphics("../img/aggregation_bias.PNG")
 ```
@@ -393,8 +393,8 @@ However, if the indicators that make up the indices use different area weights a
 
 ```{r fig-pathways}
 #| fig-cap: |
-#|   Flowchart showing  a selection of nine possible pathways for the spatial aggregation of variables in ecosystem condition accounting. Normalisation refers to the steps that make a variable conform to the definition of an indicator in SEEA EA, which may include some, but not necessarily all, of the steps scale, truncate and transform. The pathway description used the standardised shorthand aggregation athway terminology, where trunc. = truncation, trans. = transformation, sp. agg. = spatial aggregation, proj. = project (extrapolation or interpolation), sample = sub-sampling from a larger dataset, th. agg. = thematic aggregation.
-#| out-width: 400
+#|   Flowchart showing  a selection of nine possible pathways for the spatial aggregation of variables in ecosystem condition accounting. Normalisation refers to the steps that make a variable conform to the definition of an indicator in SEEA EA, which may include some, but not necessarily all, of the steps scale, truncate and transform. The pathway description uses the standardised shorthand aggregation pathway terminology, where trunc. = truncation, trans. = transformation, sp. agg. = spatial aggregation, proj. = project (extrapolation or interpolation), sample = sub-sampling from a larger dataset, th. agg. = thematic aggregation.
+#| out-width: 600
 #| echo: false
 knitr::include_graphics("../img/aggregationPathways.png")
 ```
