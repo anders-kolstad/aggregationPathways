@@ -393,7 +393,7 @@ However, if the indicators that make up the indices use different area weights a
 
 ```{r fig-pathways}
 #| fig-cap: |
-#|   Flowchart showing pathways for the spatial aggregation of variables in ecosystem condition accounting. Normalisation refers to the steps that make a variable conform to the definition of an indicator in SEEA EA, which may include some, but not necessarily all, of the steps scale, truncate and transform.
+#|   Flowchart showing  a selection of nine possible pathways for the spatial aggregation of variables in ecosystem condition accounting. Normalisation refers to the steps that make a variable conform to the definition of an indicator in SEEA EA, which may include some, but not necessarily all, of the steps scale, truncate and transform. The pathway description used the standardised shorthand aggregation athway terminology, where trunc. = truncation, trans. = transformation, sp. agg. = spatial aggregation, proj. = project (extrapolation or interpolation), sample = sub-sampling from a larger dataset, th. agg. = thematic aggregation.
 #| out-width: 400
 #| echo: false
 knitr::include_graphics("../img/aggregationPathways.png")
@@ -472,6 +472,15 @@ Generally, because of the normalisation process, indicators are more aligned wit
 Although variable accounts are allowed under the SEEA EA framework, and are indeed a central feature, we believe they should be seen as interim accounts for metrics that cannot be, or have not yet been, normalised.
 
 # Conclusion
+This paper has described the reasons why we need to do spatial generalisation in ecosystem accounting, and 
+clarified several misconscptions about this process. 
+We have showed that indeitical raw data, when spatially aggregated through different pathways, can yield fundamentally different types of information about ecosystems condition. 
+The recommendations offered here is intended to help researchers 
+design ecosystem condition metrics that better align 
+with the type of information they aim to communicate from the data, 
+while also improving transparency through the use of a standardised terminology.
+With a clearer understanding of the challenges inherrent to spatial generalisation,
+we that hope future ecosystem condition accounts will be more internally consistent, more comparable between each other, and less susceptible to unintended mathematical artefacts.   
 
 
 
