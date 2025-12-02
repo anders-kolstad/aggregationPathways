@@ -124,7 +124,7 @@ fig1 <- dat_x |>
                arrow = arrow(ends = "both")
   ) +
   geom_text(x = 60+20, y = fVbar+0.08,
-            label = "aggregation\nerror",
+            label = "aggregation\ndisplacement",
             color = "black",
             size = 6
             )
@@ -139,7 +139,7 @@ fig1 <- dat_x |>
 
 X60 <- 150
 #X100 <- 160 # as before
-V2x <- 170
+V2x <- 160
 Vbarx <- ((V2x-V1)/2)+V1 
 
 dat2 <- var |>
@@ -244,7 +244,7 @@ dat3 <- dat2 |>
                arrow = arrow(ends = "both")
   ) +
   geom_text(x = 60+20, y = fVhattx+0.08,
-            label = "aggregation\nerror",
+            label = "aggregation\ndisplacement",
             color = "black",
             size = 6
   ))
@@ -254,7 +254,7 @@ dat3 <- dat2 |>
 
 library(ggpubr)
 ggarrange(fig1, fig2, labels = c("A)", "B)"), font.label = list(size = 30))
-#ggsave("img/aggregation_bias.PNG",
-#       width = 25,
-#       height = 10
-#)
+ggsave("img/aggregation_bias.PNG",
+       width = 25,
+       height = 10
+)
