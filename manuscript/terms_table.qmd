@@ -43,15 +43,15 @@ terms <- tibble(
   ) |>
   add_row(
     X = "Spatial aggregation",
-    Y = "Spatial (sometimes called horizontal) aggregation is the process of summarising data from different sub-areas and taking this new value as the value for all constituent sub-areas. It means going from fine-resolution data to less fine or coarse resolution data. In related fields of study this operation may be described as _increasing the support_ or _reducing the grain_ [@bierkens2002]. Aggregation can be partial, resulting in two or more spatial areas with unique values, or total, if it results in just a single number summarising all the data. Different summary functions can be used, including the area-weighted arithmetic mean, which is required when aggregating indicator values in SEEA EA. The term _upscaling_ is sometimes used synonymously to our definition of spatial aggregation, but it also has a wider definition tied to the ambiguous use of the terms scale to mean either grain or extent. It's common to lump spatial aggregation together with some types of extra- or interpolation operation, such as averaging point data and attributing this value to entire polygons [@gruijter1990], or spatial estimation methods (e.g. geostatistics) and subsequent spatial sampling [@brus1997]. However, for the detailed deliberation in this study it is important to note the distinction between these."
+    Y = "Spatial (sometimes called horizontal) aggregation is the process of summarising data from different sub-areas and taking this new value as the value for all constituent sub-areas. It means going from fine-resolution data to less fine or coarse-resolution data. In related fields of study this operation may be described as _increasing the support_ or _reducing the grain_ [@bierkens2002]. Aggregation can be partial, resulting in two or more spatial areas with unique values, or total, if it results in just a single number summarising all the data. Different summary functions can be used, including the area-weighted arithmetic mean, which is required when aggregating indicator values in SEEA EA. The term _upscaling_ is sometimes used synonymously to our definition of spatial aggregation, but it also has a wider definition tied to the ambiguous use of the terms scale to mean either grain or extent. It's common to lump spatial aggregation together with some types of extra- or interpolation operation, such as averaging point data and attributing this value to entire polygons [@gruijter1990], or spatial estimation methods (e.g. geostatistics) and subsequent spatial sampling [@brus1997]. However, for the detailed deliberation in this study it is important to note the distinction between these."
   ) |>
   add_row(
     X = "Temporal aggregation",
-    Y = "emporal aggregation refers to operations involved in combining data from different time points or periods to represent a single temporal period (e.g. an accounting period or a growing season)."
+    Y = "Temporal aggregation refers to operations involved in combining data from different time points or periods to represent a single temporal period (e.g. an accounting period or a growing season)."
   ) |>
   add_row(
-    X = "Thematic aggregation",
-    Y = "In the case of ECA, thematic (also called vertical) aggregation refers to an aggregation of two or more indicators into a composite **index** (_plural_: **indices**)."
+    X = "Thematic aggregation, index",
+    Y = "Thematic (also called vertical) aggregation is the combination of individual ecosystem condition indicators into a composite metric referred to as **index** (_plural_: **indices**) [@unitednations2024 §5.81]. Thematic aggregation can combine the indicators belonging to the same ecosystem type (e.g., rivers) and/or the same ecosystem condition typology class (e.g., chemical condition)."
   ) |>
   add_row(
     X = "Spatial prediction",
