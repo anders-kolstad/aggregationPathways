@@ -188,7 +188,7 @@ The variable is recorded at the scale of vegetation plots.
 The reference level however, is designed with a regional spatial scale in mind, especially because of how it encompasses the known variation in forest types in each ecosystem asset to estimate the mean bilberry coverage under the reference condition.
 Because the normalisation includes a truncation step, normalising the variable at the plot scale (pathway 1; @fig-agg1) does not allow overshooting values in plot 2 to compensate for lower values in plot 1 when spatially aggregating the indicator values.
 When normalising at the plot scale in this case, one is essentially aggregating only the negative deviations from the upper reference level X~100~, and the aggregated indicator value becomes negatively displaced (0.55) relative to when aggregating variable values (0.9).
-Given that X~100~ is defined the way it is, this indicator should follow pathway 3 (@tbl-pathways) by spatially aggregating the variable from plot scale to ecosystem asset to allow spatial compensation between plots.
+Given that X~100~ is defined the way it is, it would make more sense for this indicator to follow pathway 3 (@tbl-pathways) by spatially aggregating the variable from plot scale to ecosystem asset to allow spatial compensation between plots.
 At the scale of ecosystem assets, the variable and the reference levels are at a commensurable scale, and the variable can be normalised and potentially aggregated further.
 :::
 

@@ -39,7 +39,7 @@ terms <- tibble(
   ) |>
   add_row(
     X = "Aggregation displacement",
-    Y = "Aggregation displacement refers to the systematic shift that may occur to the relative values of variables and their corresponding indicators when they are spatially aggregated. When we take the average of two variables, each of which has attribute values (i.e. indicator values) associated with them via some non-linear function (e.g. truncation or transformation), then the attribute of the average variable value differs from the average of the attributes of the original variable. @rastetter1992 referred to this as aggregation error and used it to describe some of the dangers associated with upscaling in the sense of using precise fine-scale information to explain or predict large-scale phenomena. However, in ECAs, the difference between variables and indicators is an intentional one, and we therefore choose to refer to what is essentially the same mathematical phenomenon with the less derogatory term aggregation displacement."
+    Y = "Aggregation displacement refers to the systematic shift that may occur to the relative values of variables and their corresponding indicators when they are spatially aggregated. When we take the average of two variables, each of which has indicator values associated with them via some non-linear function (e.g. truncation or transformation), then the indicator values associated to the average variable value differs from the average of the indicator values associated to the original variables. @rastetter1992 referred to this as aggregation error and used it to describe some of the dangers associated with upscaling in the sense of using precise fine-scale information to explain or predict large-scale phenomena. However, in ECAs, the difference between variables and indicators is an intentional one, and we therefore choose to refer to what is essentially the same mathematical phenomenon with the less derogatory term aggregation displacement."
   ) |>
   add_row(
     X = "Spatial aggregation",
@@ -79,7 +79,7 @@ terms <- tibble(
   ) |>
   add_row(
     X = "Post-stratification",
-    Y = "A statistical technique used to correct for a biased sample by forcing the sample to match the main population in some key characteristcis. In ECAs it is common to have data that lack a clear probability-based sampling design, and therefore end up with more samples from certain strata (e.g. some geographic region or within some shared environmental condition). Post-stratification seeks to remove this unevenness in the _post_-processing, e.g. by doing a step-wise spatial aggregation via the same strata."
+    Y = "A statistical technique used to correct for a biased sample by forcing the sample to match the main population in some key characteristcis. In ECAs it is common to have data that lack a clear probability-based sampling design, and therefore end up with more samples from certain strata (e.g. some geographic region or ecosystem subtype). Post-stratification seeks to remove this unevenness in the _post_-processing, e.g. by doing a step-wise spatial aggregation via the same strata."
   )|>
   
   rename("Term or concept" = X, "Definition and deliberation" = Y)
