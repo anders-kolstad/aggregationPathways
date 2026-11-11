@@ -79,7 +79,7 @@ This represents a type of knowledge synthesis, aimed at condensing the complexit
 However, the way spatial aggregation is done affects how a metric should be interpreted, as well as the descriptive properties and normative claims one can make based on it [@allain2018].
 Without an understanding of the pitfalls during spatial aggregation of information, one risks introducing unintended and undetected systematic bias into the decision making process.
 
-Much has been written about **vertical aggregation**, i.e. of indicators into composite **indices** [e.g. @langhans2014; @maes2020; @oecd_2008], as well as on the spatial aggregation of relatively unmodified or raw **variables** [e.g. @allain2018].
+Much has been written about **vertical aggregation**, i.e. of indicators into composite **indices** [e.g. @langhans2014; @oecd_2008], as well as on the spatial aggregation of relatively unmodified or raw **variables** [e.g. @allain2018].
 However, there is a lack of explicit deliberation on the special case of spatially aggregating highly modified **indicators** used for ecosystem condition accounting [but see @vanbeurden1999].
 This paper therefore focuses on explaining and providing guidelines for the spatial aggregation of ecosystem indicators in the context of the System of Environmental Economic Accounting - Ecosystem Accounting (SEEA EA) [@unitednations2024] - the most used ecosystem accounting framework in the world [@comte2022].
 There is is a jungle of terms for the topics of indicators and aggregation, which are used inconsistently across scientific fields and different frameworks for ecosystem assessments, and there is a clear need for a standardised terminology, at least with the SEEA EA field of practice.

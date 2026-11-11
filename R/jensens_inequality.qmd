@@ -1,0 +1,205 @@
+---
+title: "Untitled"
+format: html
+---
+
+```{r setup}
+library(ecTools)
+library(tidyverse)
+```
+
+# Jensens inequality
+
+Does  aggregation displacement depend on the variation in variable values?
+
+
+```{r}
+var1 <- rnorm(100, 10, 1)
+var2 <- rnorm(100, 10, 2)
+var3 <- rnorm(100, 10, 4)
+
+jen <- tibble(var1, var2, var3, ind1, ind2, ind3)
+```
+
+
+```{r}
+ec_ji <- function(var, xmin, xmax, ...) {
+
+  # Check inputs
+  stopifnot(
+    is.numeric(var)
+  )
+
+  # Remove missing observations
+  keep <- complete.cases(var)
+  var <- var[keep]
+
+  if (length(var) == 0) {
+    stop("No complete observations.")
+  }
+
+  # Scaling function
+  scale_fun <- function(x) {
+    ecTools::ec_normalise(x, ...)
+  }
+
+  ind <- scale_fun(var)
+
+  # Summary statistics
+  meanvar <- mean(var)
+  meanind <- mean(ind)
+  indFromMeanVar <- scale_fun(meanvar)
+
+  diff <- indFromMeanVar - meanind
+
+  # Annotation positions
+  xrange <- xmax - xmin
+
+  x_arrow <- meanvar + 0.08 * xrange
+  x_text <- x_arrow + 0.03 * xrange
+
+  # Plot
+  ggplot2::ggplot(
+    data.frame(var, ind),
+    ggplot2::aes(x = var, y = ind)
+  ) +
+    ggplot2::stat_function(
+      fun = scale_fun,
+      colour = "grey40",
+      linewidth = 1
+    ) +
+    ggplot2::geom_point(alpha = 0.5) +
+    ggplot2::geom_rug(
+      sides = "b",
+      alpha = 0.4
+    ) +
+
+    # Mean variable
+    ggplot2::annotate(
+      "segment",
+      x = meanvar, xend = meanvar,
+      y = 0, yend = indFromMeanVar,
+      colour = "blue",
+      linewidth = 1,
+      linetype = "dashed"
+    ) +
+
+    # Indicator from mean variable
+    ggplot2::annotate(
+      "segment",
+      x = xmin, xend = meanvar,
+      y = indFromMeanVar, yend = indFromMeanVar,
+      colour = "blue",
+      linewidth = 1
+    ) +
+
+    # Mean indicator
+    ggplot2::annotate(
+      "segment",
+      x = xmin, xend = meanvar,
+      y = meanind, yend = meanind,
+      colour = "red",
+      linewidth = 1
+    ) +
+
+    # Difference arrow
+    ggplot2::annotate(
+      "segment",
+      x = x_arrow, xend = x_arrow,
+      y = meanind, yend = indFromMeanVar,
+      arrow = grid::arrow(
+        ends = "both",
+        length = grid::unit(0.15, "cm")
+      ),
+      linewidth = 0.7
+    ) +
+
+    # Difference label
+    ggplot2::annotate(
+      "text",
+      x = x_text,
+      y = (meanind + indFromMeanVar) / 2,
+      label = paste0("Difference = ", round(diff, 3)),
+      hjust = 0,
+      size = 5
+    ) +
+
+    ggplot2::coord_cartesian(
+      ylim = c(0, 1),
+      xlim = c(xmin, xmax),
+      clip = "off"
+    ) +
+    ggplot2::labs(
+      x = "Condition variable",
+      y = "Condition indicator"
+    ) +
+    ggplot2::theme_classic(base_size = 16)
+}
+```
+
+```{r}
+
+
+# Linear scaling
+ec_ji(
+  var = jen$var1,
+  x0 = 5,
+  x100 = 11,
+  fun = "linear"
+) +
+ xlim(c(0, 20))
+ec_ji(
+  var = jen$var2,
+  x0 = 5,
+  x100 = 11,
+  fun = "linear"
+)+
+ xlim(c(0, 20))
+ec_ji(
+  var = jen$var3,
+  x0 = 5,
+  x100 = 11,
+  fun = "linear"
+)+
+ xlim(c(0, 20))
+
+
+
+# Concave scaling
+exp <- .2
+x0 <- 5
+x100 <- 20
+
+p1 <- ec_ji(
+  var = jen$var1,
+  xmin = 0,
+  xmax = 20,
+  x0 = x0,
+  x100 = x100,
+  fun = "exponential convex",
+  convex_exponent = exp
+)
+p2 <- ec_ji(
+  var = jen$var2,
+  xmin = 0,
+  xmax = 20,
+  x0 = x0,
+  x100 = x100,
+  fun = "exponential convex",
+  convex_exponent = exp
+)
+p3 <- ec_ji(
+  var = jen$var3,
+  xmin = 0,
+  xmax = 20,
+  x0 = x0,
+  x100 = x100,
+  fun = "exponential convex",
+  convex_exponent = exp
+)
+
+library(patchwork)
+out <- p1+p2+p3
+ggsave(plot = out, filename = here::here("R/figures/jensen_inequality_example.png"), width = 40, height = 16, units ="cm")
+
+```
