@@ -380,7 +380,7 @@ The resulting map (field of values) is then normalised, (re)sampled (which could
 Pathways 8 and 9 describe alternative ways to create indices at different spatial scales, either by performing the spatial aggregation on the indices (i.e. after thematic aggregation; pathway 8) or on the indicators (i.e. before thematic aggregation; pathway 9).
 If all indicators making up an index are spatially aggregated using the same weights, typically the extent of the spatial units, then the aggregation operations will be commutative and it will not matter if you aggregate vertically then horizontally, or the other way around (@tbl-pathways; Pathway 8 and 9, respectively) [@unitednations2024].
 However, indicators are not always valid for the entire ecosystem type that the account is made over.
-They can, for example, retain to only certain habitats or nature types within the ecosystem type, in which case one might want to use different weights when spatially aggregating the indicator that reflect the extent of only the relevant habitat or nature types, and not of the entire ecosystem.
+They can, for example, pertain to only certain habitats or nature types within the ecosystem type, in which case one might want to use different weights when spatially aggregating the indicator that reflect the extent of only the relevant habitat or nature types, and not of the entire ecosystem.
 This can be achieved using pathway 9. 
 
 
