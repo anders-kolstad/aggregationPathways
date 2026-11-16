@@ -90,7 +90,7 @@ We will focus on the SEEA EA condition accounts in this paper, although spatial 
 In 2026, EU and EEA countries will be required to report ecosystem condition accounts to Eurostat and the European Commission [@legalReporting], and these accounts will have to be spatially aggregated to national levels.
 This underlines the importance of having a robust methodological framework for the spatial aggregation of data and information.
 
-This paper is aimed primarily at indicator developers to provide them with recommendations for how to choose the best aggregation pathway for variables and indicators, and how to report these choices in an accessible and transparent way.
+This paper is aimed primarily at indicator developers, to provide them with recommendations for how to choose the best aggregation pathway for variables and indicators, and how to report these choices in an accessible and transparent way.
 Indicator developer subjectivity affects indicator interpretation [@allain2018] and thus ultimately the conclusion from ECAs.
 Still, the process of designing indicators and estimating indicator values is often left entirely to them, with little real involvement from indicator users, such as regional and local land managers and policy makers.
 It is therefore important to be aware of the role that indicator developers play in shaping the type of information and the narratives that are presented to decision makers.
@@ -113,7 +113,7 @@ It is important to note that this is by design, i.e. that X~100~ is set (or shou
 Therefore, aggregation of truncated indicators summarises the estimated ecosystem condition over an area, and not the variable itself.
 The flip-side of this is that spatially aggregating the original variable values does not directly summarise information about ecosystem condition for that area.
 
-Thirdly, we normalise in order to standardise the indicator on the same unitless scale, thus improving their comparability and making is possible to perform thematic (i.e. vertical) aggregation and create indices [@jakobsson2021; @pollesch_normalization_2016; @nardo_handbook_2008; @unitednations2024 §5.81].
+Thirdly, we normalise in order to standardise the indicator on the same unitless scale, thus improving their comparability and making is possible to perform thematic (i.e. vertical) aggregation and create indices [@jakobsson2021; @pollesch_normalization_2016; @oecd_2008; @unitednations2024 §5.81; @langhans_how_2013].
 This is commonly referred to as *the* reason for normalising variables, not least because it is perhaps the least confusing one for many; nonetheless, as we have shown, it is not the only reason.
 
 ```{r fig-term}
