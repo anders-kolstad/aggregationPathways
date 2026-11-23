@@ -6,6 +6,8 @@ format: html
 ```{r setup}
 library(ecTools)
 library(tidyverse)
+library(patchwork)
+
 ```
 
 # Jensens inequality
@@ -14,11 +16,12 @@ Does  aggregation displacement depend on the variation in variable values?
 
 
 ```{r}
-var1 <- rnorm(100, 10, 1)
-var2 <- rnorm(100, 10, 2)
-var3 <- rnorm(100, 10, 4)
+set.seed(123)
+var1 <- rnorm(200, 10, 1) |> pmax(0)
+var2 <- rnorm(200, 10, 2) |> pmax(0)
+var3 <- rnorm(200, 10, 4) |> pmax(0)
 
-jen <- tibble(var1, var2, var3, ind1, ind2, ind3)
+jen <- tibble(var1, var2, var3)
 ```
 
 
@@ -68,10 +71,10 @@ ec_ji <- function(var, xmin, xmax, ...) {
       colour = "grey40",
       linewidth = 1
     ) +
-    ggplot2::geom_point(alpha = 0.5) +
+    ggplot2::geom_point(alpha = 0.1, size = 5) +
     ggplot2::geom_rug(
       sides = "b",
-      alpha = 0.4
+      alpha = 0.2
     ) +
 
     # Mean variable
@@ -140,35 +143,10 @@ ec_ji <- function(var, xmin, xmax, ...) {
 ```{r}
 
 
-# Linear scaling
-ec_ji(
-  var = jen$var1,
-  x0 = 5,
-  x100 = 11,
-  fun = "linear"
-) +
- xlim(c(0, 20))
-ec_ji(
-  var = jen$var2,
-  x0 = 5,
-  x100 = 11,
-  fun = "linear"
-)+
- xlim(c(0, 20))
-ec_ji(
-  var = jen$var3,
-  x0 = 5,
-  x100 = 11,
-  fun = "linear"
-)+
- xlim(c(0, 20))
-
-
-
 # Concave scaling
 exp <- .2
 x0 <- 5
-x100 <- 20
+x100 <- 12
 
 p1 <- ec_ji(
   var = jen$var1,
@@ -198,8 +176,42 @@ p3 <- ec_ji(
   convex_exponent = exp
 )
 
-library(patchwork)
 out <- p1+p2+p3
-ggsave(plot = out, filename = here::here("R/figures/jensen_inequality_example.png"), width = 40, height = 16, units ="cm")
+ggsave(plot = out, filename = here::here("R/figures/jensen_inequality_example_v2.png"), width = 40, height = 16, units ="cm")
+
+```
+
+```{r}
+
+
+# Concave scaling
+x0 <- 0
+x100 <- 12
+
+p1v2 <- ec_ji(
+  var = jen$var1,
+  xmin = 0,
+  xmax = 20,
+  x0 = x0,
+  x100 = x100
+)
+p2v2 <- ec_ji(
+  var = jen$var2,
+  xmin = 0,
+  xmax = 20,
+  x0 = x0,
+  x100 = x100
+)
+p3v2 <- ec_ji(
+  var = jen$var3,
+  xmin = 0,
+  xmax = 20,
+  x0 = x0,
+  x100 = x100
+)
+
+out2 <- p1v2+p2v2+p3v2
+out2
+#ggsave(plot = out2, filename = here::here("R/figures/jensen_inequality_example_v3.png"), width = 40, height = 16, units ="cm")
 
 ```
