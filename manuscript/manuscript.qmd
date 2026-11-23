@@ -148,7 +148,7 @@ For example, if data is collected opportunistically with sampling sizes or sampl
 This approach represents a form of **post-stratification** that is also relevant to process data from hierarchical (e.g. blocked) sampling designs.
 
 Spatial aggregation can have several consequences that may or may not be desirable, such as smoothing out spatial variability, which can mask local patterns and trends.
-This smoothing out makes the data and its inherent information less suitable for some use cases, such as depicting spatial variation that can be used to support local land-use planning, for aiding a debate about spatial conflicts, or for identification of high risk areas [@vanbeurden1999].
+This _smoothing out_ makes the data and its inherent information less suitable for some use cases, such as depicting spatial variation that can be used to support local land-use planning, for aiding a debate about spatial conflicts, or for identification of high risk areas [@vanbeurden1999].
 
 <!-- ## Matching the scale of variables and reference levels -->
 
@@ -173,7 +173,7 @@ This stresses the need to define ecosystem assets that are appropriate in size. 
 ::: callout-note
 **Example 1 -- Bilberry**\
 
-This example is to show what it means that the variable and the reference levels need to be at a commensurable spatial scale before doing the normalisition.
+This example is to show what it means that the variable and the reference levels need to be at a commensurable spatial scale before doing the normalisition.\
 
 *Variable*: Ground cover of European blueberry or bilberry (*Vaccinum myrtillus*) recorded in permanent vegetation plots.\
 
@@ -196,12 +196,12 @@ At the scale of ecosystem assets, the variable and the reference levels are at a
 # Spatial prediction: fitting data to ecosystem assets
 
 In SEEA EA, information about ecosystem condition is made spatially explicit by assigning variable or indicator values to ecosystem assets.
-This process requires some spatial manipulations of data or scale changes [@ewert2011].
+This process requires some spatial manipulations of data, or scale changes [@ewert2011].
 The type of manipulation depends on the spatial resolution of the underlying data, as well as the size and configuration of the ecosystem assets.
 To elaborate on this issue we first make a distinction between two main types of data: spatially exhaustive data and sparse (i.e. spatially discontinuous) data.
 
 Spatially exhaustive, or wall-to-wall data, include remote sensing products, but also some pre-aggregated datasets. 
-For example, a lot of demographic information for example is made available at the scale of administrative units, rather than at the level of individuals (which would be very ineffective and also problematic in terms of protecting sensitive information).
+For example, a lot of demographic information is made available at the scale of administrative units, rather than at the level of individuals (which would be very ineffective and also problematic in terms of protecting sensitive information).
 Pre-aggregation may also be more subtle.
 Consider, as an example, data from LiDAR (Light Detection And Ranging).
 The raw data is a point cloud, yet the most commonly available datasets are rasters, such as surface or canopy models, i.e. wall-to-wall generalisations of the point cloud.
@@ -221,7 +221,7 @@ From here on, we will focus on design-based approaches.
 
 For design-based approaches, one can assign values to areas via simple aggregation functions used on data values that fall within a given ecosystem asset.
 Many aggregation functions are available, such as sum, worst-rule, different percentiles, arithmetic, geometric, or harmonic means [@unitednations2024 §5.54].
-In addition, non-parametric bootstrapping [@kolstad_area_2025] and Bayesian updating [@kolstad_making_2024] can be used to possibly obtain better descriptions of the uncertainty in the estimates.
+In addition, non-parametric techniques also exist, such as Monte Carlo resampling [@metode2026], and can be used to possibly obtain better descriptions of the uncertainty in the estimates.
 If the inclusion probabilities are known, or they can be estimated, then the Horvitz-Thomson estimator for the sum or the mean (and variance) of a spatial sample is appropriate and useful, especially when the data originated from a stratified sample [@horvitz1952].
 Depending on the random process used to select the sampling points we may need to account for the spatial structure (spatial autocorrelation) of the data when doing this aggregation.
 This can be addressed in several ways, such as model-assisted approaches [@brus2021], e.g. using regression models [@brus2000].
