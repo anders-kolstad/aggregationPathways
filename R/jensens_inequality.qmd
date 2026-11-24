@@ -233,6 +233,47 @@ ggsave(plot = out, filename = here::here("R/figures/jensen_inequality_harmonised
 
 ```{r}
 
+# Quadratic version:
+# Concave scaling
+exp <- 1
+x0 <- 0
+x100 <- 20
+
+p1 <- ec_ji(
+  var = jen$var1,
+  xmin = 0,
+  xmax = 20,
+  x0 = x0,
+  x100 = x100,
+  fun = "quadratic",
+  quadratic_curvature = exp
+)
+p2 <- ec_ji(
+  var = jen$var2,
+  xmin = 0,
+  xmax = 20,
+  x0 = x0,
+  x100 = x100,
+  fun = "quadratic",
+  quadratic_curvature = exp
+)
+p3 <- ec_ji(
+  var = jen$var3,
+  xmin = 0,
+  xmax = 20,
+  x0 = x0,
+  x100 = x100,
+  fun = "quadratic",
+  quadratic_curvature = exp
+)
+
+out <- p1+p2+p3 + plot_annotation(tag_levels = "A", tag_suffix = ")")
+ggsave(plot = out, filename = here::here("R/figures/jensen_inequality_quadratic.png"), width = 40, height = 16, units ="cm")
+
+```
+
+```{r}
+
 
 # Concave scaling
 x0 <- 0
