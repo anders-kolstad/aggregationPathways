@@ -55,7 +55,7 @@ ec_ji <- function(var, xmin, xmax, ...) {
 
   # Shared figure style
   col_variable <- "#555555"
-  col_indicator <- "#0ff526"
+  col_indicator <- "#075bf7"
 
   # Intersection with the scaling curve (monotonic functions)
   x_cross <- if (abs(scale_fun(meanvar) - meanind) < 1e-10) {
@@ -74,24 +74,40 @@ ec_ji <- function(var, xmin, xmax, ...) {
   x_arrow <- meanvar + 0.08 * xrange
   x_text <- x_arrow + 0.03 * xrange
 
+  curve_dat <- tibble(
+    var = seq(xmin, xmax, length.out = 2000),
+    ind = scale_fun(var)
+  )
+
   # Plot
   ggplot2::ggplot(
     data.frame(var, ind),
     ggplot2::aes(x = var, y = ind)
   ) +
-    ggplot2::stat_function(
-      fun = scale_fun,
-      colour = "#555555",
-      xlim = c(xmin, xmax),
-      n = 2001,
-      linewidth = 1
-    ) +
-    ggplot2::geom_point(alpha = 0.2, size = 2.5) +
+    #ggplot2::stat_function(
+    #  fun = scale_fun,
+    #  colour = "#555555",
+    #  xlim = c(xmin, xmax),
+    #  n = 2001,
+    #  linewidth = 1
+    #) +
     ggplot2::geom_rug(
       sides = "b",
       alpha = 0.2
     ) +
-
+      geom_line(
+    data = curve_dat,
+      aes(colour = ind),
+      linewidth = 1.5,
+      lineend = "round"
+    ) +
+      scale_colour_gradient(
+    low = "red",
+      high = "green",
+      limits = c(0, 1),
+      guide = "none"
+    ) +
+    ggplot2::geom_point(alpha = 0.1, size = 3.5) +
     # Mean variable
     ggplot2::annotate(
       "segment",
