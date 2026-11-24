@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "Jensens inequality examples"
 format: html
 ---
 
@@ -7,7 +7,6 @@ format: html
 library(ecTools)
 library(tidyverse)
 library(patchwork)
-
 ```
 
 # Jensens inequality
@@ -34,7 +33,7 @@ ec_ji <- function(var, xmin, xmax, ...) {
   )
 
   # Remove missing observations
-  keep <- complete.cases(var)
+  keep <- is.finite(var)
   var <- var[keep]
 
   if (length(var) == 0) {
@@ -55,6 +54,18 @@ ec_ji <- function(var, xmin, xmax, ...) {
 
   diff <- indFromMeanVar - meanind
 
+  # Shared figure style
+  col_variable <- "#555555"
+  col_indicator <- "#0ff526"
+
+  # Intersection with the scaling curve (monotonic functions)
+  x_cross <- if (abs(scale_fun(meanvar) - meanind) < 1e-10) {
+    meanvar
+  } else {
+    uniroot(function(x) scale_fun(x) - meanind,
+            interval = range(var), tol = 1e-9)$root
+  }
+
   # Annotation positions
   xrange <- xmax - xmin
 
@@ -68,10 +79,12 @@ ec_ji <- function(var, xmin, xmax, ...) {
   ) +
     ggplot2::stat_function(
       fun = scale_fun,
-      colour = "grey40",
+      colour = "#555555",
+      xlim = c(xmin, xmax),
+      n = 2001,
       linewidth = 1
     ) +
-    ggplot2::geom_point(alpha = 0.1, size = 5) +
+    ggplot2::geom_point(alpha = 0.2, size = 2.5) +
     ggplot2::geom_rug(
       sides = "b",
       alpha = 0.2
@@ -82,7 +95,7 @@ ec_ji <- function(var, xmin, xmax, ...) {
       "segment",
       x = meanvar, xend = meanvar,
       y = 0, yend = indFromMeanVar,
-      colour = "blue",
+      colour = col_variable,
       linewidth = 1,
       linetype = "dashed"
     ) +
@@ -92,17 +105,17 @@ ec_ji <- function(var, xmin, xmax, ...) {
       "segment",
       x = xmin, xend = meanvar,
       y = indFromMeanVar, yend = indFromMeanVar,
-      colour = "blue",
-      linewidth = 1
+      colour = col_variable,
+      linewidth = 1, linetype = "dashed"
     ) +
 
     # Mean indicator
     ggplot2::annotate(
       "segment",
-      x = xmin, xend = meanvar,
+      x = xmin, xend = x_cross,
       y = meanind, yend = meanind,
-      colour = "red",
-      linewidth = 1
+      colour = col_indicator,
+      linewidth = 1, linetype = "solid"
     ) +
 
     # Difference arrow
@@ -122,9 +135,9 @@ ec_ji <- function(var, xmin, xmax, ...) {
       "text",
       x = x_text,
       y = (meanind + indFromMeanVar) / 2,
-      label = paste0("Difference = ", round(diff, 3)),
+      label = sprintf("Aggregation\ndisplacement = %.3f", diff),
       hjust = 0,
-      size = 5
+      size = 3.5
     ) +
 
     ggplot2::coord_cartesian(
@@ -136,7 +149,9 @@ ec_ji <- function(var, xmin, xmax, ...) {
       x = "Condition variable",
       y = "Condition indicator"
     ) +
-    ggplot2::theme_classic(base_size = 16)
+    ggplot2::theme_bw(base_size = 16) +
+    ggplot2::theme(panel.grid.minor = ggplot2::element_blank(),
+                   panel.grid.major = ggplot2::element_line(colour = "grey90"))
 }
 ```
 
@@ -176,8 +191,8 @@ p3 <- ec_ji(
   convex_exponent = exp
 )
 
-out <- p1+p2+p3
-ggsave(plot = out, filename = here::here("R/figures/jensen_inequality_example_v2.png"), width = 40, height = 16, units ="cm")
+out <- p1+p2+p3 + plot_annotation(tag_levels = "A", tag_suffix = ")")
+ggsave(plot = out, filename = here::here("R/figures/jensen_inequality_harmonised.png"), width = 40, height = 16, units ="cm")
 
 ```
 
@@ -210,7 +225,7 @@ p3v2 <- ec_ji(
   x100 = x100
 )
 
-out2 <- p1v2+p2v2+p3v2
+out2 <- p1v2+p2v2+p3v2 + plot_annotation(tag_levels = "A", tag_suffix = ")")
 out2
 #ggsave(plot = out2, filename = here::here("R/figures/jensen_inequality_example_v3.png"), width = 40, height = 16, units ="cm")
 
