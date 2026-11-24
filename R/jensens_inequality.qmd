@@ -26,7 +26,6 @@ jen <- tibble(var1, var2, var3)
 
 ```{r}
 ec_ji <- function(var, xmin, xmax, ...) {
-
   # Check inputs
   stopifnot(
     is.numeric(var)
@@ -62,8 +61,11 @@ ec_ji <- function(var, xmin, xmax, ...) {
   x_cross <- if (abs(scale_fun(meanvar) - meanind) < 1e-10) {
     meanvar
   } else {
-    uniroot(function(x) scale_fun(x) - meanind,
-            interval = range(var), tol = 1e-9)$root
+    uniroot(
+      function(x) scale_fun(x) - meanind,
+      interval = range(var),
+      tol = 1e-9
+    )$root
   }
 
   # Annotation positions
@@ -93,8 +95,10 @@ ec_ji <- function(var, xmin, xmax, ...) {
     # Mean variable
     ggplot2::annotate(
       "segment",
-      x = meanvar, xend = meanvar,
-      y = 0, yend = indFromMeanVar,
+      x = meanvar,
+      xend = meanvar,
+      y = 0,
+      yend = indFromMeanVar,
       colour = col_variable,
       linewidth = 1,
       linetype = "dashed"
@@ -103,30 +107,42 @@ ec_ji <- function(var, xmin, xmax, ...) {
     # Indicator from mean variable
     ggplot2::annotate(
       "segment",
-      x = xmin, xend = meanvar,
-      y = indFromMeanVar, yend = indFromMeanVar,
+      x = xmin,
+      xend = meanvar,
+      y = indFromMeanVar,
+      yend = indFromMeanVar,
       colour = col_variable,
-      linewidth = 1, linetype = "dashed"
+      linewidth = 1,
+      linetype = "dashed"
     ) +
 
     # Mean indicator
     ggplot2::annotate(
       "segment",
-      x = xmin, xend = x_cross,
-      y = meanind, yend = meanind,
+      x = xmin,
+      xend = x_cross,
+      y = meanind,
+      yend = meanind,
       colour = col_indicator,
-      linewidth = 1, linetype = "solid"
+      linewidth = 1,
+      linetype = "solid"
     ) +
 
     # Difference arrow
     ggplot2::annotate(
       "segment",
-      x = x_arrow, xend = x_arrow,
-      y = meanind, yend = indFromMeanVar,
-      arrow = grid::arrow(
-        ends = "both",
-        length = grid::unit(0.15, "cm")
-      ),
+      x = x_arrow,
+      xend = x_arrow,
+      y = meanind,
+      yend = indFromMeanVar,
+      arrow = if (abs(diff) > 0.025) {
+        grid::arrow(
+          ends = "both",
+          length = grid::unit(0.12, "cm")
+        )
+      } else {
+        NULL
+      },
       linewidth = 0.7
     ) +
 
@@ -146,12 +162,14 @@ ec_ji <- function(var, xmin, xmax, ...) {
       clip = "off"
     ) +
     ggplot2::labs(
-      x = "Condition variable",
-      y = "Condition indicator"
+      x = expression("Condition variable (" * V * ")"),
+      y = expression("Condition indicator (" * i * ")")
     ) +
     ggplot2::theme_bw(base_size = 16) +
-    ggplot2::theme(panel.grid.minor = ggplot2::element_blank(),
-                   panel.grid.major = ggplot2::element_line(colour = "grey90"))
+    ggplot2::theme(
+      panel.grid.minor = ggplot2::element_blank(),
+      panel.grid.major = ggplot2::element_line(colour = "grey90")
+    )
 }
 ```
 
