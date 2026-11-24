@@ -124,7 +124,7 @@ ec_ji <- function(var, xmin, xmax, ...) {
       y = meanind,
       yend = meanind,
       colour = col_indicator,
-      linewidth = 1,
+      linewidth = 2,
       linetype = "solid"
     ) +
 
@@ -163,7 +163,8 @@ ec_ji <- function(var, xmin, xmax, ...) {
     ) +
     ggplot2::labs(
       x = expression("Condition variable (" * V * ")"),
-      y = expression("Condition indicator (" * i * ")")
+      y = expression("Condition indicator (" * i * ")"),
+      subtitle = sprintf("SD = %.2f", sd(var))
     ) +
     ggplot2::theme_bw(base_size = 16) +
     ggplot2::theme(
