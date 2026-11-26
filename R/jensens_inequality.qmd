@@ -193,7 +193,7 @@ ec_ji <- function(var, xmin, xmax, ...) {
 ```{r}
 
 
-# Concave scaling
+# Concave power scaling
 exp <- .2
 x0 <- 5
 x100 <- 12
@@ -227,7 +227,7 @@ p3 <- ec_ji(
 )
 
 out <- p1+p2+p3 + plot_annotation(tag_levels = "A", tag_suffix = ")")
-ggsave(plot = out, filename = here::here("R/figures/jensen_inequality_harmonised.png"), width = 40, height = 16, units ="cm")
+#ggsave(plot = out, filename = here::here("R/figures/jensen_inequality_harmonised.png"), width = 40, height = 16, units ="cm")
 
 ```
 
@@ -274,8 +274,48 @@ ggsave(plot = out, filename = here::here("R/figures/jensen_inequality_quadratic.
 
 ```{r}
 
+# Circular arc transformation
+curve <- .9
+x0 <- 0
+x100 <- 20
 
-# Concave scaling
+p1 <- ec_ji(
+  var = jen$var1,
+  xmin = 0,
+  xmax = 20,
+  x0 = x0,
+  x100 = x100,
+  fun = "circular",
+  circular_curvature = curve
+)
+p2 <- ec_ji(
+  var = jen$var2,
+  xmin = 0,
+  xmax = 20,
+  x0 = x0,
+  x100 = x100,
+  fun = "circular",
+  circular_curvature = curve
+)
+p3 <- ec_ji(
+  var = jen$var3,
+  xmin = 0,
+  xmax = 20,
+  x0 = x0,
+  x100 = x100,
+  fun = "circular",
+  circular_curvature = curve
+)
+
+out <- p1+p2+p3 + plot_annotation(tag_levels = "A", tag_suffix = ")")
+ggsave(plot = out, filename = here::here("R/figures/jensen_inequality_circular.png"), width = 40, height = 16, units ="cm")
+
+```
+
+```{r}
+
+
+# linear  scaling with truncation
 x0 <- 0
 x100 <- 12
 
