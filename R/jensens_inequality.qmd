@@ -1,0 +1,348 @@
+---
+title: "Jensens inequality examples"
+format: html
+---
+
+```{r setup}
+library(ecTools)
+library(tidyverse)
+library(patchwork)
+```
+
+# Jensens inequality
+
+Does  aggregation displacement depend on the variation in variable values?
+
+
+```{r}
+set.seed(123)
+var1 <- rnorm(200, 10, 1) |> pmax(0)
+var2 <- rnorm(200, 10, 2) |> pmax(0)
+var3 <- rnorm(200, 10, 4) |> pmax(0)
+
+jen <- tibble(var1, var2, var3)
+```
+
+
+```{r}
+ec_ji <- function(var, xmin, xmax, ...) {
+  # Check inputs
+  stopifnot(
+    is.numeric(var)
+  )
+
+  # Remove missing observations
+  keep <- is.finite(var)
+  var <- var[keep]
+
+  if (length(var) == 0) {
+    stop("No complete observations.")
+  }
+
+  # Scaling function
+  scale_fun <- function(x) {
+    ecTools::ec_normalise(x, ...)
+  }
+
+  ind <- scale_fun(var)
+
+  # Summary statistics
+  meanvar <- mean(var)
+  meanind <- mean(ind)
+  indFromMeanVar <- scale_fun(meanvar)
+
+  diff <- indFromMeanVar - meanind
+
+  # Shared figure style
+  col_variable <- "#555555"
+  col_indicator <- "#075bf7"
+
+  # Intersection with the scaling curve (monotonic functions)
+  x_cross <- if (abs(scale_fun(meanvar) - meanind) < 1e-10) {
+    meanvar
+  } else {
+    uniroot(
+      function(x) scale_fun(x) - meanind,
+      interval = range(var),
+      tol = 1e-9
+    )$root
+  }
+
+  # Annotation positions
+  xrange <- xmax - xmin
+
+  x_arrow <- meanvar + 0.08 * xrange
+  x_text <- x_arrow + 0.03 * xrange
+
+  curve_dat <- tibble(
+    var = seq(xmin, xmax, length.out = 2000),
+    ind = scale_fun(var)
+  )
+
+  # Plot
+  ggplot2::ggplot(
+    data.frame(var, ind),
+    ggplot2::aes(x = var, y = ind)
+  ) +
+    #ggplot2::stat_function(
+    #  fun = scale_fun,
+    #  colour = "#555555",
+    #  xlim = c(xmin, xmax),
+    #  n = 2001,
+    #  linewidth = 1
+    #) +
+    ggplot2::geom_rug(
+      sides = "b",
+      alpha = 0.2
+    ) +
+      geom_line(
+    data = curve_dat,
+      aes(colour = ind),
+      linewidth = 1.5,
+      lineend = "round"
+    ) +
+      scale_colour_gradient(
+    low = "red",
+      high = "green",
+      limits = c(0, 1),
+      guide = "none"
+    ) +
+    ggplot2::geom_point(alpha = 0.1, size = 3.5) +
+    # Mean variable
+    ggplot2::annotate(
+      "segment",
+      x = meanvar,
+      xend = meanvar,
+      y = 0,
+      yend = indFromMeanVar,
+      colour = col_variable,
+      linewidth = 1,
+      linetype = "dashed"
+    ) +
+
+    # Indicator from mean variable
+    ggplot2::annotate(
+      "segment",
+      x = xmin,
+      xend = meanvar,
+      y = indFromMeanVar,
+      yend = indFromMeanVar,
+      colour = col_variable,
+      linewidth = 1,
+      linetype = "dashed"
+    ) +
+
+    # Mean indicator
+    ggplot2::annotate(
+      "segment",
+      x = xmin,
+      xend = x_cross,
+      y = meanind,
+      yend = meanind,
+      colour = col_indicator,
+      linewidth = 2,
+      linetype = "solid"
+    ) +
+
+    # Difference arrow
+    ggplot2::annotate(
+      "segment",
+      x = x_arrow,
+      xend = x_arrow,
+      y = meanind,
+      yend = indFromMeanVar,
+      arrow = if (abs(diff) > 0.025) {
+        grid::arrow(
+          ends = "both",
+          length = grid::unit(0.12, "cm")
+        )
+      } else {
+        NULL
+      },
+      linewidth = 0.7
+    ) +
+
+    # Difference label
+    ggplot2::annotate(
+      "text",
+      x = x_text,
+      y = (meanind + indFromMeanVar) / 2,
+      label = sprintf("Aggregation\ndisplacement = %.3f", diff),
+      hjust = 0,
+      size = 3.5
+    ) +
+
+    ggplot2::coord_cartesian(
+      ylim = c(0, 1),
+      xlim = c(xmin, xmax),
+      clip = "off"
+    ) +
+    ggplot2::labs(
+      x = expression("Condition variable (" * V * ")"),
+      y = expression("Condition indicator (" * i * ")"),
+      subtitle = sprintf("SD = %.2f", sd(var))
+    ) +
+    ggplot2::theme_bw(base_size = 16) +
+    ggplot2::theme(
+      panel.grid.minor = ggplot2::element_blank(),
+      panel.grid.major = ggplot2::element_line(colour = "grey90")
+    )
+}
+```
+
+```{r}
+
+
+# Concave power scaling
+exp <- .2
+x0 <- 5
+x100 <- 12
+
+p1 <- ec_ji(
+  var = jen$var1,
+  xmin = 0,
+  xmax = 20,
+  x0 = x0,
+  x100 = x100,
+  fun = "exponential convex",
+  convex_exponent = exp
+)
+p2 <- ec_ji(
+  var = jen$var2,
+  xmin = 0,
+  xmax = 20,
+  x0 = x0,
+  x100 = x100,
+  fun = "exponential convex",
+  convex_exponent = exp
+)
+p3 <- ec_ji(
+  var = jen$var3,
+  xmin = 0,
+  xmax = 20,
+  x0 = x0,
+  x100 = x100,
+  fun = "exponential convex",
+  convex_exponent = exp
+)
+
+out <- p1+p2+p3 + plot_annotation(tag_levels = "A", tag_suffix = ")")
+#ggsave(plot = out, filename = here::here("R/figures/jensen_inequality_harmonised.png"), width = 40, height = 16, units ="cm")
+
+```
+
+```{r}
+
+# Quadratic version:
+# Concave scaling
+exp <- 1
+x0 <- 0
+x100 <- 20
+
+p1 <- ec_ji(
+  var = jen$var1,
+  xmin = 0,
+  xmax = 20,
+  x0 = x0,
+  x100 = x100,
+  fun = "quadratic",
+  quadratic_curvature = exp
+)
+p2 <- ec_ji(
+  var = jen$var2,
+  xmin = 0,
+  xmax = 20,
+  x0 = x0,
+  x100 = x100,
+  fun = "quadratic",
+  quadratic_curvature = exp
+)
+p3 <- ec_ji(
+  var = jen$var3,
+  xmin = 0,
+  xmax = 20,
+  x0 = x0,
+  x100 = x100,
+  fun = "quadratic",
+  quadratic_curvature = exp
+)
+
+out <- p1+p2+p3 + plot_annotation(tag_levels = "A", tag_suffix = ")")
+ggsave(plot = out, filename = here::here("R/figures/jensen_inequality_quadratic.png"), width = 40, height = 16, units ="cm")
+
+```
+
+```{r}
+
+# Circular arc transformation
+curve <- .9
+x0 <- 0
+x100 <- 20
+
+p1 <- ec_ji(
+  var = jen$var1,
+  xmin = 0,
+  xmax = 20,
+  x0 = x0,
+  x100 = x100,
+  fun = "circular",
+  circular_curvature = curve
+)
+p2 <- ec_ji(
+  var = jen$var2,
+  xmin = 0,
+  xmax = 20,
+  x0 = x0,
+  x100 = x100,
+  fun = "circular",
+  circular_curvature = curve
+)
+p3 <- ec_ji(
+  var = jen$var3,
+  xmin = 0,
+  xmax = 20,
+  x0 = x0,
+  x100 = x100,
+  fun = "circular",
+  circular_curvature = curve
+)
+
+out <- p1+p2+p3 + plot_annotation(tag_levels = "A", tag_suffix = ")")
+ggsave(plot = out, filename = here::here("R/figures/jensen_inequality_circular.png"), width = 40, height = 16, units ="cm")
+
+```
+
+```{r}
+
+
+# linear  scaling with truncation
+x0 <- 0
+x100 <- 12
+
+p1v2 <- ec_ji(
+  var = jen$var1,
+  xmin = 0,
+  xmax = 20,
+  x0 = x0,
+  x100 = x100
+)
+p2v2 <- ec_ji(
+  var = jen$var2,
+  xmin = 0,
+  xmax = 20,
+  x0 = x0,
+  x100 = x100
+)
+p3v2 <- ec_ji(
+  var = jen$var3,
+  xmin = 0,
+  xmax = 20,
+  x0 = x0,
+  x100 = x100
+)
+
+out2 <- p1v2+p2v2+p3v2 + plot_annotation(tag_levels = "A", tag_suffix = ")")
+out2
+#ggsave(plot = out2, filename = here::here("R/figures/jensen_inequality_example_v3.png"), width = 40, height = 16, units ="cm")
+
+```

@@ -42,3 +42,6 @@ _*
 manuscript/table_billberry.pdf
 manuscript/terms_table.pdf
 R/terms_table.pdf
+*.html
+manuscript/terms_table_files/*
+
